@@ -1,0 +1,2964 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>پورتال آموزشی مترجمی زبان انگلیسی — دانشگاه علامه طباطبائی | ATU Translation Hub</title>
+
+  <!-- Google Fonts: Vazirmatn (Persian), Inter (UI/Body), Playfair Display (Academic Headings) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            ivory: '#FAF8F5',
+            parchment: '#F3EFE7',
+            navy: {
+              DEFAULT: '#1B2A4A',
+              light: '#2A3F6E',
+              dark: '#111C33'
+            },
+            burgundy: {
+              DEFAULT: '#7C2335',
+              light: '#9E3147',
+              dark: '#5B1826'
+            },
+            gold: {
+              DEFAULT: '#B8893A',
+              light: '#D4A857'
+            }
+          },
+          fontFamily: {
+            fa: ['Vazirmatn', 'Inter', 'sans-serif'],
+            en: ['Inter', 'Vazirmatn', 'sans-serif'],
+            serif: ['Playfair Display', 'Vazirmatn', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- SheetJS (xlsx) CDN for client-side Excel/CSV import & export -->
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+  <style>
+    /* Typography defaults adapting cleanly to RTL (FA) and LTR (EN) */
+    html[lang="fa"] body {
+      font-family: 'Vazirmatn', 'Inter', sans-serif;
+    }
+    html[lang="en"] body {
+      font-family: 'Inter', 'Vazirmatn', sans-serif;
+    }
+    .font-editorial {
+      font-family: 'Playfair Display', 'Vazirmatn', serif;
+    }
+
+    /* Mixed-script bidirectional isolation to prevent punctuation/alignment breakage */
+    .bidi-iso {
+      unicode-bidi: isolate;
+    }
+
+    /* 3D Flashcard Flip Mechanics */
+    .fc-scene {
+      perspective: 1200px;
+    }
+    .fc-card {
+      position: relative;
+      width: 100%;
+      min-height: 320px;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fc-card.is-flipped {
+      transform: rotateY(180deg);
+    }
+    .fc-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .fc-face-back {
+      transform: rotateY(180deg);
+    }
+
+    /* Lecture Note Rich Content Formatting */
+    .lecture-prose h4 {
+      font-weight: 700;
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+      font-size: 1.05rem;
+    }
+    .lecture-prose p {
+      margin-bottom: 0.75rem;
+      line-height: 1.85;
+    }
+    .lecture-prose ul {
+      list-style-type: disc;
+      padding-inline-start: 1.5rem;
+      margin-bottom: 0.9rem;
+    }
+    .lecture-prose li {
+      margin-bottom: 0.35rem;
+      line-height: 1.75;
+    }
+    .lecture-prose table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+    .lecture-prose th,
+    .lecture-prose td {
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 0.55rem 0.75rem;
+      text-align: start;
+    }
+    .lecture-prose th {
+      background-color: rgba(27, 42, 74, 0.08);
+      font-weight: 600;
+    }
+    .dark .lecture-prose th {
+      background-color: rgba(255, 255, 255, 0.06);
+    }
+    .lecture-callout {
+      border-inline-start: 4px solid #7C2335;
+      background-color: rgba(124, 35, 53, 0.06);
+      padding: 0.85rem 1rem;
+      border-radius: 0.5rem;
+      margin: 0.9rem 0;
+    }
+    .dark .lecture-callout {
+      border-inline-start-color: #D4A857;
+      background-color: rgba(212, 168, 87, 0.09);
+    }
+
+    /* Search Highlight */
+    mark.search-hl {
+      background-color: #fde68a;
+      color: #111827;
+      padding: 0 2px;
+      border-radius: 3px;
+    }
+    .dark mark.search-hl {
+      background-color: #b45309;
+      color: #fef3c7;
+    }
+
+    /* Subtle Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(100, 116, 139, 0.35);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(100, 116, 139, 0.55);
+    }
+  </style>
+</head>
+
+<body class="bg-ivory text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200 selection:bg-burgundy/20 dark:selection:bg-gold/30">
+
+  <!-- ==================== STICKY TOP NAVIGATION ==================== -->
+  <header class="sticky top-0 z-40 bg-ivory/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-stone-200/80 dark:border-slate-800 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap items-center justify-between gap-3 py-3">
+        <!-- Brand / Academic Crest -->
+        <div class="flex items-center gap-3 cursor-pointer" onclick="switchMainTab('courses')">
+          <div class="w-10 h-10 rounded-xl bg-navy dark:bg-burgundy text-ivory flex items-center justify-center shadow-sm shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+            </svg>
+          </div>
+          <div class="leading-tight">
+            <h1 id="brand-title" class="text-sm sm:text-base font-bold text-navy dark:text-ivory tracking-tight"></h1>
+            <p id="brand-subtitle" class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400"></p>
+          </div>
+        </div>
+
+        <!-- Desktop Navigation Tabs -->
+        <nav class="hidden md:flex items-center gap-1 bg-parchment/90 dark:bg-slate-900 p-1 rounded-xl border border-stone-200 dark:border-slate-800">
+          <button id="nav-courses" onclick="switchMainTab('courses')" class="nav-tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all"></button>
+          <button id="nav-wordlist" onclick="switchMainTab('wordlist')" class="nav-tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all"></button>
+          <button id="nav-flashcards" onclick="switchMainTab('flashcards')" class="nav-tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all"></button>
+        </nav>
+
+        <!-- Utility Controls: FA/EN Switcher & Light/Dark Toggle -->
+        <div class="flex items-center gap-2">
+          <button id="btn-lang-toggle" onclick="toggleLanguage()" class="px-3 py-2 rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-parchment dark:hover:bg-slate-800 text-xs font-bold text-navy dark:text-slate-200 transition-colors flex items-center gap-1.5" aria-label="Switch Language">
+            <svg class="w-4 h-4 text-burgundy dark:text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802" />
+            </svg>
+            <span id="lang-label">EN</span>
+          </button>
+
+          <button id="btn-theme-toggle" onclick="toggleTheme()" class="p-2 rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-parchment dark:hover:bg-slate-800 text-navy dark:text-gold transition-colors" aria-label="Toggle Theme">
+            <!-- Sun Icon (shown in dark mode) -->
+            <svg id="icon-sun" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+            </svg>
+            <!-- Moon Icon (shown in light mode) -->
+            <svg id="icon-moon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Tabs -->
+      <nav class="flex md:hidden items-center gap-1 pb-2.5 overflow-x-auto">
+        <button id="mnav-courses" onclick="switchMainTab('courses')" class="mnav-tab-btn flex-1 whitespace-nowrap px-3 py-2 rounded-lg text-xs font-semibold transition-all text-center"></button>
+        <button id="mnav-wordlist" onclick="switchMainTab('wordlist')" class="mnav-tab-btn flex-1 whitespace-nowrap px-3 py-2 rounded-lg text-xs font-semibold transition-all text-center"></button>
+        <button id="mnav-flashcards" onclick="switchMainTab('flashcards')" class="mnav-tab-btn flex-1 whitespace-nowrap px-3 py-2 rounded-lg text-xs font-semibold transition-all text-center"></button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT CONTAINER ==================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+    <!-- ==================== TAB 1: COURSES & LECTURE NOTES ==================== -->
+    <section id="tab-courses" class="space-y-6">
+      <!-- Course Directory View -->
+      <div id="courses-directory-view" class="space-y-6">
+        <!-- Editorial Hero Banner -->
+        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-navy via-navy-dark to-slate-900 dark:from-slate-900 dark:via-slate-900 dark:to-burgundy-dark text-ivory p-6 sm:p-8 shadow-md border border-navy-light/30 dark:border-slate-800">
+          <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+            <div class="space-y-2 max-w-2xl">
+              <span id="hero-badge" class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-amber-200 border border-white/15"></span>
+              <h2 id="hero-title" class="text-2xl sm:text-3xl font-extrabold tracking-tight"></h2>
+              <p id="hero-desc" class="text-sm sm:text-base text-slate-200/90 leading-relaxed"></p>
+            </div>
+            <div class="grid grid-cols-3 gap-3 shrink-0">
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3 text-center border border-white/10">
+                <div id="stat-courses-count" class="text-xl sm:text-2xl font-bold text-amber-300">10</div>
+                <div id="stat-courses-label" class="text-[11px] text-slate-200 mt-0.5"></div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3 text-center border border-white/10">
+                <div id="stat-units-count" class="text-xl sm:text-2xl font-bold text-amber-300">20</div>
+                <div id="stat-units-label" class="text-[11px] text-slate-200 mt-0.5"></div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3 text-center border border-white/10">
+                <div id="stat-terms-count" class="text-xl sm:text-2xl font-bold text-amber-300">40</div>
+                <div id="stat-terms-label" class="text-[11px] text-slate-200 mt-0.5"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Filter Pills & Search -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div id="course-category-pills" class="flex flex-wrap items-center gap-2"></div>
+          <div class="relative w-full sm:w-72">
+            <input id="course-grid-search" type="text" oninput="renderCoursesGrid()" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-navy dark:focus:ring-gold" />
+          </div>
+        </div>
+
+        <!-- 10 Courses Grid -->
+        <div id="courses-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      </div>
+
+      <!-- Course Reader View (Hidden by default) -->
+      <div id="course-reader-view" class="hidden space-y-6">
+        <div class="flex items-center justify-between gap-3">
+          <button onclick="closeCourseReader()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-parchment dark:hover:bg-slate-800 text-sm font-semibold text-navy dark:text-slate-200 transition-colors">
+            <span id="back-to-courses-label"></span>
+          </button>
+          <span id="reader-course-code-pill" class="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-parchment dark:bg-slate-800 text-navy dark:text-gold border border-stone-300 dark:border-slate-700"></span>
+        </div>
+
+        <!-- Course Metadata Header Card -->
+        <div id="reader-metadata-card" class="rounded-2xl bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 p-6 shadow-sm space-y-5"></div>
+
+        <!-- In-Course Lecture Search Bar -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-parchment/70 dark:bg-slate-900/80 p-4 rounded-2xl border border-stone-200 dark:border-slate-800">
+          <div class="flex items-center gap-2">
+            <h3 id="reader-notes-heading" class="text-lg font-bold text-navy dark:text-ivory"></h3>
+            <span id="reader-notes-count" class="text-xs px-2.5 py-0.5 rounded-full bg-navy/10 dark:bg-gold/20 text-navy dark:text-gold font-semibold"></span>
+          </div>
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <input id="in-course-search" type="text" oninput="renderCourseLectures()" class="w-full sm:w-72 rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-navy dark:focus:ring-gold" />
+            <button onclick="toggleAllAccordions(true)" id="btn-expand-all" class="px-3 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 border border-stone-300 dark:border-slate-700 hover:bg-parchment dark:hover:bg-slate-700 whitespace-nowrap"></button>
+          </div>
+        </div>
+
+        <!-- Lecture Accordions Container -->
+        <div id="reader-lectures-list" class="space-y-4"></div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: LEGAL WORD LIST ==================== -->
+    <section id="tab-wordlist" class="hidden space-y-5">
+      <!-- Header & Controls -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 p-5 sm:p-6 shadow-sm space-y-4">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <h2 id="wl-title" class="text-xl sm:text-2xl font-extrabold text-navy dark:text-ivory"></h2>
+            <p id="wl-subtitle" class="text-sm text-slate-600 dark:text-slate-400 mt-1"></p>
+          </div>
+          <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-parchment dark:bg-slate-800 border border-stone-200 dark:border-slate-700">
+              <svg class="w-4 h-4 text-burgundy dark:text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" />
+              </svg>
+              <span id="wl-copy-hint"></span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Search + Source Dropdown + Page Size -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+          <div class="md:col-span-6 relative">
+            <input id="wl-search" type="text" oninput="onWordListFilterChange()" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-ivory/60 dark:bg-slate-950 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-navy dark:focus:ring-gold" />
+          </div>
+          <div class="md:col-span-4">
+            <select id="wl-source-select" onchange="onWordListSourceSelect(this.value)" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-ivory/60 dark:bg-slate-950 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-navy dark:focus:ring-gold"></select>
+          </div>
+          <div class="md:col-span-2">
+            <select id="wl-pagesize-select" onchange="onWordListPageSizeChange(this.value)" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-ivory/60 dark:bg-slate-950 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-navy dark:focus:ring-gold">
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="all">All</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Source Filter Pills -->
+        <div id="wl-source-pills" class="flex flex-wrap gap-1.5 pt-1"></div>
+      </div>
+
+      <!-- Results Count & Table -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 shadow-sm overflow-hidden">
+        <div class="px-5 py-3 border-b border-stone-200 dark:border-slate-800 bg-parchment/50 dark:bg-slate-900/80 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600 dark:text-slate-400">
+          <span id="wl-result-count" class="font-semibold"></span>
+          <div id="wl-pagination-top" class="flex items-center gap-1.5"></div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="bg-navy text-ivory dark:bg-slate-800 dark:text-slate-100 text-xs uppercase tracking-wide">
+                <th id="th-row" class="py-3.5 px-3 text-center w-14 font-semibold"></th>
+                <th id="th-fa" class="py-3.5 px-4 text-start min-w-[180px] font-semibold"></th>
+                <th id="th-en" class="py-3.5 px-4 text-start min-w-[200px] font-semibold"></th>
+                <th id="th-notes" class="py-3.5 px-4 text-start min-w-[240px] font-semibold"></th>
+                <th id="th-source" class="py-3.5 px-4 text-start min-w-[140px] font-semibold"></th>
+              </tr>
+            </thead>
+            <tbody id="wl-table-body" class="divide-y divide-stone-200/80 dark:divide-slate-800"></tbody>
+          </table>
+        </div>
+
+        <!-- Bottom Pagination -->
+        <div class="px-5 py-3.5 border-t border-stone-200 dark:border-slate-800 bg-parchment/40 dark:bg-slate-900/60 flex flex-wrap items-center justify-between gap-3">
+          <span id="wl-page-info" class="text-xs text-slate-600 dark:text-slate-400"></span>
+          <div id="wl-pagination-bottom" class="flex items-center gap-1.5"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: INTERACTIVE FLASHCARD TRAINER ==================== -->
+    <section id="tab-flashcards" class="hidden space-y-6">
+      <!-- Controls Panel -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 p-5 shadow-sm space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div>
+            <h2 id="fc-title" class="text-xl sm:text-2xl font-extrabold text-navy dark:text-ivory"></h2>
+            <p id="fc-subtitle" class="text-sm text-slate-600 dark:text-slate-400 mt-0.5"></p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="shuffleFlashcards()" id="fc-btn-shuffle" class="px-3.5 py-2 rounded-xl border border-stone-300 dark:border-slate-700 bg-ivory dark:bg-slate-800 hover:bg-parchment dark:hover:bg-slate-700 text-xs font-semibold transition-colors"></button>
+            <button onclick="confirmResetMastery()" id="fc-btn-reset" class="px-3.5 py-2 rounded-xl border border-rose-300 dark:border-rose-800 text-rose-700 dark:text-rose-300 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 text-xs font-semibold transition-colors"></button>
+          </div>
+        </div>
+
+        <!-- Filters & Settings Row -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
+          <div>
+            <label id="fc-lbl-source" class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1"></label>
+            <select id="fc-source-filter" onchange="rebuildFlashcardDeck()" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-ivory/60 dark:bg-slate-950 px-3 py-2 text-sm"></select>
+          </div>
+          <div>
+            <label id="fc-lbl-mastery" class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1"></label>
+            <select id="fc-mastery-filter" onchange="rebuildFlashcardDeck()" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-ivory/60 dark:bg-slate-950 px-3 py-2 text-sm"></select>
+          </div>
+          <div>
+            <label id="fc-lbl-direction" class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1"></label>
+            <button id="fc-direction-btn" onclick="toggleFlashcardDirection()" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-parchment/80 dark:bg-slate-800 hover:bg-parchment dark:hover:bg-slate-700 px-3 py-2 text-sm font-semibold text-navy dark:text-gold transition-colors"></button>
+          </div>
+          <div class="flex items-end">
+            <label class="w-full flex items-center justify-between gap-2 rounded-xl border border-stone-300 dark:border-slate-700 bg-ivory/60 dark:bg-slate-950 px-3.5 py-2 cursor-pointer">
+              <span id="fc-lbl-shownotes" class="text-xs font-semibold text-slate-700 dark:text-slate-300"></span>
+              <input id="fc-show-notes-toggle" type="checkbox" checked onchange="renderCurrentFlashcard()" class="w-4 h-4 accent-navy dark:accent-gold rounded" />
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Bar & Stats -->
+      <div class="max-w-2xl mx-auto space-y-2">
+        <div class="flex items-center justify-between text-xs font-semibold text-slate-600 dark:text-slate-400">
+          <span id="fc-progress-text"></span>
+          <span id="fc-mastery-stats"></span>
+        </div>
+        <div class="w-full h-2.5 rounded-full bg-stone-200 dark:bg-slate-800 overflow-hidden">
+          <div id="fc-progress-bar" class="h-full bg-gradient-to-r from-navy to-burgundy dark:from-gold dark:to-amber-500 transition-all duration-300 rounded-full" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- 3D Flashcard Stage -->
+      <div id="fc-stage-wrapper" class="max-w-2xl mx-auto">
+        <div class="fc-scene">
+          <div id="fc-card-inner" onclick="flipFlashcard()" class="fc-card cursor-pointer select-none">
+            <!-- Front Face -->
+            <div class="fc-face rounded-3xl bg-white dark:bg-slate-900 border-2 border-stone-200 dark:border-slate-700 shadow-lg p-6 sm:p-10 flex flex-col justify-between">
+              <div class="flex items-center justify-between gap-2">
+                <span id="fc-front-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-navy/10 dark:bg-gold/15 text-navy dark:text-gold"></span>
+                <span id="fc-front-status" class="px-2.5 py-1 rounded-full text-[11px] font-semibold"></span>
+              </div>
+              <div class="my-6 text-center space-y-3">
+                <div id="fc-front-term" class="text-2xl sm:text-3xl font-extrabold text-navy dark:text-ivory leading-snug bidi-iso"></div>
+              </div>
+              <div class="flex items-center justify-between text-xs text-slate-400 dark:text-slate-500 pt-3 border-t border-stone-100 dark:border-slate-800">
+                <span id="fc-front-source" class="bidi-iso"></span>
+                <span id="fc-flip-hint"></span>
+              </div>
+            </div>
+
+            <!-- Back Face -->
+            <div class="fc-face fc-face-back rounded-3xl bg-gradient-to-br from-parchment to-white dark:from-slate-900 dark:to-slate-800 border-2 border-burgundy/40 dark:border-gold/50 shadow-xl p-6 sm:p-10 flex flex-col justify-between">
+              <div class="flex items-center justify-between gap-2">
+                <span id="fc-back-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-burgundy/10 dark:bg-gold/20 text-burgundy dark:text-gold"></span>
+                <span id="fc-back-source" class="text-xs font-medium text-slate-500 dark:text-slate-400 bidi-iso"></span>
+              </div>
+              <div class="my-4 text-center space-y-4">
+                <div id="fc-back-term" class="text-2xl sm:text-3xl font-extrabold text-burgundy dark:text-amber-300 leading-snug bidi-iso"></div>
+                <div id="fc-back-notes-box" class="text-sm text-slate-700 dark:text-slate-300 bg-white/80 dark:bg-slate-950/60 border border-stone-200 dark:border-slate-700 rounded-2xl p-4 leading-relaxed text-start bidi-iso"></div>
+              </div>
+              <div class="text-center text-xs text-slate-400 dark:text-slate-500 pt-2">
+                <span id="fc-back-hint"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty Deck State -->
+        <div id="fc-empty-state" class="hidden rounded-3xl bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 p-10 text-center space-y-3">
+          <div class="text-4xl">📚</div>
+          <p id="fc-empty-text" class="text-slate-600 dark:text-slate-400 font-medium"></p>
+        </div>
+
+        <!-- Navigation & Mastery Action Buttons -->
+        <div id="fc-actions-bar" class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div class="flex items-center gap-2 w-full sm:w-auto justify-center">
+            <button onclick="prevFlashcard()" id="fc-btn-prev" class="flex-1 sm:flex-none px-5 py-3 rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-parchment dark:hover:bg-slate-800 text-sm font-semibold transition-colors"></button>
+            <button onclick="flipFlashcard()" id="fc-btn-flip" class="flex-1 sm:flex-none px-5 py-3 rounded-xl bg-navy hover:bg-navy-light dark:bg-gold dark:hover:bg-gold-light text-white dark:text-slate-950 text-sm font-bold transition-colors"></button>
+            <button onclick="nextFlashcard()" id="fc-btn-next" class="flex-1 sm:flex-none px-5 py-3 rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-parchment dark:hover:bg-slate-800 text-sm font-semibold transition-colors"></button>
+          </div>
+
+          <div class="flex items-center gap-2 w-full sm:w-auto justify-center">
+            <button onclick="markFlashcard('review')" id="fc-btn-review" class="flex-1 sm:flex-none px-4 py-3 rounded-xl border border-amber-400 dark:border-amber-600 bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900/50 text-xs font-bold transition-colors"></button>
+            <button onclick="markFlashcard('mastered')" id="fc-btn-mastered" class="flex-1 sm:flex-none px-4 py-3 rounded-xl border border-emerald-400 dark:border-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-xs font-bold transition-colors"></button>
+          </div>
+        </div>
+
+        <p id="fc-shortcuts-hint" class="text-center text-xs text-slate-400 dark:text-slate-500 mt-4"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER (ZERO ADMIN MENTIONS; TRIPLE-CLICK TRIGGER) ==================== -->
+  <footer class="mt-auto border-t border-stone-200 dark:border-slate-800 bg-parchment/60 dark:bg-slate-900/60 py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-600 dark:text-slate-400">
+      <p id="footer-uni-trigger" class="font-medium select-none text-center sm:text-start">
+        دانشگاه علامه طباطبائی — نیمسال تحصیلی ۱۴۰۵–۱۴۰۴ | Allameh Tabataba'i University
+      </p>
+      <p id="footer-dept" class="text-slate-500 dark:text-slate-500"></p>
+    </div>
+  </footer>
+
+  <!-- ==================== STEALTH ADMIN PASSCODE GATE MODAL ==================== -->
+  <div id="admin-gate-modal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-full max-w-md rounded-2xl bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-700 shadow-2xl p-6 space-y-5">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-bold text-navy dark:text-ivory">Academic Portal Management</h3>
+        <button onclick="closeAdminGate()" class="p-1.5 rounded-lg hover:bg-stone-100 dark:hover:bg-slate-800 text-slate-500">&times;</button>
+      </div>
+      <p class="text-xs text-slate-600 dark:text-slate-400">Enter the administrator passcode to access the content management backend.</p>
+      <form onsubmit="submitAdminPasscode(event)" class="space-y-4">
+        <input id="admin-passcode-input" type="password" autocomplete="off" placeholder="Passcode" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-ivory dark:bg-slate-950 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-navy dark:focus:ring-gold" />
+        <p id="admin-gate-error" class="hidden text-xs text-rose-600 dark:text-rose-400 font-medium"></p>
+        <div class="flex justify-end gap-2">
+          <button type="button" onclick="closeAdminGate()" class="px-4 py-2 rounded-xl border border-stone-300 dark:border-slate-700 text-xs font-semibold">Cancel</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-navy dark:bg-gold text-white dark:text-slate-950 text-xs font-bold">Unlock</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== STEALTH ADMIN DASHBOARD OVERLAY ==================== -->
+  <div id="admin-dashboard-modal" class="hidden fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-2 sm:p-5">
+    <div class="w-full max-w-6xl h-[92vh] rounded-2xl bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-700 shadow-2xl flex flex-col overflow-hidden">
+      <!-- Admin Header -->
+      <div class="px-5 py-4 bg-navy dark:bg-slate-950 text-ivory flex flex-wrap items-center justify-between gap-3 border-b border-navy-light dark:border-slate-800">
+        <div class="flex items-center gap-3">
+          <span class="px-2.5 py-1 rounded-lg bg-burgundy text-white text-xs font-bold tracking-wider">ADMIN</span>
+          <h3 class="text-base sm:text-lg font-bold">ATU Translation Hub — Content & Terminology Manager</h3>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="logoutAdmin()" class="px-3 py-1.5 rounded-lg bg-rose-600/90 hover:bg-rose-600 text-white text-xs font-semibold">Logout</button>
+          <button onclick="closeAdminDashboard()" class="px-3 py-1.5 rounded-lg bg-white/15 hover:bg-white/25 text-white text-xs font-semibold">Close &times;</button>
+        </div>
+      </div>
+
+      <!-- Admin 4-Tab Bar -->
+      <div class="px-5 pt-3 bg-parchment/70 dark:bg-slate-900 border-b border-stone-200 dark:border-slate-800 flex items-center gap-1 overflow-x-auto">
+        <button onclick="switchAdminTab('paste')" id="admtab-paste" class="adm-tab-btn px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-t-xl whitespace-nowrap border-b-2 transition-colors">1. Table-Paste Bulk Importer</button>
+        <button onclick="switchAdminTab('xlsx')" id="admtab-xlsx" class="adm-tab-btn px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-t-xl whitespace-nowrap border-b-2 transition-colors">2. Excel / CSV Upload & Export</button>
+        <button onclick="switchAdminTab('crud')" id="admtab-crud" class="adm-tab-btn px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-t-xl whitespace-nowrap border-b-2 transition-colors">3. Single-Term CRUD</button>
+        <button onclick="switchAdminTab('courses')" id="admtab-courses" class="adm-tab-btn px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-t-xl whitespace-nowrap border-b-2 transition-colors">4. Course Editor & Settings</button>
+      </div>
+
+      <!-- Admin Body Scroll Area -->
+      <div class="flex-1 overflow-y-auto p-5 space-y-6">
+
+        <!-- ADMIN TAB 1: TABLE-PASTE BULK IMPORTER -->
+        <div id="admpanel-paste" class="space-y-4">
+          <div class="rounded-xl bg-parchment/70 dark:bg-slate-800/60 p-4 border border-stone-200 dark:border-slate-700 text-xs sm:text-sm space-y-1">
+            <p class="font-bold text-navy dark:text-gold">Smart Table-Paste Bulk Importer (Excel, Google Sheets, Word, Markdown, TSV, CSV)</p>
+            <p class="text-slate-600 dark:text-slate-300">Paste 5-column rows (<code>ردیف | فارسی | English | توضیحات | مرجع</code>) or 4-column rows (<code>فارسی | English | توضیحات | مرجع</code>). Header rows and Markdown dividers are skipped automatically.</p>
+          </div>
+
+          <textarea id="bulk-paste-input" rows="7" oninput="parseBulkPasteText()" placeholder="Paste rows from Excel, Google Sheets, Word, Markdown table, or CSV here..." class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-ivory dark:bg-slate-950 p-3.5 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-navy dark:focus:ring-gold"></textarea>
+
+          <!-- Import Options -->
+          <div class="flex flex-wrap items-center justify-between gap-3 bg-stone-100/80 dark:bg-slate-800/50 p-3.5 rounded-xl border border-stone-200 dark:border-slate-700">
+            <div class="flex flex-wrap items-center gap-4 text-xs">
+              <div class="flex items-center gap-2">
+                <span class="font-bold">Import Mode:</span>
+                <label class="inline-flex items-center gap-1 cursor-pointer">
+                  <input type="radio" name="import-mode" value="append" checked onchange="renderImportPreview()" /> Append
+                </label>
+                <label class="inline-flex items-center gap-1 cursor-pointer">
+                  <input type="radio" name="import-mode" value="replace" onchange="renderImportPreview()" /> Replace All
+                </label>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="font-bold">Duplicates:</span>
+                <label class="inline-flex items-center gap-1 cursor-pointer">
+                  <input type="radio" name="dup-mode" value="skip" checked onchange="renderImportPreview()" /> Skip Duplicates
+                </label>
+                <label class="inline-flex items-center gap-1 cursor-pointer">
+                  <input type="radio" name="dup-mode" value="overwrite" onchange="renderImportPreview()" /> Overwrite
+                </label>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="clearBulkImport()" class="px-3.5 py-2 rounded-lg border border-stone-300 dark:border-slate-600 text-xs font-semibold">Clear</button>
+              <button onclick="commitBulkImport()" id="btn-commit-import" class="px-4 py-2 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold disabled:opacity-40" disabled>Confirm Import</button>
+            </div>
+          </div>
+
+          <!-- Live Parsed Preview -->
+          <div id="bulk-preview-container" class="hidden space-y-2">
+            <div class="flex items-center justify-between text-xs font-semibold">
+              <span id="bulk-preview-summary"></span>
+            </div>
+            <div class="max-h-72 overflow-auto rounded-xl border border-stone-200 dark:border-slate-700">
+              <table class="w-full text-xs border-collapse">
+                <thead class="bg-slate-100 dark:bg-slate-800 sticky top-0">
+                  <tr>
+                    <th class="p-2 text-start">Status</th>
+                    <th class="p-2 text-start">ردیف</th>
+                    <th class="p-2 text-start">فارسی</th>
+                    <th class="p-2 text-start">English</th>
+                    <th class="p-2 text-start">توضیحات</th>
+                    <th class="p-2 text-start">مرجع</th>
+                  </tr>
+                </thead>
+                <tbody id="bulk-preview-tbody" class="divide-y divide-stone-200 dark:divide-slate-800"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADMIN TAB 2: EXCEL / CSV UPLOAD & EXPORT -->
+        <div id="admpanel-xlsx" class="hidden space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <!-- Upload Card -->
+            <div class="rounded-2xl border border-stone-200 dark:border-slate-700 p-5 space-y-4 bg-ivory/50 dark:bg-slate-950/50">
+              <h4 class="font-bold text-navy dark:text-gold">Upload .xlsx / .csv Spreadsheet</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-400">Select an Excel (<code>.xlsx</code>, <code>.xls</code>) or <code>.csv</code> file. Parsed rows will automatically load into the Bulk Importer preview for review before committing.</p>
+              <input id="xlsx-file-input" type="file" accept=".xlsx,.xls,.csv" onchange="handleSpreadsheetUpload(event)" class="block w-full text-xs text-slate-600 dark:text-slate-300 file:me-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-navy file:text-white dark:file:bg-gold dark:file:text-slate-950 hover:file:opacity-90 cursor-pointer" />
+            </div>
+
+            <!-- Export Card -->
+            <div class="rounded-2xl border border-stone-200 dark:border-slate-700 p-5 space-y-4 bg-ivory/50 dark:bg-slate-950/50">
+              <h4 class="font-bold text-navy dark:text-gold">1-Click Export Current Word List</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-400">Download the full active Legal Word List (<span id="adm-export-count" class="font-bold"></span> entries) in your preferred format.</p>
+              <div class="flex flex-wrap gap-2">
+                <button onclick="exportWordList('xlsx')" class="px-4 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold">Export .xlsx</button>
+                <button onclick="exportWordList('csv')" class="px-4 py-2.5 rounded-xl bg-navy hover:bg-navy-light text-white text-xs font-bold">Export .csv</button>
+                <button onclick="exportWordList('json')" class="px-4 py-2.5 rounded-xl bg-burgundy hover:bg-burgundy-light text-white text-xs font-bold">Export .json</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADMIN TAB 3: SINGLE-TERM CRUD -->
+        <div id="admpanel-crud" class="hidden space-y-5">
+          <!-- Add / Edit Form -->
+          <form onsubmit="saveSingleTerm(event)" class="rounded-2xl border border-stone-200 dark:border-slate-700 p-4 bg-parchment/50 dark:bg-slate-800/40 space-y-3">
+            <div class="flex items-center justify-between">
+              <h4 id="crud-form-title" class="text-sm font-bold text-navy dark:text-gold">Add New Terminology Entry</h4>
+              <button type="button" id="crud-cancel-edit" onclick="resetCrudForm()" class="hidden text-xs text-rose-600 font-semibold">Cancel Edit</button>
+            </div>
+            <input type="hidden" id="crud-edit-id" value="" />
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+              <input id="crud-fa" type="text" required placeholder="اصطلاح/عبارت فارسی" class="rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs" />
+              <input id="crud-en" type="text" required dir="ltr" placeholder="English Term/Phrase" class="rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs" />
+              <input id="crud-notes" type="text" placeholder="توضیحات حقوقی و کاربردی" class="rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs" />
+              <input id="crud-source" type="text" required placeholder="مرجع - منبع (مثلاً صوت جلسه ۱)" class="rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs" />
+            </div>
+            <div class="flex justify-end">
+              <button type="submit" id="crud-submit-btn" class="px-5 py-2 rounded-xl bg-navy dark:bg-gold text-white dark:text-slate-950 text-xs font-bold">Add Term</button>
+            </div>
+          </form>
+
+          <!-- Admin Term Search & Table -->
+          <div class="space-y-2">
+            <input id="adm-crud-search" type="text" oninput="renderAdminCrudTable()" placeholder="Search existing terms to edit or delete..." class="w-full sm:w-80 rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3.5 py-2 text-xs" />
+            <div class="max-h-80 overflow-auto rounded-xl border border-stone-200 dark:border-slate-700">
+              <table class="w-full text-xs border-collapse">
+                <thead class="bg-slate-100 dark:bg-slate-800 sticky top-0">
+                  <tr>
+                    <th class="p-2.5 text-center w-12">#</th>
+                    <th class="p-2.5 text-start">فارسی</th>
+                    <th class="p-2.5 text-start">English</th>
+                    <th class="p-2.5 text-start">مرجع</th>
+                    <th class="p-2.5 text-center w-28">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adm-crud-tbody" class="divide-y divide-stone-200 dark:divide-slate-800"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADMIN TAB 4: COURSE & LECTURE NOTE EDITOR + SETTINGS & BACKUP -->
+        <div id="admpanel-courses" class="hidden space-y-6">
+          <!-- Course Selector & Metadata Editor -->
+          <div class="rounded-2xl border border-stone-200 dark:border-slate-700 p-5 space-y-4 bg-ivory/40 dark:bg-slate-950/40">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <h4 class="font-bold text-navy dark:text-gold">Course & Lecture Note Block Editor</h4>
+              <select id="adm-course-select" onchange="loadCourseIntoEditor(this.value)" class="rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-xs font-semibold"></select>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+              <div>
+                <label class="block font-semibold mb-1">Persian Title</label>
+                <input id="ce-title-fa" type="text" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">English Title</label>
+                <input id="ce-title-en" type="text" dir="ltr" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" />
+              </div>
+              <div class="grid grid-cols-3 gap-2">
+                <div>
+                  <label class="block font-semibold mb-1">Code</label>
+                  <input id="ce-code" type="text" dir="ltr" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-2.5 py-2" />
+                </div>
+                <div>
+                  <label class="block font-semibold mb-1">Category</label>
+                  <select id="ce-category" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-2 py-2">
+                    <option value="تخصصی">تخصصی</option>
+                    <option value="عمومی">عمومی</option>
+                    <option value="اختیاری">اختیاری</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-semibold mb-1">Units</label>
+                  <input id="ce-units" type="number" min="1" max="6" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-2.5 py-2" />
+                </div>
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Prerequisites (FA)</label>
+                <input id="ce-prereq-fa" type="text" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Prerequisites (EN)</label>
+                <input id="ce-prereq-en" type="text" dir="ltr" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Objectives (FA)</label>
+                <input id="ce-obj-fa" type="text" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" />
+              </div>
+              <div class="md:col-span-2 lg:col-span-3">
+                <label class="block font-semibold mb-1">Syllabus Topics (one per line)</label>
+                <textarea id="ce-syllabus" rows="3" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2"></textarea>
+              </div>
+            </div>
+
+            <div class="flex justify-end">
+              <button onclick="saveCourseMetadata()" class="px-4 py-2 rounded-xl bg-navy dark:bg-gold text-white dark:text-slate-950 text-xs font-bold">Save Course Details</button>
+            </div>
+
+            <!-- Lecture Sections Manager -->
+            <div class="pt-4 border-t border-stone-200 dark:border-slate-700 space-y-3">
+              <div class="flex items-center justify-between">
+                <h5 class="text-xs font-bold uppercase tracking-wide text-slate-600 dark:text-slate-300">Lecture Note Sections (جزوه)</h5>
+                <button onclick="addNewLectureSection()" class="px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-semibold">+ Add Session</button>
+              </div>
+              <div id="ce-lectures-list" class="space-y-3"></div>
+            </div>
+          </div>
+
+          <!-- Admin Settings, Backup & Reset -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="rounded-2xl border border-stone-200 dark:border-slate-700 p-5 space-y-3">
+              <h4 class="font-bold text-sm text-navy dark:text-gold">Change Admin Passcode</h4>
+              <div class="flex gap-2">
+                <input id="adm-new-passcode" type="password" placeholder="New passcode (min 4 chars)" class="flex-1 rounded-xl border border-stone-300 dark:border-slate-700 bg-ivory dark:bg-slate-950 px-3 py-2 text-xs" />
+                <button onclick="updateAdminPasscode()" class="px-4 py-2 rounded-xl bg-navy dark:bg-gold text-white dark:text-slate-950 text-xs font-bold">Update</button>
+              </div>
+            </div>
+
+            <div class="rounded-2xl border border-stone-200 dark:border-slate-700 p-5 space-y-3">
+              <h4 class="font-bold text-sm text-navy dark:text-gold">Full JSON Backup, Restore & Reset</h4>
+              <div class="flex flex-wrap items-center gap-2">
+                <button onclick="exportFullBackupJson()" class="px-3.5 py-2 rounded-xl bg-navy text-white text-xs font-semibold">Download JSON Backup</button>
+                <label class="px-3.5 py-2 rounded-xl bg-emerald-700 text-white text-xs font-semibold cursor-pointer">
+                  Restore JSON
+                  <input type="file" accept=".json" onchange="restoreFullBackupJson(event)" class="hidden" />
+                </label>
+                <button onclick="confirmResetAllData()" class="px-3.5 py-2 rounded-xl bg-rose-700 hover:bg-rose-600 text-white text-xs font-semibold">Reset All to Defaults</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CUSTOM CONFIRMATION MODAL (NO NATIVE confirm()) ==================== -->
+  <div id="confirm-modal" class="hidden fixed inset-0 z-[60] bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-full max-w-sm rounded-2xl bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-700 shadow-2xl p-6 space-y-4">
+      <h4 id="confirm-modal-title" class="text-base font-bold text-navy dark:text-ivory"></h4>
+      <p id="confirm-modal-message" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"></p>
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeConfirmModal(false)" id="confirm-btn-cancel" class="px-4 py-2 rounded-xl border border-stone-300 dark:border-slate-700 text-xs font-semibold"></button>
+        <button onclick="closeConfirmModal(true)" id="confirm-btn-ok" class="px-4 py-2 rounded-xl bg-rose-700 hover:bg-rose-600 text-white text-xs font-bold"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TOAST NOTIFICATION CONTAINER ==================== -->
+  <div id="toast-container" class="fixed bottom-5 inset-x-4 sm:inset-x-auto sm:end-5 z-[70] flex flex-col gap-2 pointer-events-none items-center sm:items-end"></div>
+
+  <!-- ==================== APPLICATION SCRIPT ==================== -->
+  <script>
+    /* =========================================================================
+       1. SAFE STORAGE WRAPPER & CONSTANTS
+       ========================================================================= */
+    const STORAGE_KEYS = {
+      LANG: 'atu_portal_lang',
+      THEME: 'atu_portal_theme',
+      COURSES: 'atu_portal_courses_v1',
+      WORDLIST: 'atu_portal_wordlist_v1',
+      MASTERY: 'atu_portal_mastery_v1',
+      PASSCODE: 'atu_portal_admin_pass_v1',
+      ADMIN_AUTH: 'atu_portal_admin_auth_session'
+    };
+
+    const DEFAULT_PASSCODE = 'ATU2026';
+
+    const safeStorage = {
+      get(key, fallback = null) {
+        try {
+          const val = localStorage.getItem(key);
+          return val !== null ? JSON.parse(val) : fallback;
+        } catch (err) {
+          console.warn('localStorage read error:', err);
+          return fallback;
+        }
+      },
+      set(key, value) {
+        try {
+          localStorage.setItem(key, JSON.stringify(value));
+          return true;
+        } catch (err) {
+          console.error('localStorage write error:', err);
+          showToast(currentLang === 'fa'
+            ? 'خطا در ذخیره‌سازی محلی (احتمالاً حافظه مرورگر پر است).'
+            : 'Storage error: could not save changes to localStorage.', 'error');
+          return false;
+        }
+      },
+      remove(key) {
+        try { localStorage.removeItem(key); } catch (e) {}
+      }
+    };
+
+    /* =========================================================================
+       2. I18N DICTIONARY (PERSIAN FA / ENGLISH EN)
+       ========================================================================= */
+    const I18N = {
+      fa: {
+        brandTitle: 'پورتال آموزشی مترجمی زبان انگلیسی',
+        brandSubtitle: 'دانشگاه علامه طباطبائی — دانشکده ادبیات فارسی و زبان‌های خارجی',
+        navCourses: 'جزوه‌های درسی',
+        navWordlist: 'واژه‌نامه حقوقی',
+        navFlashcards: 'فلش‌کارت تمرینی',
+        langSwitch: 'EN',
+        heroBadge: 'کارشناسی مترجمی زبان انگلیسی • نیمسال تحصیلی ۱۴۰۵–۱۴۰۴',
+        heroTitle: 'سامانه یکپارچه جزوه‌های درسی و منابع ترجمه رسمی',
+        heroDesc: 'دسترسی سریع و ساختاریافته به جزوه‌های ۱۰ درس رسمی، واژه‌نامه تخصصی ترجمه اسناد رسمی و حقوقی، و سیستم تمرین تعاملی فلش‌کارت.',
+        statCourses: 'درس رسمی',
+        statUnits: 'واحد درسی',
+        statTerms: 'اصطلاح حقوقی',
+        catAll: 'همه دروس',
+        catSpecialized: 'تخصصی',
+        catGeneral: 'عمومی',
+        catElective: 'اختیاری',
+        searchCoursesPlaceholder: 'جستجو در عنوان یا کد درس...',
+        unitsLabel: 'واحد',
+        sessionsLabel: 'جلسه جزوه',
+        openCourse: 'مطالعه جزوه ←',
+        backToCourses: '→ بازگشت به فهرست دروس',
+        prerequisites: 'پیشنیاز:',
+        objectives: 'اهداف آموزشی:',
+        syllabusOverview: 'سرفصل‌های مصوب درس (مشاهده / بستن)',
+        lectureNotesHeading: 'جزوه‌های جلسات درس',
+        inCourseSearchPlaceholder: 'جستجو درون جزوه‌های این درس...',
+        expandAll: 'باز کردن همه',
+        collapseAll: 'بستن همه',
+        noMatchingLectures: 'هیچ جلسه‌ای با عبارت جستجو شده مطابقت ندارد.',
+        wlTitle: 'واژه‌نامه ترجمه رسمی و حقوقی',
+        wlSubtitle: 'مجموعه اصطلاحات کاربردی اسناد رسمی، دادگستری و کتاب توانگر با توضیحات دقیق حقوقی',
+        wlCopyHint: 'برای کپی اصطلاح انگلیسی، روی آن کلیک کنید',
+        wlSearchPlaceholder: 'جستجوی لحظه‌ای در اصطلاح فارسی، معادل انگلیسی یا توضیحات...',
+        wlAllSources: 'همه منابع و جلسات',
+        wlPageSizeAll: 'همه موارد',
+        thRow: 'ردیف',
+        thFa: 'اصطلاح/عبارت فارسی',
+        thEn: 'English Term/Phrase',
+        thNotes: 'توضیحات',
+        thSource: 'مرجع - منبع',
+        wlShowing: (start, end, total) => `نمایش ${start} تا ${end} از ${total} اصطلاح`,
+        wlEmpty: 'هیچ اصطلاحی با فیلترهای انتخابی یافت نشد.',
+        copiedToast: (txt) => `کپی شد: ${txt}`,
+        fcTitle: 'فلش‌کارت تمرینی واژگان حقوقی',
+        fcSubtitle: 'تمرین تعاملی سه‌بعدی با قابلیت پیگیری میزان تسلط و میانبرهای صفحه‌کلید',
+        fcShuffle: 'بر زدن کارت‌ها',
+        fcResetMastery: 'بازنشانی تسلط',
+        fcLblSource: 'فیلتر بر اساس جلسه / منبع',
+        fcLblMastery: 'وضعیت تسلط',
+        fcLblDirection: 'جهت تمرین',
+        fcLblShowNotes: 'نمایش توضیحات در پشت کارت',
+        fcMasteryAll: 'همه کارت‌ها',
+        fcMasteryReview: 'نیازمند مرور',
+        fcMasteryDone: 'مسلط شده‌ام',
+        fcDirFaEn: 'فارسی ← انگلیسی',
+        fcDirEnFa: 'انگلیسی ← فارسی',
+        fcCardOf: (cur, tot) => `کارت ${cur} از ${tot}`,
+        fcMasteredCount: (m, t) => `مسلط: ${m} از ${t}`,
+        fcFrontFa: 'اصطلاح فارسی',
+        fcFrontEn: 'English Legal Term',
+        fcFlipHint: 'کلیک یا کلید Space برای برگرداندن',
+        fcBackHint: 'برای بازگشت دوباره کلیک کنید',
+        fcBtnPrev: '→ قبلی',
+        fcBtnFlip: 'برگرداندن کارت',
+        fcBtnNext: 'بعدی ←',
+        fcBtnReview: 'نیازمند مرور',
+        fcBtnMastered: '✓ مسلط شدم',
+        fcEmptyDeck: 'کارتی با فیلتر انتخابی وجود ندارد. فیلتر منبع یا وضعیت تسلط را تغییر دهید.',
+        fcShortcuts: 'میانبرها: Space (برگرداندن کارت) • کلیدهای جهت چپ و راست (کارت قبلی و بعدی)',
+        statusMastered: 'مسلط',
+        statusReview: 'نیازمند مرور',
+        statusNew: 'جدید',
+        footerDept: 'گروه مترجمی زبان انگلیسی • پورتال مطالعه دانشجویی',
+        confirmCancel: 'انصراف',
+        confirmOk: 'تأیید',
+        resetMasteryTitle: 'بازنشانی وضعیت تسلط',
+        resetMasteryMsg: 'آیا مطمئن هستید که می‌خواهید وضعیت تسلط همه فلش‌کارت‌ها را پاک کنید؟',
+        prevPage: 'قبلی',
+        nextPage: 'بعدی'
+      },
+      en: {
+        brandTitle: 'English–Persian Translation Study Portal',
+        brandSubtitle: "Allameh Tabataba'i University — Faculty of Persian Literature & Foreign Languages",
+        navCourses: 'Courses & Lecture Notes',
+        navWordlist: 'Legal Word List',
+        navFlashcards: 'Flashcard Trainer',
+        langSwitch: 'FA',
+        heroBadge: 'B.A. in English Translation • Academic Semester 2025–2026',
+        heroTitle: 'Bilingual Academic Study Portal & Legal Translation Hub',
+        heroDesc: 'Structured lecture notes for all 10 official curriculum courses, a searchable Persian–English legal terminology database, and a 3D interactive flashcard trainer.',
+        statCourses: 'Official Courses',
+        statUnits: 'Total Units',
+        statTerms: 'Legal Terms',
+        catAll: 'All Courses',
+        catSpecialized: 'Specialized (تخصصی)',
+        catGeneral: 'General (عمومی)',
+        catElective: 'Elective (اختیاری)',
+        searchCoursesPlaceholder: 'Search course title or code...',
+        unitsLabel: 'Units',
+        sessionsLabel: 'Lecture Sessions',
+        openCourse: 'Read Lecture Notes →',
+        backToCourses: '← Back to All Courses',
+        prerequisites: 'Prerequisites:',
+        objectives: 'Learning Objectives:',
+        syllabusOverview: 'Official Syllabus Overview (Toggle)',
+        lectureNotesHeading: 'Structured Lecture Notes',
+        inCourseSearchPlaceholder: 'Search within this course notes...',
+        expandAll: 'Expand All',
+        collapseAll: 'Collapse All',
+        noMatchingLectures: 'No lecture sections match your search query.',
+        wlTitle: 'Legal & Official Translation Word List',
+        wlSubtitle: 'Curated Persian–English legal terminology across lecture recordings and Tavangar textbook lessons',
+        wlCopyHint: 'Click any English term to copy it',
+        wlSearchPlaceholder: 'Instant search across Persian terms, English equivalents, or notes...',
+        wlAllSources: 'All Sessions & Sources',
+        wlPageSizeAll: 'All',
+        thRow: 'Row #',
+        thFa: 'Persian Term / Phrase',
+        thEn: 'English Term / Phrase',
+        thNotes: 'Contextual & Legal Notes',
+        thSource: 'Session / Source',
+        wlShowing: (start, end, total) => `Showing ${start}–${end} of ${total} entries`,
+        wlEmpty: 'No terminology entries match your current filter.',
+        copiedToast: (txt) => `Copied: ${txt}`,
+        fcTitle: 'Interactive Legal Flashcard Trainer',
+        fcSubtitle: '3D-flip study deck powered by the Legal Word List with mastery tracking and keyboard shortcuts',
+        fcShuffle: 'Shuffle Deck',
+        fcResetMastery: 'Reset Mastery',
+        fcLblSource: 'Filter by Session / Source',
+        fcLblMastery: 'Mastery Filter',
+        fcLblDirection: 'Study Direction',
+        fcLblShowNotes: 'Show legal notes on back',
+        fcMasteryAll: 'All Cards',
+        fcMasteryReview: 'Needs Review',
+        fcMasteryDone: 'Mastered',
+        fcDirFaEn: 'Persian → English',
+        fcDirEnFa: 'English → Persian',
+        fcCardOf: (cur, tot) => `Card ${cur} of ${tot}`,
+        fcMasteredCount: (m, t) => `Mastered: ${m} / ${t}`,
+        fcFrontFa: 'Persian Legal Term',
+        fcFrontEn: 'English Legal Term',
+        fcFlipHint: 'Click or press Space to flip',
+        fcBackHint: 'Click again to flip back',
+        fcBtnPrev: '← Previous',
+        fcBtnFlip: 'Flip Card',
+        fcBtnNext: 'Next →',
+        fcBtnReview: 'Needs Review',
+        fcBtnMastered: '✓ Mastered',
+        fcEmptyDeck: 'No flashcards match the selected filters. Adjust the source or mastery filter.',
+        fcShortcuts: 'Shortcuts: Space (Flip) • ArrowLeft / ArrowRight (Previous / Next)',
+        statusMastered: 'Mastered',
+        statusReview: 'Needs Review',
+        statusNew: 'Unseen',
+        footerDept: 'Department of English Translation • Student Resource Hub',
+        confirmCancel: 'Cancel',
+        confirmOk: 'Confirm',
+        resetMasteryTitle: 'Reset Mastery Progress',
+        resetMasteryMsg: 'Are you sure you want to clear all Mastered and Needs Review statuses?',
+        prevPage: 'Prev',
+        nextPage: 'Next'
+      }
+    };
+
+    /* =========================================================================
+       3. DEFAULT DATASET: ALL 10 OFFICIAL CURRICULUM COURSES & LECTURE NOTES
+       ========================================================================= */
+    const DEFAULT_COURSES = [
+      {
+        id: 'course-1',
+        code: 'TR-3041',
+        titleFa: 'ترجمه اسناد رسمی',
+        titleEn: 'Translating Legal Documents',
+        category: 'تخصصی',
+        units: 2,
+        prereqFa: 'اصول و مبانی ترجمه، ترجمه متون ساده',
+        prereqEn: 'Principles of Translation, Translating Simple Texts',
+        objFa: 'تسلط بر ساختار حقوقی، اصطلاحات استاندارد قوه قضائیه، و فنون ترجمه رسمی اسناد سجلی، ثبتی، قضایی و شرکتی از فارسی به انگلیسی و بالعکس.',
+        objEn: 'Mastery of legal syntax, official Judiciary terminology, and certified translation conventions for civil status, notarized, judicial, and corporate documents.',
+        syllabus: [
+          'آشنایی با آیین‌نامه مترجمان رسمی قوه قضائیه و ویژگی‌های زبان حقوقی',
+          'ترجمه اسناد سجلی: شناسنامه، کارت ملی، سند ازدواج و طلاق',
+          'ترجمه اسناد ثبتی و املاک: سند مالکیت تک‌برگ، مبایعه‌نامه و وکالت‌نامه',
+          'ترجمه اسناد تحصیلی و شغلی: دانشنامه، ریز نمرات، گواهی اشتغال به کار',
+          'ترجمه اسناد قضایی و شرکتی: دادنامه، اساسنامه و روزنامه رسمی'
+        ],
+        lectures: [
+          {
+            id: 'c1-l1',
+            title: 'جلسه ۱: ویژگی‌های زبان حقوقی و ساختار اسناد رسمی',
+            content: `
+              <p>زبان حقوقی (<span class="bidi-iso" dir="ltr">Legalese</span>) به دلیل ماهیت الزام‌آور خود، دارای ویژگی‌های نحوی و واژگانی متمایزی است. در ترجمه اسناد رسمی، دقت حقوقی بر زیبایی‌شناسی ادبی اولویت مطلق دارد.</p>
+              <div class="lecture-callout">
+                <strong>تعریف کلیدی:</strong> <em>ترجمه رسمی (Certified / Official Translation)</em> ترجمه‌ای است که توسط مترجم رسمی دارای پروانه از قوه قضائیه روی سربرگ رسمی انجام و ممهور به مهر مترجم شود.
+              </div>
+              <h4>ویژگی‌های اصلی نثر حقوقی انگلیسی:</h4>
+              <ul>
+                <li>استفاده از قیدهای مرکب کهن مانند <span class="bidi-iso" dir="ltr">hereinafter, hereby, thereof, whereas</span>.</li>
+                <li>به‌کارگیری زوج‌واژه‌ها (<span class="bidi-iso" dir="ltr">Legal Doublets</span>) مانند <span class="bidi-iso" dir="ltr">null and void</span> (باطل و بلااثر) و <span class="bidi-iso" dir="ltr">terms and conditions</span>.</li>
+                <li>کاربرد فعل وجهی <span class="bidi-iso" dir="ltr">shall</span> برای بیان تکلیف و الزام حقوقی، نه زمان آینده.</li>
+              </ul>
+              <table>
+                <thead><tr><th>ویژگی در متن فارسی</th><th>معادل استاندارد انگلیسی</th><th>نکته اجرایی</th></tr></thead>
+                <tbody>
+                  <tr><td>بدین‌وسیله گواهی می‌شود</td><td dir="ltr">This is to certify that / It is hereby certified</td><td>پرهیز از ترجمه تحت‌اللفظی</td></tr>
+                  <tr><td>در اجرای ماده ...</td><td dir="ltr">Pursuant to Article ...</td><td>عدم استفاده از In execution of</td></tr>
+                  <tr><td>برابر با اصل است</td><td dir="ltr">Certified True Copy</td><td>مهر و امضای دفترخانه یا دادگستری</td></tr>
+                </tbody>
+              </table>
+            `
+          },
+          {
+            id: 'c1-l2',
+            title: 'جلسه ۲: ترجمه اسناد سجلی (شناسنامه، سند ازدواج و طلاق)',
+            content: `
+              <p>اسناد سجلی صادره از سازمان ثبت احوال کشور (<span class="bidi-iso" dir="ltr">National Organization for Civil Registration</span>) پرکاربردترین اسناد در دارالترجمه‌های رسمی هستند.</p>
+              <ul>
+                <li><strong>شماره شناسنامه:</strong> <span class="bidi-iso" dir="ltr">Birth Certificate No. / ID No.</span></li>
+                <li><strong>کد ملی:</strong> <span class="bidi-iso" dir="ltr">National ID No.</span></li>
+                <li><strong>توضیحات صفحه آخر شناسنامه:</strong> درج دقیق تغییرات نام، ازدواج، طلاق و فرزندان با ذکر تاریخ شمسی و معادل میلادی.</li>
+              </ul>
+              <div class="lecture-callout">
+                <strong>نکته طلایی:</strong> در ترجمه مهریه (<span class="bidi-iso" dir="ltr">Marriage Portion / Dower</span>)، ذکر دقیق عبارت <em>عندالمطالبه</em> (<span class="bidi-iso" dir="ltr">payable upon demand</span>) یا <em>عندالاستطاعه</em> (<span class="bidi-iso" dir="ltr">payable upon financial ability</span>) الزامی است.
+              </div>
+            `
+          },
+          {
+            id: 'c1-l3',
+            title: 'جلسه ۳: وکالت‌نامه‌ها و اسناد ثبتی املاک',
+            content: `
+              <p>وکالت‌نامه (<span class="bidi-iso" dir="ltr">Power of Attorney - POA</span>) سندی است که به موجب آن موکل (<span class="bidi-iso" dir="ltr">Principal</span>) به وکیل (<span class="bidi-iso" dir="ltr">Attorney-in-Fact / Agent</span>) اختیار انجام امور مشخصی را می‌دهد.</p>
+              <table>
+                <thead><tr><th>نوع سند</th><th>معادل انگلیسی</th><th>مرجع صدور</th></tr></thead>
+                <tbody>
+                  <tr><td>وکالت‌نامه بلاعزل</td><td dir="ltr">Irrevocable Power of Attorney</td><td>دفتر اسناد رسمی</td></tr>
+                  <tr><td>سند مالکیت تک‌برگ</td><td dir="ltr">Single-Page Title Deed</td><td>اداره ثبت اسناد و املاک</td></tr>
+                  <tr><td>مبایعه‌نامه</td><td dir="ltr">Deed of Sale / Purchase Agreement</td><td>دفترخانه یا مشاور املاک</td></tr>
+                </tbody>
+              </table>
+            `
+          }
+        ]
+      },
+      {
+        id: 'course-2',
+        code: 'TR-3042',
+        titleFa: 'ترجمه شفاهی پیاپی',
+        titleEn: 'Consecutive Interpreting',
+        category: 'تخصصی',
+        units: 2,
+        prereqFa: 'گفتگو و شنیدار پیشرفته، ترجمه شفاهی (۱)',
+        prereqEn: 'Advanced Listening & Speaking, Interpreting (1)',
+        objFa: 'تقویت حافظه کوتاه‌مدت، مهارت گوش دادن فعال، یادداشت‌برداری ساختاری (Note-taking) و ارائه روان در ترجمه پیاپی کنفرانس‌ها و جلسات دیپلماتیک.',
+        objEn: 'Developing active listening, short-term memory retention, structured note-taking symbols, and fluent target-language delivery in consecutive interpreting.',
+        syllabus: [
+          'مدل تلاش ژیل (Gile’s Effort Model) در ترجمه پیاپی',
+          'اصول هفت‌گانه یادداشت‌برداری ژان فرانسوا روزان (Rozan)',
+          'نمادسازی، چیدمان عمودی و نشانه‌گذاری روابط منطقی',
+          'مدیریت استرس، لحن صدا و بازتولید سخنرانی‌های رسمی'
+        ],
+        lectures: [
+          {
+            id: 'c2-l1',
+            title: 'جلسه ۱: مدل تلاش دانیل ژیل و مراحل دوگانه ترجمه پیاپی',
+            content: `
+              <p>در ترجمه شفاهی پیاپی (<span class="bidi-iso" dir="ltr">Consecutive Interpreting</span>)، مترجم پس از پایان بخشی از صحبت سخنران، پیام را به زبان مقصد منتقل می‌کند. دانیل ژیل این فرایند را به دو فاز تقسیم می‌کند:</p>
+              <ul>
+                <li><strong>فاز ۱ (درک و یادداشت‌برداری):</strong> <span class="bidi-iso" dir="ltr">Listening & Analysis + Note-taking + Short-term Memory</span></li>
+                <li><strong>فاز ۲ (بازتولید پیام):</strong> <span class="bidi-iso" dir="ltr">Remembering + Note-reading + Production</span></li>
+              </ul>
+              <div class="lecture-callout">
+                <strong>قاعده کلیدی:</strong> یادداشت‌برداری جایگزین درک مطلب نیست؛ بلکه صرفاً <em>محرک حافظه (Memory Trigger)</em> است. از نوشتن کلمه‌به‌کلمه پرهیز کنید.
+              </div>
+            `
+          },
+          {
+            id: 'c2-l2',
+            title: 'جلسه ۲: اصول یادداشت‌برداری روزان و نمادهای استاندارد',
+            content: `
+              <p>سیستم یادداشت‌برداری باید بر پایه <strong>ایده</strong> باشد نه واژه، و ساختار <strong>عمودی و پلکانی (Verticality & Shift)</strong> داشته باشد.</p>
+              <table>
+                <thead><tr><th>نماد</th><th>مفهوم</th><th>کاربرد نمونه</th></tr></thead>
+                <tbody>
+                  <tr><td dir="ltr">↑ / ↓</td><td>افزایش / کاهش</td><td>رشد اقتصادی، افت قیمت</td></tr>
+                  <tr><td dir="ltr">∴ / ∵</td><td>بنابراین / زیرا</td><td>نشان دادن روابط علی و معلولی</td></tr>
+                  <tr><td dir="ltr">≠ / =</td><td>تفاوت / برابری</td><td>مقایسه سیاست‌ها یا آمارها</td></tr>
+                  <tr><td dir="ltr">□</td><td>کشور / دولت</td><td>روابط بین‌الملل و دیپلماسی</td></tr>
+                </tbody>
+              </table>
+            `
+          }
+        ]
+      },
+      {
+        id: 'course-3',
+        code: 'TR-3043',
+        titleFa: 'ترجمه متون رسانه‌ای و مطبوعاتی',
+        titleEn: 'Translating Journalistic Texts',
+        category: 'تخصصی',
+        units: 2,
+        prereqFa: 'ترجمه متون ساده، نگارش فارسی پیشرفته',
+        prereqEn: 'Translating Simple Texts, Advanced Persian Writing',
+        objFa: 'آشنایی با سبک نگارش مطبوعاتی (هرم وارونه)، فنون ترجمه تیترهای خبری (Headlinese)، لید خبر، سرمقاله‌ها و تحلیل سوگیری‌های گفتمانی در رسانه‌های بین‌المللی.',
+        objEn: 'Mastering journalistic style (inverted pyramid), headlinese translation strategies, news leads, editorials, and ideological framing in international media.',
+        syllabus: [
+          'ساختار هرم وارونه و عناصر شش‌گانه خبر (5Ws & H)',
+          'دستور زبان ویژه تیترهای انگلیسی (Headlinese) و بازآفرینی در فارسی',
+          'ترجمه گزارش‌های تحلیلی، مصاحبه‌ها و سرمقاله‌ها',
+          'تشخیص جهت‌گیری واژگانی و نقل‌قول‌های غیرمستقیم در خبرگزاری‌ها'
+        ],
+        lectures: [
+          {
+            id: 'c3-l1',
+            title: 'جلسه ۱: ساختار هرم وارونه و ترجمه لید (Lead)',
+            content: `
+              <p>در روزنامه‌نگاری حرفه‌ای، مهم‌ترین اطلاعات در پاراگراف اول یا <strong>لید (<span class="bidi-iso" dir="ltr">Lead</span>)</strong> می‌آید. در ترجمه لید به فارسی، باید از جملات طولانی و سنگین پرهیز کرد و فعل را در جایگاه طبیعی زبان فارسی قرار داد.</p>
+              <div class="lecture-callout">
+                <strong>نکته ویرایشی:</strong> افعال نقل‌قول در انگلیسی (<span class="bidi-iso" dir="ltr">claimed, alleged, stressed, reiterated</span>) بار معنایی و موضع‌گیری متفاوتی دارند و نباید همه آن‌ها را صرفاً «گفت» ترجمه کرد.
+              </div>
+            `
+          },
+          {
+            id: 'c3-l2',
+            title: 'جلسه ۲: ویژگی‌های تیترهای خبری (Headlinese)',
+            content: `
+              <p>تیترهای انگلیسی برای صرفه‌جویی در فضا از قوانین خاصی پیروی می‌کنند:</p>
+              <ul>
+                <li>حذف افعال کمکی (<span class="bidi-iso" dir="ltr">be, have</span>) و حروف تعریف (<span class="bidi-iso" dir="ltr">a, the</span>).</li>
+                <li>استفاده از زمان حال ساده برای رویدادهای گذشته (مثلاً: <span class="bidi-iso" dir="ltr">UN Approves Resolution</span> ← تصویب قطعنامه در سازمان ملل).</li>
+                <li>استفاده از مصدر با <span class="bidi-iso" dir="ltr">to</span> برای اشاره به آینده (مثلاً: <span class="bidi-iso" dir="ltr">Talks to Resume Monday</span> ← ازسرگیری مذاکرات در روز دوشنبه).</li>
+              </ul>
+            `
+          }
+        ]
+      },
+      {
+        id: 'course-4',
+        code: 'TR-3044',
+        titleFa: 'واژه‌شناسی و اصطلاح‌شناسی',
+        titleEn: 'Morphology and Terminology',
+        category: 'تخصصی',
+        units: 2,
+        prereqFa: 'زبان‌شناسی همگانی (۱)',
+        prereqEn: 'General Linguistics (1)',
+        objFa: 'شناخت ساخت‌واژه انگلیسی و فارسی، فرایندهای واژه‌سازی، ریشه‌شناسی یونانی و لاتین، و اصول استانداردسازی و معادل‌یابی اصطلاحات علمی و فنی.',
+        objEn: 'Understanding English and Persian morphological processes, Greek/Latin roots, and international standards for terminology management and neologism creation.',
+        syllabus: [
+          'تکواژهای آزاد و وابسته، وندهای تصریفی و اشتقاقی',
+          'فرایندهای واژه‌سازی: ترکیب، ادغام، سرواژه‌سازی و پسین‌سازی',
+          'اصول اصطلاح‌شناسی (ISO 704) و تفاوت واژه عمومی با اصطلاح تخصصی',
+          'مدیریت واژه‌نامه‌ها (Termbases) و معادل‌گزینی فرهنگستان'
+        ],
+        lectures: [
+          {
+            id: 'c4-l1',
+            title: 'جلسه ۱: تکواژ، ریشه و فرایندهای واژه‌سازی',
+            content: `
+              <p><strong>تکواژ (<span class="bidi-iso" dir="ltr">Morpheme</span>)</strong> کوچک‌ترین واحد معنادار زبان است. شناخت ساختار درونی واژگان به مترجم کمک می‌کند معنای واژه‌های ناآشنا را از بافت و ریشه استخراج کند.</p>
+              <table>
+                <thead><tr><th>فرایند واژه‌سازی</th><th>معادل انگلیسی</th><th>مثال</th></tr></thead>
+                <tbody>
+                  <tr><td>اشتقاق</td><td dir="ltr">Derivation</td><td dir="ltr">legal → legality → illegal</td></tr>
+                  <tr><td>ترکیب</td><td dir="ltr">Compounding</td><td dir="ltr">copyright, courtroom</td></tr>
+                  <tr><td>ادغام (آمیزش)</td><td dir="ltr">Blending</td><td dir="ltr">infotainment, webinar</td></tr>
+                  <tr><td>سرواژه‌سازی</td><td dir="ltr">Acronym / Initialism</td><td dir="ltr">UNESCO, POA, NGO</td></tr>
+                </tbody>
+              </table>
+            `
+          },
+          {
+            id: 'c4-l2',
+            title: 'جلسه ۲: اصول اصطلاح‌شناسی و ایجاد پایگاه واژگان',
+            content: `
+              <p>در اصطلاح‌شناسی تخصصی (<span class="bidi-iso" dir="ltr">Terminology</span>)، اصل بر <strong>تک‌معنایی (Monosemy)</strong> در یک حوزه موضوعی مشخص است. یک مترجم حرفه‌ای باید برای هر پروژه یک برگه اصطلاحات (<span class="bidi-iso" dir="ltr">Termbase</span>) شامل حوزه، تعریف، بافت و منبع تهیه کند.</p>
+            `
+          }
+        ]
+      },
+      {
+        id: 'course-5',
+        code: 'EN-3045',
+        titleFa: 'داستان کوتاه و رمان در ادبیات انگلیسی',
+        titleEn: 'English Literature: Short Story & Novel',
+        category: 'تخصصی',
+        units: 2,
+        prereqFa: 'نمونه‌های نثر ساده، خواندن و درک مفاهیم (۳)',
+        prereqEn: 'Simple Prose, Reading Comprehension (3)',
+        objFa: 'تحلیل عناصر روایی در داستان کوتاه و رمان انگلیسی، شناخت سبک‌های ادبی از رئالیسم تا مدرنیسم، و بررسی چالش‌های ترجمه ادبی در بازآفرینی لحن و شخصیت‌پردازی.',
+        objEn: 'Analyzing narrative elements in English short stories and novels from Realism to Modernism, with emphasis on literary translation of voice, tone, and characterization.',
+        syllabus: [
+          'عناصر داستان: پیرنگ، شخصیت‌پردازی، زاویه دید و فضاسازی',
+          'خوانش تحلیلی داستان‌های کوتاه جیمز جویس، ویرجینیا وولف و همینگوی',
+          'سیر تحول رمان انگلیسی (دیکنز، آستین، جورج اورول)',
+          'جریان سیال ذهن، کنایه (Irony) و ترجمه دیالوگ‌های گویشی'
+        ],
+        lectures: [
+          {
+            id: 'c5-l1',
+            title: 'جلسه ۱: عناصر بنیادین روایت و زاویه دید',
+            content: `
+              <p>شناخت دقیق <strong>زاویه دید (<span class="bidi-iso" dir="ltr">Point of View</span>)</strong> و <strong>گفتار غیرمستقیم آزاد (<span class="bidi-iso" dir="ltr">Free Indirect Discourse</span>)</strong> برای حفظ لحن نویسنده در ترجمه ادبی حیاتی است.</p>
+              <ul>
+                <li><strong>راوی اول‌شخص (<span class="bidi-iso" dir="ltr">First-person Narrator</span>):</strong> انتقال صمیمیت و محدودیت دیدگاه راوی.</li>
+                <li><strong>راوی دانای کل محدود (<span class="bidi-iso" dir="ltr">Third-person Limited</span>):</strong> تمرکز بر ذهنیت یک شخصیت مشخص.</li>
+              </ul>
+            `
+          },
+          {
+            id: 'c5-l2',
+            title: 'جلسه ۲: مطالعه موردی «دوبلینی‌ها» و مفهوم اپیفانی',
+            content: `
+              <p>در داستان‌های کوتاه جیمز جویس، به‌ویژه <em>Araby</em>، کل ساختار داستان به سوی لحظه <strong>اپیفانی (<span class="bidi-iso" dir="ltr">Epiphany</span>)</strong> یا اشراق ناگهانی پیش می‌رود. در ترجمه، حفظ ایجاز، تصاویر حسی و تضاد نور و تاریکی ضروری است.</p>
+            `
+          }
+        ]
+      },
+      {
+        id: 'course-6',
+        code: 'TR-3046',
+        titleFa: 'بررسی آثار ترجمه‌شده اسلامی (۲)',
+        titleEn: 'The Study of Translated Islamic Texts (2)',
+        category: 'تخصصی',
+        units: 2,
+        prereqFa: 'بررسی آثار ترجمه‌شده اسلامی (۱)',
+        prereqEn: 'The Study of Translated Islamic Texts (1)',
+        objFa: 'نقد و ارزیابی تطبیقی ترجمه‌های انگلیسی قرآن کریم، نهج‌البلاغه، صحیفه سجادیه و متون عرفانی و فلسفی اسلام بر پایه نظریه‌های نقد ترجمه.',
+        objEn: 'Comparative criticism and evaluation of English translations of the Holy Quran, Nahj al-Balagha, Sahifa Sajjadiyya, and classical Islamic philosophical/mystical texts.',
+        syllabus: [
+          'معیارهای ارزیابی ترجمه‌های متون مقدس و دینی',
+          'مقایسه ترجمه‌های قرآن (آربری، پیکتال، یوسف علی، قرایی)',
+          'بررسی ترجمه‌های نهج‌البلاغه و چالش‌های بلاغت و ایجاز',
+          'رویکردهای بومی‌سازی و بیگانه‌سازی در ترجمه متون عرفانی'
+        ],
+        lectures: [
+          {
+            id: 'c6-l1',
+            title: 'جلسه ۱: مقایسه سبک‌شناختی ترجمه‌های انگلیسی قرآن کریم',
+            content: `
+              <p>مترجمان قرآن کریم در زبان انگلیسی میان دو قطب <strong>نثر کهن کتاب‌مقدسی (Biblical Archaic Style)</strong> و <strong>انگلیسی معاصر روان</strong> حرکت کرده‌اند.</p>
+              <table>
+                <thead><tr><th>مترجم</th><th>رویکرد غالب</th><th>ویژگی شاخص</th></tr></thead>
+                <tbody>
+                  <tr><td dir="ltr">A. J. Arberry</td><td>ادبی و آهنگین</td><td>تلاش برای حفظ ریتم و زیبایی شعرگونه</td></tr>
+                  <tr><td dir="ltr">A. Quli Qara'i</td><td>عبارت‌به‌عبارت (Phrase-by-phrase)</td><td>دقت معنایی بالا و وفاداری تفسیری</td></tr>
+                  <tr><td dir="ltr">M. A. S. Abdel Haleem</td><td>انگلیسی معاصر روان</td><td>خوانایی بالا برای مخاطب امروز</td></tr>
+                </tbody>
+              </table>
+            `
+          },
+          {
+            id: 'c6-l2',
+            title: 'جلسه ۲: چالش‌های ترجمه اصطلاحات فقهی و عرفانی',
+            content: `
+              <p>مفاهیمی مانند <em>تقوا، توکل، عصمت، اجتهاد</em> فاقد معادل یک‌به‌یک کامل در زبان انگلیسی هستند. استفاده از آوانگاری همراه با پانویس (<span class="bidi-iso" dir="ltr">Transliteration + Gloss</span>) یا معادل‌سازی توصیفی از راهکارهای اصلی است.</p>
+            `
+          }
+        ]
+      },
+      {
+        id: 'course-7',
+        code: 'TR-3047',
+        titleFa: 'ترجمه متون اسلامی از فارسی (۲)',
+        titleEn: 'Translating Persian Islamic Texts (2)',
+        category: 'تخصصی',
+        units: 2,
+        prereqFa: 'ترجمه متون اسلامی از فارسی (۱)',
+        prereqEn: 'Translating Persian Islamic Texts (1)',
+        objFa: 'تمرین عملی ترجمه متون پیشرفته کلامی، تفسیری، اخلاقی و تاریخی از فارسی به انگلیسی با رعایت دقت اصطلاح‌شناختی و بلاغت زبان مقصد.',
+        objEn: 'Practical translation of advanced Persian theological, exegetical, ethical, and historical Islamic texts into idiomatic, terminologically accurate English.',
+        syllabus: [
+          'تحلیل ساختار جملات متون کلاسیک و معاصر اسلامی فارسی',
+          'ترجمه گزیده‌هایی از متون اخلاقی و تفسیری معاصر',
+          'اصول استناد به آیات و روایات درون متن فارسی هنگام ترجمه به انگلیسی',
+          'ویرایش و بازنگری متون اسلامی ترجمه‌شده برای خواننده انگلیسی‌زبان'
+        ],
+        lectures: [
+          {
+            id: 'c7-l1',
+            title: 'جلسه ۱: راهبردهای ترجمه متون کلامی و تفسیری فارسی به انگلیسی',
+            content: `
+              <p>در ترجمه متون اسلامی از فارسی به انگلیسی، مترجم اغلب با جملات بلند حاوی عبارات دعایی (<span class="bidi-iso" dir="ltr">Eulogical Formulas</span>) و استشهادات قرآنی مواجه است.</p>
+              <ul>
+                <li>رعایت یکنواختی در ترجمه القاب معصومین (ع) مانند <span class="bidi-iso" dir="ltr">(PBUH)</span> یا <span class="bidi-iso" dir="ltr">(AS)</span>.</li>
+                <li>شکستن جملات بسیار بلند فارسی به جملات روشن و منسجم در انگلیسی بدون حذف پیوندهای منطقی.</li>
+              </ul>
+            `
+          },
+          {
+            id: 'c7-l2',
+            title: 'جلسه ۲: واژه‌گزینی دقیق در متون اخلاقی و فلسفی',
+            content: `
+              <table>
+                <thead><tr><th>اصطلاح فارسی</th><th>معادل دقیق انگلیسی</th><th>معادل نادرست رایج</th></tr></thead>
+                <tbody>
+                  <tr><td>علم کلام</td><td dir="ltr">Islamic Theology / Kalam</td><td dir="ltr">Science of Speech</td></tr>
+                  <tr><td>حجت شرعی</td><td dir="ltr">Canonical Proof / Religious Authority</td><td dir="ltr">Legal Argument</td></tr>
+                  <tr><td>تزکیه نفس</td><td dir="ltr">Purification of the Soul</td><td dir="ltr">Self-cleaning</td></tr>
+                </tbody>
+              </table>
+            `
+          }
+        ]
+      },
+      {
+        id: 'course-8',
+        code: 'FL-2048',
+        titleFa: 'زبان دوم (۲) — اسپانیایی',
+        titleEn: 'Foreign Language (2) — Spanish',
+        category: 'اختیاری',
+        units: 2,
+        prereqFa: 'زبان دوم (۱) — اسپانیایی',
+        prereqEn: 'Foreign Language (1) — Spanish',
+        objFa: 'گسترش مهارت‌های دستوری و واژگانی زبان اسپانیایی در سطح A2 شامل زمان‌های گذشته (Pretérito Indefinido و Imperfecto)، ضمایر مفعولی و مکالمات روزمره و دانشگاهی.',
+        objEn: 'Expanding Spanish grammar and vocabulary to CEFR A2 level, covering past tenses (Pretérito Indefinido & Imperfecto), object pronouns, and everyday academic communication.',
+        syllabus: [
+          'مرور زمان حال اخباری و افعال بی‌قاعده پرکاربرد',
+          'زمان گذشته ساده (Pretérito Indefinido) و گذشته استمراری (Imperfecto)',
+          'ضمایر مفعول مستقیم و غیرمستقیم (lo, la, le, les)',
+          'درک مطلب متون کوتاه فرهنگی و ترجمه عبارات پایه'
+        ],
+        lectures: [
+          {
+            id: 'c8-l1',
+            title: 'جلسه ۱: صرف افعال باقاعده در گذشته ساده (Pretérito Indefinido)',
+            content: `
+              <p>زمان <span class="bidi-iso" dir="ltr">Pretérito Indefinido</span> برای بیان رویدادهای کامل‌شده در نقطه‌ای مشخص از گذشته به کار می‌رود.</p>
+              <table>
+                <thead><tr><th>ضمیر</th><th dir="ltr">-AR (hablar)</th><th dir="ltr">-ER / -IR (comer / vivir)</th></tr></thead>
+                <tbody>
+                  <tr><td dir="ltr">yo</td><td dir="ltr">hablé</td><td dir="ltr">comí / viví</td></tr>
+                  <tr><td dir="ltr">tú</td><td dir="ltr">hablaste</td><td dir="ltr">comiste / viviste</td></tr>
+                  <tr><td dir="ltr">él / ella / usted</td><td dir="ltr">habló</td><td dir="ltr">comió / vivió</td></tr>
+                  <tr><td dir="ltr">nosotros/as</td><td dir="ltr">hablamos</td><td dir="ltr">comimos / vivimos</td></tr>
+                </tbody>
+              </table>
+            `
+          },
+          {
+            id: 'c8-l2',
+            title: 'جلسه ۲: تفاوت Por و Para در جملات کاربردی',
+            content: `
+              <ul>
+                <li><strong dir="ltr" class="bidi-iso">Para:</strong> بیان هدف، مقصد، گیرنده و مهلت زمانی (مثلاً: <span class="bidi-iso" dir="ltr">Este libro es para ti</span>).</li>
+                <li><strong dir="ltr" class="bidi-iso">Por:</strong> بیان علت، مدت زمان، معاوضه و مسیر عبور (مثلاً: <span class="bidi-iso" dir="ltr">Gracias por tu ayuda</span>).</li>
+              </ul>
+            `
+          }
+        ]
+      },
+      {
+        id: 'course-9',
+        code: 'GN-1049',
+        titleFa: 'تاریخ تحلیلی صدر اسلام',
+        titleEn: 'Analytical History of Early Islam',
+        category: 'عمومی',
+        units: 2,
+        prereqFa: 'ندارد',
+        prereqEn: 'None',
+        objFa: 'بررسی تحلیلی بسترهای اجتماعی، سیاسی و فرهنگی شبه‌جزیره عربستان پیش از اسلام، سیره نبوی در مکه و مدینه، و تحولات سیاسی دوران خلفا و امامت امام علی (ع).',
+        objEn: 'Analytical examination of pre-Islamic Arabian society, the Prophetic era in Mecca and Medina, and early political developments in Islamic history.',
+        syllabus: [
+          'روش‌شناسی تاریخ تحلیلی و منابع دست‌اول تاریخ اسلام',
+          'اوضاع اجتماعی و قبایلی حجاز پیش از بعثت',
+          'تشکیل حکومت اسلامی در مدینه و پیمان عمومی (صحیفه مدینه)',
+          'تحلیل رویدادهای پس از رحلت پیامبر (ص) و دوران خلافت امام علی (ع)'
+        ],
+        lectures: [
+          {
+            id: 'c9-l1',
+            title: 'جلسه ۱: روش‌شناسی تاریخ تحلیلی و ویژگی‌های جامعه جاهلی',
+            content: `
+              <p>تفاوت <strong>تاریخ نقلی</strong> با <strong>تاریخ تحلیلی</strong> در جستجوی علل، زمینه‌ها و پیامدهای رویدادها است. نظام اجتماعی حجاز بر پایه <em>عصبیت قبیله‌ای</em> و اقتصاد تجاری مکه استوار بود.</p>
+              <div class="lecture-callout">
+                <strong>نکته کلیدی:</strong> اسلام با جایگزین کردن «امت» به جای «قبیله»، پیوندهای ایمانی و اخلاقی را محور همبستگی اجتماعی قرار داد.
+              </div>
+            `
+          },
+          {
+            id: 'c9-l2',
+            title: 'جلسه ۲: هجرت به مدینه و پیمان مدینه',
+            content: `
+              <p>هجرت نقطه عطف تبدیل دعوت فردی و جمعی به یک جامعه سیاسی سازمان‌یافته بود. <strong>پیمان مدینه (صحیفه مدینه)</strong> نخستین منشور حقوقی-سیاسی برای همزیستی مسالمت‌آمیز و دفاع مشترک در تاریخ اسلام به شمار می‌رود.</p>
+            `
+          }
+        ]
+      },
+      {
+        id: 'course-10',
+        code: 'GN-1050',
+        titleFa: 'آشنایی با دفاع مقدس',
+        titleEn: 'Introduction to Sacred Defense',
+        category: 'عمومی',
+        units: 2,
+        prereqFa: 'ندارد',
+        prereqEn: 'None',
+        objFa: 'شناخت ریشه‌های ژئوپلیتیکی و تاریخی جنگ تحمیلی هشت‌ساله، تحلیل عملیات‌های سرنوشت‌ساز، نقش دیپلماسی و قطعنامه ۵۹۸، و دستاوردهای فرهنگی و امنیتی دفاع مقدس.',
+        objEn: 'Studying the geopolitical and historical roots of the eight-year Sacred Defense, key operations, diplomatic milestones including UNSCR 598, and its socio-cultural legacy.',
+        syllabus: [
+          'زمینه تاریخی اختلافات مرزی و قرارداد ۱۹۷۵ الجزایر',
+          'آغاز تهاجم و مراحل چهارگانه جنگ تحمیلی',
+          'آزادسازی خرمشهر (عملیات بیت‌المقدس) و موازنه راهبردی',
+          'بررسی حقوقی قطعنامه ۵۹۸ شورای امنیت سازمان ملل'
+        ],
+        lectures: [
+          {
+            id: 'c10-l1',
+            title: 'جلسه ۱: ریشه‌های تاریخی و قرارداد ۱۹۷۵ الجزایر',
+            content: `
+              <p>اختلافات مرزی بر سر خط تالوگ (<span class="bidi-iso" dir="ltr">Thalweg Line</span>) در اروندرود با امضای قرارداد ۱۹۷۵ الجزایر حل‌وفصل شد؛ اما رژیم بعث عراق در شهریور ۱۳۵۹ به‌صورت یک‌جانبه آن را لغو کرد.</p>
+            `
+          },
+          {
+            id: 'c10-l2',
+            title: 'جلسه ۲: قطعنامه ۵۹۸ و ابعاد حقوق بین‌الملل',
+            content: `
+              <p><strong>قطعنامه ۵۹۸ شورای امنیت سازمان ملل</strong> (<span class="bidi-iso" dir="ltr">UN Security Council Resolution 598</span>) نخستین قطعنامه‌ای بود که بر اساس فصل هفتم منشور ملل متحد خواستار آتش‌بس، بازگشت به مرزهای بین‌المللی و تعیین متجاوز شد.</p>
+            `
+          }
+        ]
+      }
+    ];
+
+    /* =========================================================================
+       4. DEFAULT DATASET: 40 REALISTIC PERSIAN–ENGLISH LEGAL TERMS
+       Distributed across صوت جلسه ۱–۸ and کتاب توانگر - درس ۱–۳
+       ========================================================================= */
+    const DEFAULT_WORDLIST = [
+      // صوت جلسه ۱
+      { id: 1, fa: 'دفتر اسناد رسمی', en: 'Notary Public Office', notes: 'مرجع رسمی تنظیم و ثبت اسناد رسمی و گواهی امضا زیر نظر سازمان ثبت اسناد و املاک.', source: 'صوت جلسه ۱' },
+      { id: 2, fa: 'سردفتر اسناد رسمی', en: 'Notary Public', notes: 'شخص دارای ابلاغ رسمی برای تنظیم اسناد و تصدیق امضاها در دفترخانه.', source: 'صوت جلسه ۱' },
+      { id: 3, fa: 'برابر با اصل است', en: 'Certified True Copy', notes: 'عبارت استاندارد روی رونوشت اسناد پس از تطبیق با نسخه اصلی توسط دفترخانه یا دادگستری.', source: 'صوت جلسه ۱' },
+      { id: 4, fa: 'بدین‌وسیله گواهی می‌شود', en: 'It is hereby certified that', notes: 'فرمول آغازین رسمی در گواهی‌نامه‌ها و اسناد تأییدی؛ به جای ترجمه تحت‌اللفظی به کار می‌رود.', source: 'صوت جلسه ۱' },
+
+      // صوت جلسه ۲
+      { id: 5, fa: 'شناسنامه', en: 'Birth Certificate / National Identity Booklet', notes: 'در ترجمه رسمی ایران معمولاً Birth Certificate یا Identity Certificate (Shenasnameh) به کار می‌رود.', source: 'صوت جلسه ۲' },
+      { id: 6, fa: 'سازمان ثبت احوال کشور', en: 'National Organization for Civil Registration', notes: 'نهاد صادرکننده شناسنامه، کارت ملی و گواهی‌های ولادت، وفات و تجرد.', source: 'صوت جلسه ۲' },
+      { id: 7, fa: 'گواهی تجرد', en: 'Certificate of Single Status', notes: 'سندی که نشان می‌دهد فرد در حال حاضر فاقد همسر ثبت‌شده در شناسنامه است.', source: 'صوت جلسه ۲' },
+      { id: 8, fa: 'گواهی انحصار وراثت', en: 'Certificate of Heirship / Probate Certificate', notes: 'گواهی صادره از شورای حل اختلاف یا دادگاه برای تعیین وراث قانونی متوفی و سهم‌الارث آنان.', source: 'صوت جلسه ۲' },
+
+      // صوت جلسه ۳
+      { id: 9, fa: 'سند ازدواج (عقدنامه)', en: 'Marriage Certificate', notes: 'سند رسمی ثبت نکاح در دفتر رسمی ازدواج شامل شروط ضمن عقد و مشخصات مهریه.', source: 'صوت جلسه ۳' },
+      { id: 10, fa: 'مهریه عندالمطالبه', en: 'Marriage Portion Payable Upon Demand', notes: 'مهریه‌ای که زوجه هر زمان پس از عقد حق مطالبه آن را از زوج دارد.', source: 'صوت جلسه ۳' },
+      { id: 11, fa: 'طلاق توافقی', en: 'Divorce by Mutual Consent', notes: 'انحلال نکاح بر اساس توافق کامل زوجین درباره حقوق مالی و حضانت فرزندان.', source: 'صوت جلسه ۳' },
+      { id: 12, fa: 'شروط ضمن عقد', en: 'Stipulations of the Marriage Contract', notes: 'شروط مندرج در سند ازدواج از جمله حق طلاق، حق تحصیل، حق اشتغال و حق مسکن.', source: 'صوت جلسه ۳' },
+
+      // صوت جلسه ۴
+      { id: 13, fa: 'وکالت‌نامه بلاعزل', en: 'Irrevocable Power of Attorney', notes: 'وکالت‌نامه‌ای که موکل حق عزل وکیل را در ضمن عقد خارج لازم از خود سلب کرده است.', source: 'صوت جلسه ۴' },
+      { id: 14, fa: 'موکل و وکیل (در اسناد رسمی)', en: 'Principal and Attorney-in-Fact', notes: 'تفاوت مهم: برای وکیل دادگستری از Attorney-at-Law و برای وکیل مدنی دفترخانه‌ای از Attorney-in-Fact استفاده می‌شود.', source: 'صوت جلسه ۴' },
+      { id: 15, fa: 'حق توکیل به غیر', en: 'Right of Substitution / Power to Delegate', notes: 'اختیار وکیل برای واگذاری تمام یا بخشی از اختیارات وکالت به شخص ثالث.', source: 'صوت جلسه ۴' },
+      { id: 16, fa: 'اقرارنامه رسمی', en: 'Official Affidavit / Sworn Declaration', notes: 'سندی که فرد در دفتر اسناد رسمی به امری به زیان خود یا به نفع دیگری اقرار می‌نماید.', source: 'صوت جلسه ۴' },
+
+      // صوت جلسه ۵
+      { id: 17, fa: 'سند مالکیت تک‌برگ', en: 'Single-Page Title Deed', notes: 'سند رسمی جدید املاک با هولوگرام و شناسه یکتا صادره از اداره ثبت اسناد و املاک.', source: 'صوت جلسه ۵' },
+      { id: 18, fa: 'عرصه و اعیان', en: 'Land and Building / Plot and Superstructure', notes: 'عرصه به معنای زمین ملک و اعیان به معنای بنا و مستحدثات روی آن است.', source: 'صوت جلسه ۵' },
+      { id: 19, fa: 'مبایعه‌نامه', en: 'Deed of Sale / Purchase Agreement', notes: 'قرارداد رسمی یا عادی خریدوفروش ملک یا مال منقول میان بایع و مشتری.', source: 'صوت جلسه ۵' },
+      { id: 20, fa: 'در رهن بانک بودن', en: 'Mortgaged to the Bank / Encumbered with a Lien', notes: 'قیدی در ستون نقل‌وانتقالات سند مالکیت مبنی بر وثیقه بودن ملک در برابر تسهیلات بانکی.', source: 'صوت جلسه ۵' },
+
+      // صوت جلسه ۶
+      { id: 21, fa: 'دادنامه', en: 'Court Verdict / Written Judgment', notes: 'متن رسمی و مکتوب رأی صادره از دادگاه شامل شماره پرونده، طرفین، گردشکار و متن رأی.', source: 'صوت جلسه ۶' },
+      { id: 22, fa: 'رأی قطعی و لازم‌الاجرا', en: 'Final and Binding Judgment', notes: 'حکمی که مهلت تجدیدنظرخواهی آن گذشته یا در دادگاه تجدیدنظر تأیید شده و قابل اجراست.', source: 'صوت جلسه ۶' },
+      { id: 23, fa: 'تجدیدنظرخواهی', en: 'Filing an Appeal', notes: 'درخواست رسیدگی مجدد به رأی دادگاه بدوی در مرجع قضایی بالاتر (دادگاه تجدیدنظر).', source: 'صوت جلسه ۶' },
+      { id: 24, fa: 'قرار منع تعقیب', en: 'Order of Non-Prosecution / Dismissal of Charges', notes: 'قراری که بازپرس در صورت جرم نبودن عمل یا فقدان ادله کافی صادر می‌کند.', source: 'صوت جلسه ۶' },
+
+      // صوت جلسه ۷
+      { id: 25, fa: 'اساسنامه شرکت', en: 'Articles of Association', notes: 'سند بنیادین شرکت که موضوع فعالیت، سرمایه، ارکان و نحوه اداره شرکت را تعیین می‌کند.', source: 'صوت جلسه ۷' },
+      { id: 26, fa: 'آگهی تأسیس در روزنامه رسمی', en: 'Notice of Incorporation in the Official Gazette', notes: 'انتشار رسمی ثبت شرکت و مشخصات مدیران و دارندگان حق امضا در روزنامه رسمی کشور.', source: 'صوت جلسه ۷' },
+      { id: 27, fa: 'صورتجلسه مجمع عمومی عادی', en: 'Minutes of the Ordinary General Meeting', notes: 'گزارش رسمی تصمیمات سهامداران درباره تصویب ترازنامه، انتخاب هیئت‌مدیره و بازرسان.', source: 'صوت جلسه ۷' },
+      { id: 28, fa: 'شرکت سهامی خاص', en: 'Private Joint-Stock Company', notes: 'شرکتی که تمام سرمایه آن در موقع تأسیس منحصراً توسط مؤسسین تأمین می‌گردد.', source: 'صوت جلسه ۷' },
+
+      // صوت جلسه ۸
+      { id: 29, fa: 'دانشنامه کارشناسی', en: "Bachelor's Degree Certificate / Diploma", notes: 'مدرک رسمی فراغت از تحصیل پس از تسویه حساب آموزشی و مالی با دانشگاه.', source: 'صوت جلسه ۸' },
+      { id: 30, fa: 'ریز نمرات رسمی تحصیلی', en: 'Official Academic Transcript', notes: 'فهرست کامل دروس گذرانده‌شده، تعداد واحدها، نمرات و معدل کل (GPA).', source: 'صوت جلسه ۸' },
+      { id: 31, fa: 'گواهی اشتغال به تحصیل', en: 'Certificate of Enrollment', notes: 'نامه رسمی دانشگاه مبنی بر دانشجو بودن فرد در نیمسال جاری.', source: 'صوت جلسه ۸' },
+      { id: 32, fa: 'گواهی عدم سوءپیشینه کیفری', en: 'Police Clearance Certificate / Certificate of No Criminal Record', notes: 'سند صادره از پلیس آگاهی یا قوه قضائیه برای امور مهاجرتی، استخدامی و ویزا.', source: 'صوت جلسه ۸' },
+
+      // کتاب توانگر - درس ۱
+      { id: 33, fa: 'به موجب ماده ... قانون مدنی', en: 'Pursuant to Article ... of the Civil Code', notes: 'عبارت پرکاربرد استناد قانونی؛ از ترجمه تحت‌اللفظی According to در متون رسمی پرهیز شود.', source: 'کتاب توانگر - درس ۱' },
+      { id: 34, fa: 'باطل و بلااثر (کان‌لم‌یکن)', en: 'Null and Void', notes: 'زوج‌واژه کلاسیک حقوقی برای بیان بی‌اعتباری کامل یک قرارداد یا سند از ابتدا.', source: 'کتاب توانگر - درس ۱' },
+      { id: 35, fa: 'طرفین قرارداد (متعاقدین)', en: 'The Contracting Parties', notes: 'اشخاص حقیقی یا حقوقی امضاکننده یک توافق‌نامه یا قرارداد الزام‌آور.', source: 'کتاب توانگر - درس ۱' },
+
+      // کتاب توانگر - درس ۲
+      { id: 36, fa: 'قوه قاهره (فورس ماژور)', en: 'Force Majeure / Act of God', notes: 'حوادث غیرمترقبه و خارج از کنترل طرفین که اجرای تعهدات قراردادی را ناممکن می‌سازد.', source: 'کتاب توانگر - درس ۲' },
+      { id: 37, fa: 'فسخ یک‌جانبه قرارداد', en: 'Unilateral Termination of Contract', notes: 'اعمال حق فسخ توسط یکی از طرفین بر اساس خیارات قانونی یا شروط مندرج در قرارداد.', source: 'کتاب توانگر - درس ۲' },
+      { id: 38, fa: 'خسارت وجه التزام', en: 'Liquidated Damages', notes: 'مبلغ از پیش تعیین‌شده در قرارداد که متعهد در صورت نقض تعهد یا تأخیر ملزم به پرداخت آن است.', source: 'کتاب توانگر - درس ۲' },
+
+      // کتاب توانگر - درس ۳
+      { id: 39, fa: 'استشهادیه محلی', en: 'Local Affidavit / Witness Statement', notes: 'سندی که به امضای چند شاهد مطلع رسیده و در صورت لزوم توسط کلانتری یا دفترخانه تصدیق می‌شود.', source: 'کتاب توانگر - درس ۳' },
+      { id: 40, fa: 'تأییدیه دادگستری و وزارت امور خارجه', en: 'Legalization by the Judiciary and Ministry of Foreign Affairs', notes: 'مرحله نهایی اعتباربخشی به ترجمه رسمی برای ارائه به سفارتخانه‌ها و مراجع خارجی.', source: 'کتاب توانگر - درس ۳' }
+    ];
+
+    /* =========================================================================
+       5. APPLICATION STATE
+       ========================================================================= */
+    let currentLang = safeStorage.get(STORAGE_KEYS.LANG, 'fa');
+    let currentTheme = safeStorage.get(STORAGE_KEYS.THEME, 'light');
+    let activeMainTab = 'courses';
+
+    let coursesData = safeStorage.get(STORAGE_KEYS.COURSES, null) || structuredClone(DEFAULT_COURSES);
+    let wordListData = safeStorage.get(STORAGE_KEYS.WORDLIST, null) || structuredClone(DEFAULT_WORDLIST);
+    let masteryMap = safeStorage.get(STORAGE_KEYS.MASTERY, {}); // { [termId]: 'mastered' | 'review' }
+
+    // Courses UI State
+    let selectedCourseCategory = 'all';
+    let activeCourseId = null;
+
+    // Word List UI State
+    let wlSelectedSource = 'all';
+    let wlPageSize = 25;
+    let wlCurrentPage = 1;
+
+    // Flashcard UI State
+    let fcDeck = [];
+    let fcIndex = 0;
+    let fcIsFlipped = false;
+    let fcDirection = 'fa-en'; // 'fa-en' or 'en-fa'
+
+    // Admin State
+    let isAdminOpen = false;
+    let activeAdminTab = 'paste';
+    let parsedImportRows = [];
+    let confirmCallback = null;
+
+    // Triple-click detector state
+    let footerClickCount = 0;
+    let footerClickTimer = null;
+
+    /* =========================================================================
+       6. INITIALIZATION & THEME / LANGUAGE HANDLERS
+       ========================================================================= */
+    function initApp() {
+      applyTheme(currentTheme);
+      applyLanguage(currentLang);
+      switchMainTab('courses');
+      setupStealthAdminTriggers();
+      setupKeyboardShortcuts();
+      checkUrlAdminTrigger();
+    }
+
+    function applyTheme(theme) {
+      currentTheme = theme;
+      const root = document.documentElement;
+      if (theme === 'dark') {
+        root.classList.add('dark');
+      } else {
+        root.classList.remove('dark');
+      }
+      safeStorage.set(STORAGE_KEYS.THEME, theme);
+    }
+
+    function toggleTheme() {
+      applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    }
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      const html = document.documentElement;
+      html.setAttribute('lang', lang);
+      html.setAttribute('dir', lang === 'fa' ? 'rtl' : 'ltr');
+      safeStorage.set(STORAGE_KEYS.LANG, lang);
+
+      updateStaticTranslations();
+      updateHeroStats();
+      renderCourseCategoryPills();
+      renderCoursesGrid();
+      if (activeCourseId) renderCourseReader();
+      renderWordListFilters();
+      renderWordListTable();
+      populateFlashcardFilters();
+      rebuildFlashcardDeck(false);
+    }
+
+    function toggleLanguage() {
+      applyLanguage(currentLang === 'fa' ? 'en' : 'fa');
+    }
+
+    function t(key) {
+      return I18N[currentLang][key];
+    }
+
+    function updateStaticTranslations() {
+      document.getElementById('brand-title').textContent = t('brandTitle');
+      document.getElementById('brand-subtitle').textContent = t('brandSubtitle');
+      document.getElementById('nav-courses').textContent = t('navCourses');
+      document.getElementById('nav-wordlist').textContent = t('navWordlist');
+      document.getElementById('nav-flashcards').textContent = t('navFlashcards');
+      document.getElementById('mnav-courses').textContent = t('navCourses');
+      document.getElementById('mnav-wordlist').textContent = t('navWordlist');
+      document.getElementById('mnav-flashcards').textContent = t('navFlashcards');
+      document.getElementById('lang-label').textContent = t('langSwitch');
+
+      document.getElementById('hero-badge').textContent = t('heroBadge');
+      document.getElementById('hero-title').textContent = t('heroTitle');
+      document.getElementById('hero-desc').textContent = t('heroDesc');
+      document.getElementById('stat-courses-label').textContent = t('statCourses');
+      document.getElementById('stat-units-label').textContent = t('statUnits');
+      document.getElementById('stat-terms-label').textContent = t('statTerms');
+      document.getElementById('course-grid-search').placeholder = t('searchCoursesPlaceholder');
+      document.getElementById('back-to-courses-label').textContent = t('backToCourses');
+      document.getElementById('reader-notes-heading').textContent = t('lectureNotesHeading');
+      document.getElementById('in-course-search').placeholder = t('inCourseSearchPlaceholder');
+      document.getElementById('btn-expand-all').textContent = t('expandAll');
+
+      document.getElementById('wl-title').textContent = t('wlTitle');
+      document.getElementById('wl-subtitle').textContent = t('wlSubtitle');
+      document.getElementById('wl-copy-hint').textContent = t('wlCopyHint');
+      document.getElementById('wl-search').placeholder = t('wlSearchPlaceholder');
+      document.getElementById('th-row').textContent = t('thRow');
+      document.getElementById('th-fa').textContent = t('thFa');
+      document.getElementById('th-en').textContent = t('thEn');
+      document.getElementById('th-notes').textContent = t('thNotes');
+      document.getElementById('th-source').textContent = t('thSource');
+      const allOpt = document.querySelector('#wl-pagesize-select option[value="all"]');
+      if (allOpt) allOpt.textContent = t('wlPageSizeAll');
+
+      document.getElementById('fc-title').textContent = t('fcTitle');
+      document.getElementById('fc-subtitle').textContent = t('fcSubtitle');
+      document.getElementById('fc-btn-shuffle').textContent = t('fcShuffle');
+      document.getElementById('fc-btn-reset').textContent = t('fcResetMastery');
+      document.getElementById('fc-lbl-source').textContent = t('fcLblSource');
+      document.getElementById('fc-lbl-mastery').textContent = t('fcLblMastery');
+      document.getElementById('fc-lbl-direction').textContent = t('fcLblDirection');
+      document.getElementById('fc-lbl-shownotes').textContent = t('fcLblShowNotes');
+      document.getElementById('fc-btn-prev').textContent = t('fcBtnPrev');
+      document.getElementById('fc-btn-flip').textContent = t('fcBtnFlip');
+      document.getElementById('fc-btn-next').textContent = t('fcBtnNext');
+      document.getElementById('fc-btn-review').textContent = t('fcBtnReview');
+      document.getElementById('fc-btn-mastered').textContent = t('fcBtnMastered');
+      document.getElementById('fc-shortcuts-hint').textContent = t('fcShortcuts');
+      document.getElementById('fc-empty-text').textContent = t('fcEmptyDeck');
+      document.getElementById('footer-dept').textContent = t('footerDept');
+      document.getElementById('confirm-btn-cancel').textContent = t('confirmCancel');
+      document.getElementById('confirm-btn-ok').textContent = t('confirmOk');
+
+      updateDirectionButtonLabel();
+    }
+
+    function updateHeroStats() {
+      document.getElementById('stat-courses-count').textContent = coursesData.length;
+      const totalUnits = coursesData.reduce((sum, c) => sum + (Number(c.units) || 0), 0);
+      document.getElementById('stat-units-count').textContent = totalUnits;
+      document.getElementById('stat-terms-count').textContent = wordListData.length;
+    }
+
+    function switchMainTab(tab) {
+      activeMainTab = tab;
+      ['courses', 'wordlist', 'flashcards'].forEach(name => {
+        document.getElementById(`tab-${name}`).classList.toggle('hidden', name !== tab);
+        const btn = document.getElementById(`nav-${name}`);
+        const mbtn = document.getElementById(`mnav-${name}`);
+        const isActive = name === tab;
+
+        btn.className = isActive
+          ? 'nav-tab-btn px-4 py-2 rounded-lg text-sm font-bold bg-navy text-ivory dark:bg-gold dark:text-slate-950 shadow-sm transition-all'
+          : 'nav-tab-btn px-4 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-white/70 dark:hover:bg-slate-800 transition-all';
+
+        mbtn.className = isActive
+          ? 'mnav-tab-btn flex-1 whitespace-nowrap px-3 py-2 rounded-lg text-xs font-bold bg-navy text-ivory dark:bg-gold dark:text-slate-950 shadow-sm text-center transition-all'
+          : 'mnav-tab-btn flex-1 whitespace-nowrap px-3 py-2 rounded-lg text-xs font-medium bg-parchment/80 dark:bg-slate-900 text-slate-600 dark:text-slate-300 text-center transition-all';
+      });
+
+      if (tab === 'wordlist') {
+        renderWordListFilters();
+        renderWordListTable();
+      } else if (tab === 'flashcards') {
+        populateFlashcardFilters();
+        rebuildFlashcardDeck(false);
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* =========================================================================
+       7. TAB 1: COURSES & STRUCTURED LECTURE NOTES
+       ========================================================================= */
+    function renderCourseCategoryPills() {
+      const container = document.getElementById('course-category-pills');
+      const categories = [
+        { key: 'all', label: t('catAll') },
+        { key: 'تخصصی', label: t('catSpecialized') },
+        { key: 'عمومی', label: t('catGeneral') },
+        { key: 'اختیاری', label: t('catElective') }
+      ];
+      container.innerHTML = categories.map(cat => {
+        const active = selectedCourseCategory === cat.key;
+        return `<button onclick="setCourseCategory('${cat.key}')" class="px-3.5 py-2 rounded-xl text-xs font-semibold transition-all border ${
+          active
+            ? 'bg-navy text-ivory border-navy dark:bg-gold dark:text-slate-950 dark:border-gold shadow-sm'
+            : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-stone-200 dark:border-slate-700 hover:bg-parchment dark:hover:bg-slate-800'
+        }">${cat.label}</button>`;
+      }).join('');
+    }
+
+    function setCourseCategory(cat) {
+      selectedCourseCategory = cat;
+      renderCourseCategoryPills();
+      renderCoursesGrid();
+    }
+
+    function getCategoryBadgeClasses(cat) {
+      if (cat === 'تخصصی') return 'bg-navy/10 text-navy dark:bg-sky-900/40 dark:text-sky-300 border-navy/20 dark:border-sky-800';
+      if (cat === 'عمومی') return 'bg-emerald-100/80 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800';
+      return 'bg-burgundy/10 text-burgundy dark:bg-amber-900/40 dark:text-amber-300 border-burgundy/20 dark:border-amber-800';
+    }
+
+    function getCategoryLabel(cat) {
+      if (currentLang === 'fa') return cat;
+      if (cat === 'تخصصی') return 'Specialized';
+      if (cat === 'عمومی') return 'General';
+      return 'Elective';
+    }
+
+    function renderCoursesGrid() {
+      const grid = document.getElementById('courses-grid');
+      const q = (document.getElementById('course-grid-search').value || '').trim().toLowerCase();
+
+      const filtered = coursesData.filter(c => {
+        const matchCat = selectedCourseCategory === 'all' || c.category === selectedCourseCategory;
+        const matchQ = !q ||
+          c.titleFa.toLowerCase().includes(q) ||
+          c.titleEn.toLowerCase().includes(q) ||
+          c.code.toLowerCase().includes(q);
+        return matchCat && matchQ;
+      });
+
+      if (!filtered.length) {
+        grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500 dark:text-slate-400 text-sm">${t('wlEmpty')}</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(c => {
+        const primaryTitle = currentLang === 'fa' ? c.titleFa : c.titleEn;
+        const secondaryTitle = currentLang === 'fa' ? c.titleEn : c.titleFa;
+        const secDir = currentLang === 'fa' ? 'ltr' : 'rtl';
+        const obj = currentLang === 'fa' ? c.objFa : c.objEn;
+
+        return `
+          <article onclick="openCourseReader('${c.id}')" class="group cursor-pointer rounded-2xl bg-white dark:bg-slate-900 border border-stone-200/90 dark:border-slate-800 hover:border-navy/50 dark:hover:border-gold/60 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between gap-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <span class="px-2.5 py-1 rounded-lg text-[11px] font-bold border ${getCategoryBadgeClasses(c.category)}">${getCategoryLabel(c.category)}</span>
+                <span class="text-xs font-mono text-slate-400 dark:text-slate-500">${escapeHtml(c.code)} • ${c.units} ${t('unitsLabel')}</span>
+              </div>
+              <div>
+                <h3 class="text-base sm:text-lg font-bold text-navy dark:text-ivory group-hover:text-burgundy dark:group-hover:text-gold transition-colors leading-snug">${escapeHtml(primaryTitle)}</h3>
+                <p dir="${secDir}" class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 bidi-iso ${secDir === 'ltr' ? 'font-editorial italic' : ''}">${escapeHtml(secondaryTitle)}</p>
+              </div>
+              <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">${escapeHtml(obj)}</p>
+            </div>
+
+            <div class="pt-3 border-t border-stone-100 dark:border-slate-800 flex items-center justify-between text-xs">
+              <span class="text-slate-500 dark:text-slate-400">${c.lectures.length} ${t('sessionsLabel')}</span>
+              <span class="font-bold text-burgundy dark:text-gold group-hover:underline">${t('openCourse')}</span>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function openCourseReader(courseId) {
+      activeCourseId = courseId;
+      document.getElementById('courses-directory-view').classList.add('hidden');
+      document.getElementById('course-reader-view').classList.remove('hidden');
+      document.getElementById('in-course-search').value = '';
+      renderCourseReader();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closeCourseReader() {
+      activeCourseId = null;
+      document.getElementById('course-reader-view').classList.add('hidden');
+      document.getElementById('courses-directory-view').classList.remove('hidden');
+    }
+
+    function renderCourseReader() {
+      const course = coursesData.find(c => c.id === activeCourseId);
+      if (!course) return;
+
+      document.getElementById('reader-course-code-pill').textContent = `${course.code} | ${course.units} ${t('unitsLabel')}`;
+
+      const prereq = currentLang === 'fa' ? course.prereqFa : course.prereqEn;
+      const obj = currentLang === 'fa' ? course.objFa : course.objEn;
+
+      document.getElementById('reader-metadata-card').innerHTML = `
+        <div class="flex flex-wrap items-start justify-between gap-3">
+          <div class="space-y-1">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="px-2.5 py-1 rounded-lg text-xs font-bold border ${getCategoryBadgeClasses(course.category)}">${getCategoryLabel(course.category)}</span>
+              <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">${course.units} ${t('unitsLabel')}</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-navy dark:text-ivory pt-1">${escapeHtml(course.titleFa)}</h2>
+            <p dir="ltr" class="text-sm sm:text-base font-editorial italic text-burgundy dark:text-gold bidi-iso">${escapeHtml(course.titleEn)}</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm pt-2 border-t border-stone-100 dark:border-slate-800">
+          <div class="bg-parchment/50 dark:bg-slate-800/50 rounded-xl p-3.5">
+            <span class="font-bold text-navy dark:text-gold block mb-1">${t('prerequisites')}</span>
+            <p class="text-slate-700 dark:text-slate-300">${escapeHtml(prereq)}</p>
+          </div>
+          <div class="bg-parchment/50 dark:bg-slate-800/50 rounded-xl p-3.5">
+            <span class="font-bold text-navy dark:text-gold block mb-1">${t('objectives')}</span>
+            <p class="text-slate-700 dark:text-slate-300 leading-relaxed">${escapeHtml(obj)}</p>
+          </div>
+        </div>
+
+        <details class="group rounded-xl border border-stone-200 dark:border-slate-700 bg-ivory/60 dark:bg-slate-950/50">
+          <summary class="cursor-pointer px-4 py-3 text-xs sm:text-sm font-bold text-navy dark:text-ivory flex items-center justify-between list-none">
+            <span>${t('syllabusOverview')}</span>
+            <span class="transition-transform group-open:rotate-180 text-slate-400">▾</span>
+          </summary>
+          <ul class="px-8 pb-4 pt-1 list-disc space-y-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+            ${course.syllabus.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
+          </ul>
+        </details>
+      `;
+
+      renderCourseLectures();
+    }
+
+    function renderCourseLectures() {
+      const course = coursesData.find(c => c.id === activeCourseId);
+      if (!course) return;
+
+      const query = (document.getElementById('in-course-search').value || '').trim();
+      const qLower = query.toLowerCase();
+
+      const matching = course.lectures.filter(lec => {
+        if (!qLower) return true;
+        const plainText = stripHtml(lec.content).toLowerCase();
+        return lec.title.toLowerCase().includes(qLower) || plainText.includes(qLower);
+      });
+
+      document.getElementById('reader-notes-count').textContent = `${matching.length} / ${course.lectures.length}`;
+
+      const listEl = document.getElementById('reader-lectures-list');
+      if (!matching.length) {
+        listEl.innerHTML = `<div class="rounded-2xl bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 p-8 text-center text-sm text-slate-500">${t('noMatchingLectures')}</div>`;
+        return;
+      }
+
+      listEl.innerHTML = matching.map((lec, idx) => {
+        const displayTitle = query ? highlightText(escapeHtml(lec.title), query) : escapeHtml(lec.title);
+        const displayContent = query ? highlightHtmlContent(lec.content, query) : lec.content;
+        const openAttr = (idx === 0 || query.length > 0) ? 'open' : '';
+
+        return `
+          <details class="lecture-accordion group rounded-2xl bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 shadow-sm overflow-hidden" ${openAttr}>
+            <summary class="cursor-pointer px-5 py-4 bg-parchment/40 dark:bg-slate-800/40 hover:bg-parchment/80 dark:hover:bg-slate-800/70 flex items-center justify-between gap-3 list-none transition-colors">
+              <div class="flex items-center gap-3">
+                <span class="w-7 h-7 rounded-lg bg-navy dark:bg-gold text-ivory dark:text-slate-950 text-xs font-bold flex items-center justify-center shrink-0">${idx + 1}</span>
+                <span class="font-bold text-sm sm:text-base text-navy dark:text-ivory">${displayTitle}</span>
+              </div>
+              <span class="text-slate-400 transition-transform group-open:rotate-180 text-lg leading-none">▾</span>
+            </summary>
+            <div class="p-5 sm:p-6 border-t border-stone-100 dark:border-slate-800 lecture-prose text-sm text-slate-700 dark:text-slate-300" dir="rtl">
+              ${displayContent}
+            </div>
+          </details>
+        `;
+      }).join('');
+    }
+
+    let accordionsExpanded = true;
+    function toggleAllAccordions() {
+      const items = document.querySelectorAll('.lecture-accordion');
+      accordionsExpanded = !accordionsExpanded;
+      items.forEach(d => { d.open = accordionsExpanded; });
+      document.getElementById('btn-expand-all').textContent = accordionsExpanded ? t('collapseAll') : t('expandAll');
+    }
+
+    /* =========================================================================
+       8. TAB 2: LEGAL & OFFICIAL TRANSLATION WORD LIST
+       ========================================================================= */
+    function getUniqueSources() {
+      const set = new Set();
+      wordListData.forEach(item => {
+        if (item.source && item.source.trim()) set.add(item.source.trim());
+      });
+      return Array.from(set);
+    }
+
+    function renderWordListFilters() {
+      const sources = getUniqueSources();
+      const select = document.getElementById('wl-source-select');
+      const pills = document.getElementById('wl-source-pills');
+
+      select.innerHTML = `<option value="all">${t('wlAllSources')} (${wordListData.length})</option>` +
+        sources.map(src => `<option value="${escapeAttr(src)}" ${wlSelectedSource === src ? 'selected' : ''}>${escapeHtml(src)}</option>`).join('');
+
+      pills.innerHTML = [
+        `<button onclick="onWordListSourceSelect('all')" class="px-3 py-1.5 rounded-xl text-xs font-semibold border transition-colors ${
+          wlSelectedSource === 'all'
+            ? 'bg-navy text-ivory border-navy dark:bg-gold dark:text-slate-950 dark:border-gold'
+            : 'bg-ivory dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-stone-200 dark:border-slate-700 hover:bg-parchment'
+        }">${t('wlAllSources')}</button>`,
+        ...sources.map(src => {
+          const active = wlSelectedSource === src;
+          return `<button onclick="onWordListSourceSelect('${escapeJs(src)}')" class="px-3 py-1.5 rounded-xl text-xs font-medium border transition-colors bidi-iso ${
+            active
+              ? 'bg-burgundy text-white border-burgundy dark:bg-gold dark:text-slate-950 dark:border-gold font-bold'
+              : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border-stone-200 dark:border-slate-700 hover:bg-parchment dark:hover:bg-slate-800'
+          }">${escapeHtml(src)}</button>`;
+        })
+      ].join('');
+    }
+
+    function onWordListSourceSelect(src) {
+      wlSelectedSource = src;
+      wlCurrentPage = 1;
+      renderWordListFilters();
+      renderWordListTable();
+    }
+
+    function onWordListFilterChange() {
+      wlCurrentPage = 1;
+      renderWordListTable();
+    }
+
+    function onWordListPageSizeChange(val) {
+      wlPageSize = val === 'all' ? 'all' : Number(val);
+      wlCurrentPage = 1;
+      renderWordListTable();
+    }
+
+    function getFilteredWordList() {
+      const q = (document.getElementById('wl-search').value || '').trim().toLowerCase();
+      return wordListData.filter(item => {
+        const matchSrc = wlSelectedSource === 'all' || item.source === wlSelectedSource;
+        const matchQ = !q ||
+          item.fa.toLowerCase().includes(q) ||
+          item.en.toLowerCase().includes(q) ||
+          (item.notes || '').toLowerCase().includes(q) ||
+          (item.source || '').toLowerCase().includes(q);
+        return matchSrc && matchQ;
+      });
+    }
+
+    function renderWordListTable() {
+      const filtered = getFilteredWordList();
+      const total = filtered.length;
+      const tbody = document.getElementById('wl-table-body');
+
+      const perPage = wlPageSize === 'all' ? Math.max(total, 1) : wlPageSize;
+      const totalPages = Math.max(1, Math.ceil(total / perPage));
+      if (wlCurrentPage > totalPages) wlCurrentPage = totalPages;
+
+      const startIdx = (wlCurrentPage - 1) * perPage;
+      const pageItems = filtered.slice(startIdx, startIdx + perPage);
+
+      const startNum = total === 0 ? 0 : startIdx + 1;
+      const endNum = Math.min(startIdx + perPage, total);
+      document.getElementById('wl-result-count').textContent = t('wlShowing')(startNum, endNum, total);
+      document.getElementById('wl-page-info').textContent = `${wlCurrentPage} / ${totalPages}`;
+
+      if (!pageItems.length) {
+        tbody.innerHTML = `<tr><td colspan="5" class="py-12 text-center text-slate-500 dark:text-slate-400">${t('wlEmpty')}</td></tr>`;
+      } else {
+        tbody.innerHTML = pageItems.map((item, i) => `
+          <tr class="hover:bg-parchment/50 dark:hover:bg-slate-800/50 transition-colors align-top">
+            <td class="py-3.5 px-3 text-center font-mono text-xs text-slate-500 dark:text-slate-400">${item.id || (startIdx + i + 1)}</td>
+            <td dir="rtl" class="py-3.5 px-4 font-semibold text-navy dark:text-ivory bidi-iso">${escapeHtml(item.fa)}</td>
+            <td dir="ltr" class="py-3.5 px-4 bidi-iso">
+              <button onclick="copyToClipboard('${escapeJs(item.en)}')" title="Click to copy" class="group text-start inline-flex items-center gap-1.5 font-semibold text-burgundy dark:text-amber-300 hover:underline focus:outline-none">
+                <span>${escapeHtml(item.en)}</span>
+                <svg class="w-3.5 h-3.5 opacity-40 group-hover:opacity-100 shrink-0 transition-opacity" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
+                </svg>
+              </button>
+            </td>
+            <td dir="rtl" class="py-3.5 px-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed bidi-iso">${escapeHtml(item.notes || '—')}</td>
+            <td dir="rtl" class="py-3.5 px-4 bidi-iso">
+              <span class="inline-block px-2.5 py-1 rounded-lg text-[11px] font-medium bg-parchment dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-stone-200 dark:border-slate-700 whitespace-nowrap">${escapeHtml(item.source)}</span>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      const paginationHtml = buildPaginationHtml(wlCurrentPage, totalPages);
+      document.getElementById('wl-pagination-top').innerHTML = paginationHtml;
+      document.getElementById('wl-pagination-bottom').innerHTML = paginationHtml;
+    }
+
+    function buildPaginationHtml(cur, total) {
+      if (total <= 1) return '';
+      return `
+        <button onclick="goToWordListPage(${cur - 1})" ${cur <= 1 ? 'disabled' : ''} class="px-3 py-1 rounded-lg border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-800 disabled:opacity-40 text-xs font-semibold">${t('prevPage')}</button>
+        <span class="px-2 text-xs font-mono">${cur} / ${total}</span>
+        <button onclick="goToWordListPage(${cur + 1})" ${cur >= total ? 'disabled' : ''} class="px-3 py-1 rounded-lg border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-800 disabled:opacity-40 text-xs font-semibold">${t('nextPage')}</button>
+      `;
+    }
+
+    function goToWordListPage(page) {
+      wlCurrentPage = Math.max(1, page);
+      renderWordListTable();
+    }
+
+    /* =========================================================================
+       9. TAB 3: INTERACTIVE 3D FLASHCARD TRAINER
+       ========================================================================= */
+    function populateFlashcardFilters() {
+      const srcSelect = document.getElementById('fc-source-filter');
+      const prevSrc = srcSelect.value || 'all';
+      const sources = getUniqueSources();
+      srcSelect.innerHTML = `<option value="all">${t('wlAllSources')}</option>` +
+        sources.map(s => `<option value="${escapeAttr(s)}" ${prevSrc === s ? 'selected' : ''}>${escapeHtml(s)}</option>`).join('');
+
+      const mSelect = document.getElementById('fc-mastery-filter');
+      const prevM = mSelect.value || 'all';
+      mSelect.innerHTML = `
+        <option value="all" ${prevM === 'all' ? 'selected' : ''}>${t('fcMasteryAll')}</option>
+        <option value="review" ${prevM === 'review' ? 'selected' : ''}>${t('fcMasteryReview')}</option>
+        <option value="mastered" ${prevM === 'mastered' ? 'selected' : ''}>${t('fcMasteryDone')}</option>
+      `;
+    }
+
+    function updateDirectionButtonLabel() {
+      document.getElementById('fc-direction-btn').textContent =
+        fcDirection === 'fa-en' ? t('fcDirFaEn') : t('fcDirEnFa');
+    }
+
+    function toggleFlashcardDirection() {
+      fcDirection = fcDirection === 'fa-en' ? 'en-fa' : 'fa-en';
+      fcIsFlipped = false;
+      updateDirectionButtonLabel();
+      renderCurrentFlashcard();
+    }
+
+    function rebuildFlashcardDeck(resetIdx = true) {
+      const srcVal = document.getElementById('fc-source-filter').value || 'all';
+      const masteryVal = document.getElementById('fc-mastery-filter').value || 'all';
+
+      fcDeck = wordListData.filter(item => {
+        const matchSrc = srcVal === 'all' || item.source === srcVal;
+        const st = masteryMap[item.id];
+        let matchM = true;
+        if (masteryVal === 'mastered') matchM = st === 'mastered';
+        else if (masteryVal === 'review') matchM = st !== 'mastered';
+        return matchSrc && matchM;
+      });
+
+      if (resetIdx || fcIndex >= fcDeck.length) fcIndex = 0;
+      fcIsFlipped = false;
+      renderCurrentFlashcard();
+    }
+
+    function shuffleFlashcards() {
+      for (let i = fcDeck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [fcDeck[i], fcDeck[j]] = [fcDeck[j], fcDeck[i]];
+      }
+      fcIndex = 0;
+      fcIsFlipped = false;
+      renderCurrentFlashcard();
+      showToast(currentLang === 'fa' ? 'کارت‌ها بر زده شدند.' : 'Deck shuffled.', 'info');
+    }
+
+    function renderCurrentFlashcard() {
+      const cardInner = document.getElementById('fc-card-inner');
+      const emptyEl = document.getElementById('fc-empty-state');
+      const actionsBar = document.getElementById('fc-actions-bar');
+      const sceneEl = cardInner.parentElement;
+
+      const masteredTotal = wordListData.filter(w => masteryMap[w.id] === 'mastered').length;
+      document.getElementById('fc-mastery-stats').textContent = t('fcMasteredCount')(masteredTotal, wordListData.length);
+
+      if (!fcDeck.length) {
+        sceneEl.classList.add('hidden');
+        actionsBar.classList.add('hidden');
+        emptyEl.classList.remove('hidden');
+        document.getElementById('fc-progress-text').textContent = t('fcCardOf')(0, 0);
+        document.getElementById('fc-progress-bar').style.width = '0%';
+        return;
+      }
+
+      sceneEl.classList.remove('hidden');
+      actionsBar.classList.remove('hidden');
+      emptyEl.classList.add('hidden');
+
+      const card = fcDeck[fcIndex];
+      cardInner.classList.toggle('is-flipped', fcIsFlipped);
+
+      const isFaFront = fcDirection === 'fa-en';
+      document.getElementById('fc-front-badge').textContent = isFaFront ? t('fcFrontFa') : t('fcFrontEn');
+      document.getElementById('fc-back-badge').textContent = isFaFront ? t('fcFrontEn') : t('fcFrontFa');
+
+      const frontTermEl = document.getElementById('fc-front-term');
+      const backTermEl = document.getElementById('fc-back-term');
+      frontTermEl.dir = isFaFront ? 'rtl' : 'ltr';
+      backTermEl.dir = isFaFront ? 'ltr' : 'rtl';
+      frontTermEl.textContent = isFaFront ? card.fa : card.en;
+      backTermEl.textContent = isFaFront ? card.en : card.fa;
+
+      document.getElementById('fc-front-source').textContent = card.source;
+      document.getElementById('fc-back-source').textContent = card.source;
+      document.getElementById('fc-flip-hint').textContent = t('fcFlipHint');
+      document.getElementById('fc-back-hint').textContent = t('fcBackHint');
+
+      // Show/Hide Legal Notes
+      const showNotes = document.getElementById('fc-show-notes-toggle').checked;
+      const notesBox = document.getElementById('fc-back-notes-box');
+      if (showNotes && card.notes) {
+        notesBox.classList.remove('hidden');
+        notesBox.dir = 'rtl';
+        notesBox.textContent = card.notes;
+      } else {
+        notesBox.classList.add('hidden');
+      }
+
+      // Status Badge
+      const st = masteryMap[card.id];
+      const stEl = document.getElementById('fc-front-status');
+      if (st === 'mastered') {
+        stEl.textContent = t('statusMastered');
+        stEl.className = 'px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300';
+      } else if (st === 'review') {
+        stEl.textContent = t('statusReview');
+        stEl.className = 'px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300';
+      } else {
+        stEl.textContent = t('statusNew');
+        stEl.className = 'px-2.5 py-1 rounded-full text-[11px] font-semibold bg-stone-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400';
+      }
+
+      document.getElementById('fc-progress-text').textContent = t('fcCardOf')(fcIndex + 1, fcDeck.length);
+      const pct = ((fcIndex + 1) / fcDeck.length) * 100;
+      document.getElementById('fc-progress-bar').style.width = `${pct}%`;
+    }
+
+    function flipFlashcard() {
+      if (!fcDeck.length) return;
+      fcIsFlipped = !fcIsFlipped;
+      document.getElementById('fc-card-inner').classList.toggle('is-flipped', fcIsFlipped);
+    }
+
+    function nextFlashcard() {
+      if (!fcDeck.length) return;
+      fcIndex = (fcIndex + 1) % fcDeck.length;
+      fcIsFlipped = false;
+      renderCurrentFlashcard();
+    }
+
+    function prevFlashcard() {
+      if (!fcDeck.length) return;
+      fcIndex = (fcIndex - 1 + fcDeck.length) % fcDeck.length;
+      fcIsFlipped = false;
+      renderCurrentFlashcard();
+    }
+
+    function markFlashcard(status) {
+      if (!fcDeck.length) return;
+      const card = fcDeck[fcIndex];
+      masteryMap[card.id] = status;
+      safeStorage.set(STORAGE_KEYS.MASTERY, masteryMap);
+      nextFlashcard();
+    }
+
+    function confirmResetMastery() {
+      openConfirmModal(t('resetMasteryTitle'), t('resetMasteryMsg'), () => {
+        masteryMap = {};
+        safeStorage.set(STORAGE_KEYS.MASTERY, masteryMap);
+        rebuildFlashcardDeck(true);
+        showToast(currentLang === 'fa' ? 'وضعیت تسلط بازنشانی شد.' : 'Mastery progress reset.', 'info');
+      });
+    }
+
+    /* =========================================================================
+       10. KEYBOARD SHORTCUTS & STEALTH ADMIN TRIGGERS
+       ========================================================================= */
+    function isTypingInFormField(el) {
+      if (!el) return false;
+      const tag = el.tagName;
+      return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || el.isContentEditable;
+    }
+
+    function setupKeyboardShortcuts() {
+      document.addEventListener('keydown', (e) => {
+        const typing = isTypingInFormField(document.activeElement);
+
+        // Stealth Admin Trigger #1: Ctrl+Shift+A or Alt+Shift+A (ignored while typing)
+        if (!typing && (e.ctrlKey || e.altKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
+          e.preventDefault();
+          triggerStealthAdmin();
+          return;
+        }
+
+        // Escape closes modals
+        if (e.key === 'Escape') {
+          if (!document.getElementById('confirm-modal').classList.contains('hidden')) {
+            closeConfirmModal(false);
+          } else if (!document.getElementById('admin-gate-modal').classList.contains('hidden')) {
+            closeAdminGate();
+          } else if (isAdminOpen) {
+            closeAdminDashboard();
+          }
+          return;
+        }
+
+        // Flashcard shortcuts (only when on Flashcards tab, not typing, and no modal open)
+        const anyModalOpen = isAdminOpen ||
+          !document.getElementById('admin-gate-modal').classList.contains('hidden') ||
+          !document.getElementById('confirm-modal').classList.contains('hidden');
+
+        if (activeMainTab === 'flashcards' && !typing && !anyModalOpen) {
+          if (e.code === 'Space') {
+            e.preventDefault();
+            flipFlashcard();
+          } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            currentLang === 'fa' ? prevFlashcard() : nextFlashcard();
+          } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            currentLang === 'fa' ? nextFlashcard() : prevFlashcard();
+          }
+        }
+      });
+    }
+
+    function setupStealthAdminTriggers() {
+      // Stealth Admin Trigger #3: Triple-click on footer university text
+      const footerTrigger = document.getElementById('footer-uni-trigger');
+      footerTrigger.addEventListener('click', () => {
+        footerClickCount++;
+        clearTimeout(footerClickTimer);
+        if (footerClickCount >= 3) {
+          footerClickCount = 0;
+          triggerStealthAdmin();
+        } else {
+          footerClickTimer = setTimeout(() => { footerClickCount = 0; }, 550);
+        }
+      });
+
+      // Stealth Admin Trigger #2 (Dynamic hash change)
+      window.addEventListener('hashchange', checkUrlAdminTrigger);
+    }
+
+    function checkUrlAdminTrigger() {
+      const hash = window.location.hash.toLowerCase();
+      const params = new URLSearchParams(window.location.search);
+      if (hash === '#admin' || params.get('admin') === '1') {
+        triggerStealthAdmin();
+      }
+    }
+
+    function triggerStealthAdmin() {
+      if (sessionStorage.getItem(STORAGE_KEYS.ADMIN_AUTH) === '1') {
+        openAdminDashboard();
+      } else {
+        document.getElementById('admin-passcode-input').value = '';
+        document.getElementById('admin-gate-error').classList.add('hidden');
+        document.getElementById('admin-gate-modal').classList.remove('hidden');
+        setTimeout(() => document.getElementById('admin-passcode-input').focus(), 50);
+      }
+    }
+
+    function closeAdminGate() {
+      document.getElementById('admin-gate-modal').classList.add('hidden');
+    }
+
+    function submitAdminPasscode(e) {
+      e.preventDefault();
+      const input = document.getElementById('admin-passcode-input').value.trim();
+      const storedPass = safeStorage.get(STORAGE_KEYS.PASSCODE, DEFAULT_PASSCODE);
+      if (input === storedPass) {
+        sessionStorage.setItem(STORAGE_KEYS.ADMIN_AUTH, '1');
+        closeAdminGate();
+        openAdminDashboard();
+      } else {
+        const err = document.getElementById('admin-gate-error');
+        err.textContent = 'Invalid passcode. Please try again.';
+        err.classList.remove('hidden');
+      }
+    }
+
+    function openAdminDashboard() {
+      isAdminOpen = true;
+      document.getElementById('admin-dashboard-modal').classList.remove('hidden');
+      switchAdminTab(activeAdminTab);
+      updateAdminCounters();
+    }
+
+    function closeAdminDashboard() {
+      isAdminOpen = false;
+      document.getElementById('admin-dashboard-modal').classList.add('hidden');
+    }
+
+    function logoutAdmin() {
+      sessionStorage.removeItem(STORAGE_KEYS.ADMIN_AUTH);
+      closeAdminDashboard();
+      showToast('Logged out of Admin session.', 'info');
+    }
+
+    function switchAdminTab(tab) {
+      activeAdminTab = tab;
+      ['paste', 'xlsx', 'crud', 'courses'].forEach(tName => {
+        document.getElementById(`admpanel-${tName}`).classList.toggle('hidden', tName !== tab);
+        const btn = document.getElementById(`admtab-${tName}`);
+        btn.className = tName === tab
+          ? 'adm-tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-t-xl whitespace-nowrap border-b-2 border-navy dark:border-gold text-navy dark:text-gold bg-white dark:bg-slate-800/60'
+          : 'adm-tab-btn px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-t-xl whitespace-nowrap border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200';
+      });
+
+      if (tab === 'xlsx') updateAdminCounters();
+      if (tab === 'crud') renderAdminCrudTable();
+      if (tab === 'courses') initCourseEditor();
+    }
+
+    function updateAdminCounters() {
+      document.getElementById('adm-export-count').textContent = wordListData.length;
+    }
+
+    /* =========================================================================
+       11. ADMIN TAB 1: SMART TABLE-PASTE BULK IMPORTER
+       ========================================================================= */
+    function parseCsvLine(line) {
+      const result = [];
+      let current = '';
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        const ch = line[i];
+        if (ch === '"') {
+          if (inQuotes && line[i + 1] === '"') {
+            current += '"';
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (ch === ',' && !inQuotes) {
+          result.push(current.trim());
+          current = '';
+        } else {
+          current += ch;
+        }
+      }
+      result.push(current.trim());
+      return result;
+    }
+
+    function isHeaderOrDividerRow(cols) {
+      const joined = cols.join(' ').toLowerCase();
+      // Skip Markdown table separator rows like |---|---|
+      if (/^[\s|\-:]+$/.test(joined)) return true;
+      // Skip standard header rows
+      const headerKeywords = ['ردیف', 'اصطلاح', 'عبارت فارسی', 'english term', 'persian term', 'توضیحات', 'مرجع'];
+      const matches = headerKeywords.filter(k => joined.includes(k)).length;
+      return matches >= 2;
+    }
+
+    function parseRowsFromMatrix(matrix) {
+      const existingFa = new Set(wordListData.map(w => w.fa.trim().toLowerCase()));
+      const existingEn = new Set(wordListData.map(w => w.en.trim().toLowerCase()));
+
+      const parsed = [];
+      let autoNum = wordListData.length + 1;
+
+      matrix.forEach(rawCols => {
+        const cols = rawCols.map(c => String(c ?? '').trim());
+        if (cols.every(c => !c)) return;
+        if (isHeaderOrDividerRow(cols)) return;
+
+        let rowNum, fa, en, notes, source;
+
+        // Detect 5-column (Row# | FA | EN | Notes | Source) vs 4-column (FA | EN | Notes | Source)
+        if (cols.length >= 5 && /^\d+$|^[۰-۹]+$/.test(cols[0])) {
+          rowNum = parseInt(persianToEnglishDigits(cols[0]), 10) || autoNum++;
+          fa = cols[1];
+          en = cols[2];
+          notes = cols[3] || '';
+          source = cols[4] || 'عمومی';
+        } else if (cols.length >= 4) {
+          rowNum = autoNum++;
+          fa = cols[0];
+          en = cols[1];
+          notes = cols[2] || '';
+          source = cols[3] || 'عمومی';
+        } else if (cols.length >= 2) {
+          rowNum = autoNum++;
+          fa = cols[0];
+          en = cols[1];
+          notes = cols[2] || '';
+          source = 'عمومی';
+        } else {
+          return;
+        }
+
+        if (!fa && !en) return;
+
+        const isDuplicate = existingFa.has(fa.toLowerCase()) || existingEn.has(en.toLowerCase());
+        parsed.push({ id: rowNum, fa, en, notes, source, isDuplicate });
+      });
+
+      parsedImportRows = parsed;
+      renderImportPreview();
+    }
+
+    function parseBulkPasteText() {
+      const raw = document.getElementById('bulk-paste-input').value.trim();
+      if (!raw) {
+        parsedImportRows = [];
+        renderImportPreview();
+        return;
+      }
+
+      const lines = raw.split(/\r?\n/).filter(l => l.trim().length > 0);
+      const matrix = lines.map(line => {
+        if (line.includes('\t')) {
+          return line.split('\t');
+        } else if (line.includes('|')) {
+          let parts = line.split('|');
+          if (parts.length > 2 && parts[0].trim() === '') parts.shift();
+          if (parts.length > 1 && parts[parts.length - 1].trim() === '') parts.pop();
+          return parts;
+        } else {
+          return parseCsvLine(line);
+        }
+      });
+
+      parseRowsFromMatrix(matrix);
+    }
+
+    function renderImportPreview() {
+      const container = document.getElementById('bulk-preview-container');
+      const tbody = document.getElementById('bulk-preview-tbody');
+      const btn = document.getElementById('btn-commit-import');
+
+      if (!parsedImportRows.length) {
+        container.classList.add('hidden');
+        btn.disabled = true;
+        return;
+      }
+
+      container.classList.remove('hidden');
+      btn.disabled = false;
+
+      const mode = document.querySelector('input[name="import-mode"]:checked').value;
+      const dupCount = parsedImportRows.filter(r => r.isDuplicate).length;
+      const newCount = parsedImportRows.length - dupCount;
+
+      document.getElementById('bulk-preview-summary').textContent =
+        `Parsed ${parsedImportRows.length} rows — ${newCount} New, ${dupCount} Duplicate(s) ${mode === 'replace' ? '(Replace All mode ignores existing duplicates)' : ''}`;
+
+      tbody.innerHTML = parsedImportRows.map((r, idx) => `
+        <tr class="hover:bg-stone-50 dark:hover:bg-slate-800/40">
+          <td class="p-2">
+            ${r.isDuplicate && mode === 'append'
+              ? '<span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300 font-bold">Duplicate</span>'
+              : '<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300 font-bold">New</span>'}
+          </td>
+          <td class="p-2 font-mono">${idx + 1}</td>
+          <td dir="rtl" class="p-2 font-semibold">${escapeHtml(r.fa)}</td>
+          <td dir="ltr" class="p-2">${escapeHtml(r.en)}</td>
+          <td dir="rtl" class="p-2 text-slate-500 max-w-xs truncate">${escapeHtml(r.notes)}</td>
+          <td dir="rtl" class="p-2">${escapeHtml(r.source)}</td>
+        </tr>
+      `).join('');
+    }
+
+    function clearBulkImport() {
+      document.getElementById('bulk-paste-input').value = '';
+      parsedImportRows = [];
+      renderImportPreview();
+    }
+
+    function commitBulkImport() {
+      if (!parsedImportRows.length) return;
+      const mode = document.querySelector('input[name="import-mode"]:checked').value;
+      const dupMode = document.querySelector('input[name="dup-mode"]:checked').value;
+
+      const executeImport = () => {
+        if (mode === 'replace') {
+          wordListData = parsedImportRows.map((r, idx) => ({
+            id: idx + 1, fa: r.fa, en: r.en, notes: r.notes, source: r.source
+          }));
+        } else {
+          let nextId = wordListData.reduce((m, w) => Math.max(m, Number(w.id) || 0), 0) + 1;
+          parsedImportRows.forEach(r => {
+            const matchIdx = wordListData.findIndex(w =>
+              w.fa.trim().toLowerCase() === r.fa.trim().toLowerCase() ||
+              w.en.trim().toLowerCase() === r.en.trim().toLowerCase()
+            );
+            if (matchIdx !== -1) {
+              if (dupMode === 'overwrite') {
+                wordListData[matchIdx] = { ...wordListData[matchIdx], fa: r.fa, en: r.en, notes: r.notes, source: r.source };
+              }
+            } else {
+              wordListData.push({ id: nextId++, fa: r.fa, en: r.en, notes: r.notes, source: r.source });
+            }
+          });
+        }
+
+        persistWordListAndRefresh();
+        clearBulkImport();
+        showToast(`Imported successfully! Word List now has ${wordListData.length} terms.`, 'success');
+      };
+
+      if (mode === 'replace') {
+        openConfirmModal('Replace Entire Word List?', `This will overwrite all ${wordListData.length} existing terms with ${parsedImportRows.length} imported rows.`, executeImport);
+      } else {
+        executeImport();
+      }
+    }
+
+    /* =========================================================================
+       12. ADMIN TAB 2: SHEETJS (.xlsx / .csv) UPLOAD & EXPORT
+       ========================================================================= */
+    function handleSpreadsheetUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      if (typeof XLSX === 'undefined') {
+        showToast('SheetJS library could not load. Check internet connection.', 'error');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: 'array' });
+          const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+          const matrix = XLSX.utils.sheet_to_json(firstSheet, { header: 1, defval: '' });
+          parseRowsFromMatrix(matrix);
+          switchAdminTab('paste');
+          showToast(`Loaded ${parsedImportRows.length} rows from ${file.name}. Review and click Confirm Import.`, 'info');
+        } catch (err) {
+          console.error(err);
+          showToast('Failed to parse spreadsheet file.', 'error');
+        }
+        event.target.value = '';
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    function exportWordList(format) {
+      const rows = wordListData.map((w, i) => ({
+        'ردیف': w.id || (i + 1),
+        'اصطلاح/عبارت فارسی': w.fa,
+        'English Term/Phrase': w.en,
+        'توضیحات': w.notes,
+        'مرجع - منبع': w.source
+      }));
+
+      if (format === 'json') {
+        downloadBlob(new Blob([JSON.stringify(wordListData, null, 2)], { type: 'application/json' }), 'ATU_Legal_WordList.json');
+        showToast('Exported JSON successfully.', 'success');
+        return;
+      }
+
+      if (typeof XLSX === 'undefined') {
+        showToast('SheetJS library unavailable for Excel/CSV export.', 'error');
+        return;
+      }
+
+      const ws = XLSX.utils.json_to_sheet(rows);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Legal Word List');
+
+      if (format === 'xlsx') {
+        XLSX.writeFile(wb, 'ATU_Legal_WordList.xlsx');
+      } else {
+        const csv = '\uFEFF' + XLSX.utils.sheet_to_csv(ws);
+        downloadBlob(new Blob([csv], { type: 'text/csv;charset=utf-8;' }), 'ATU_Legal_WordList.csv');
+      }
+      showToast(`Exported .${format} successfully.`, 'success');
+    }
+
+    /* =========================================================================
+       13. ADMIN TAB 3: SINGLE-TERM CRUD
+       ========================================================================= */
+    function renderAdminCrudTable() {
+      const q = (document.getElementById('adm-crud-search').value || '').trim().toLowerCase();
+      const filtered = wordListData.filter(w =>
+        !q || w.fa.toLowerCase().includes(q) || w.en.toLowerCase().includes(q) || (w.source || '').toLowerCase().includes(q)
+      );
+
+      document.getElementById('adm-crud-tbody').innerHTML = filtered.map(w => `
+        <tr class="hover:bg-stone-50 dark:hover:bg-slate-800/40">
+          <td class="p-2.5 text-center font-mono text-slate-400">${w.id}</td>
+          <td dir="rtl" class="p-2.5 font-semibold">${escapeHtml(w.fa)}</td>
+          <td dir="ltr" class="p-2.5">${escapeHtml(w.en)}</td>
+          <td dir="rtl" class="p-2.5 text-slate-500">${escapeHtml(w.source)}</td>
+          <td class="p-2.5 text-center space-x-1 space-x-reverse">
+            <button onclick="editSingleTerm(${w.id})" class="px-2 py-1 rounded bg-sky-100 text-sky-800 dark:bg-sky-900/50 dark:text-sky-300 font-semibold">Edit</button>
+            <button onclick="deleteSingleTerm(${w.id})" class="px-2 py-1 rounded bg-rose-100 text-rose-800 dark:bg-rose-900/50 dark:text-rose-300 font-semibold">Del</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function saveSingleTerm(e) {
+      e.preventDefault();
+      const editId = document.getElementById('crud-edit-id').value;
+      const fa = document.getElementById('crud-fa').value.trim();
+      const en = document.getElementById('crud-en').value.trim();
+      const notes = document.getElementById('crud-notes').value.trim();
+      const source = document.getElementById('crud-source').value.trim();
+
+      if (!fa || !en) return;
+
+      if (editId) {
+        const idx = wordListData.findIndex(w => String(w.id) === String(editId));
+        if (idx !== -1) {
+          wordListData[idx] = { ...wordListData[idx], fa, en, notes, source };
+        }
+        showToast('Term updated.', 'success');
+      } else {
+        const nextId = wordListData.reduce((m, w) => Math.max(m, Number(w.id) || 0), 0) + 1;
+        wordListData.push({ id: nextId, fa, en, notes, source });
+        showToast('New term added.', 'success');
+      }
+
+      resetCrudForm();
+      persistWordListAndRefresh();
+      renderAdminCrudTable();
+    }
+
+    function editSingleTerm(id) {
+      const term = wordListData.find(w => w.id === id);
+      if (!term) return;
+      document.getElementById('crud-edit-id').value = term.id;
+      document.getElementById('crud-fa').value = term.fa;
+      document.getElementById('crud-en').value = term.en;
+      document.getElementById('crud-notes').value = term.notes || '';
+      document.getElementById('crud-source').value = term.source || '';
+      document.getElementById('crud-form-title').textContent = `Editing Term #${term.id}`;
+      document.getElementById('crud-submit-btn').textContent = 'Save Changes';
+      document.getElementById('crud-cancel-edit').classList.remove('hidden');
+    }
+
+    function resetCrudForm() {
+      document.getElementById('crud-edit-id').value = '';
+      document.getElementById('crud-fa').value = '';
+      document.getElementById('crud-en').value = '';
+      document.getElementById('crud-notes').value = '';
+      document.getElementById('crud-source').value = '';
+      document.getElementById('crud-form-title').textContent = 'Add New Terminology Entry';
+      document.getElementById('crud-submit-btn').textContent = 'Add Term';
+      document.getElementById('crud-cancel-edit').classList.add('hidden');
+    }
+
+    function deleteSingleTerm(id) {
+      openConfirmModal('Delete Term?', `Remove terminology entry #${id} permanently?`, () => {
+        wordListData = wordListData.filter(w => w.id !== id);
+        persistWordListAndRefresh();
+        renderAdminCrudTable();
+        showToast('Term deleted.', 'info');
+      });
+    }
+
+    function persistWordListAndRefresh() {
+      safeStorage.set(STORAGE_KEYS.WORDLIST, wordListData);
+      updateHeroStats();
+      renderWordListFilters();
+      renderWordListTable();
+      populateFlashcardFilters();
+      rebuildFlashcardDeck(false);
+      updateAdminCounters();
+    }
+
+    /* =========================================================================
+       14. ADMIN TAB 4: COURSE & LECTURE NOTE EDITOR + SETTINGS & BACKUP
+       ========================================================================= */
+    function initCourseEditor() {
+      const select = document.getElementById('adm-course-select');
+      const currentVal = select.value || coursesData[0]?.id;
+      select.innerHTML = coursesData.map(c =>
+        `<option value="${c.id}" ${c.id === currentVal ? 'selected' : ''}>${escapeHtml(c.titleFa)} — ${escapeHtml(c.titleEn)}</option>`
+      ).join('');
+      loadCourseIntoEditor(select.value);
+    }
+
+    function loadCourseIntoEditor(courseId) {
+      const c = coursesData.find(x => x.id === courseId);
+      if (!c) return;
+      document.getElementById('ce-title-fa').value = c.titleFa;
+      document.getElementById('ce-title-en').value = c.titleEn;
+      document.getElementById('ce-code').value = c.code;
+      document.getElementById('ce-category').value = c.category;
+      document.getElementById('ce-units').value = c.units;
+      document.getElementById('ce-prereq-fa').value = c.prereqFa;
+      document.getElementById('ce-prereq-en').value = c.prereqEn;
+      document.getElementById('ce-obj-fa').value = c.objFa;
+      document.getElementById('ce-syllabus').value = (c.syllabus || []).join('\n');
+
+      renderEditorLectureBlocks(c);
+    }
+
+    function saveCourseMetadata() {
+      const courseId = document.getElementById('adm-course-select').value;
+      const c = coursesData.find(x => x.id === courseId);
+      if (!c) return;
+
+      c.titleFa = document.getElementById('ce-title-fa').value.trim();
+      c.titleEn = document.getElementById('ce-title-en').value.trim();
+      c.code = document.getElementById('ce-code').value.trim();
+      c.category = document.getElementById('ce-category').value;
+      c.units = Number(document.getElementById('ce-units').value) || 2;
+      c.prereqFa = document.getElementById('ce-prereq-fa').value.trim();
+      c.prereqEn = document.getElementById('ce-prereq-en').value.trim();
+      c.objFa = document.getElementById('ce-obj-fa').value.trim();
+      c.syllabus = document.getElementById('ce-syllabus').value.split('\n').map(s => s.trim()).filter(Boolean);
+
+      persistCoursesAndRefresh();
+      initCourseEditor();
+      showToast('Course details saved.', 'success');
+    }
+
+    function renderEditorLectureBlocks(course) {
+      const container = document.getElementById('ce-lectures-list');
+      container.innerHTML = course.lectures.map((lec, idx) => `
+        <div class="rounded-xl border border-stone-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-3.5 space-y-2">
+          <div class="flex items-center gap-2">
+            <input id="lec-title-${idx}" type="text" value="${escapeAttr(lec.title)}" class="flex-1 rounded-lg border border-stone-300 dark:border-slate-700 bg-ivory dark:bg-slate-950 px-3 py-1.5 text-xs font-bold" />
+            <button onclick="saveLectureSection('${course.id}', ${idx})" class="px-3 py-1.5 rounded-lg bg-navy dark:bg-gold text-white dark:text-slate-950 text-xs font-semibold">Save</button>
+            <button onclick="deleteLectureSection('${course.id}', ${idx})" class="px-2.5 py-1.5 rounded-lg bg-rose-100 text-rose-700 dark:bg-rose-900/50 dark:text-rose-300 text-xs font-semibold">Del</button>
+          </div>
+          <textarea id="lec-body-${idx}" rows="4" dir="ltr" class="w-full rounded-lg border border-stone-300 dark:border-slate-700 bg-ivory dark:bg-slate-950 p-2.5 text-xs font-mono">${escapeHtml(lec.content.trim())}</textarea>
+        </div>
+      `).join('');
+    }
+
+    function saveLectureSection(courseId, idx) {
+      const c = coursesData.find(x => x.id === courseId);
+      if (!c || !c.lectures[idx]) return;
+      c.lectures[idx].title = document.getElementById(`lec-title-${idx}`).value.trim();
+      c.lectures[idx].content = document.getElementById(`lec-body-${idx}`).value.trim();
+      persistCoursesAndRefresh();
+      showToast('Lecture note section saved.', 'success');
+    }
+
+    function addNewLectureSection() {
+      const courseId = document.getElementById('adm-course-select').value;
+      const c = coursesData.find(x => x.id === courseId);
+      if (!c) return;
+      const n = c.lectures.length + 1;
+      c.lectures.push({
+        id: `${courseId}-l${Date.now()}`,
+        title: `جلسه ${n}: عنوان جلسه جدید`,
+        content: '<p>متن جزوه جلسه جدید را اینجا وارد کنید...</p>'
+      });
+      persistCoursesAndRefresh();
+      renderEditorLectureBlocks(c);
+      showToast('New lecture session added.', 'success');
+    }
+
+    function deleteLectureSection(courseId, idx) {
+      const c = coursesData.find(x => x.id === courseId);
+      if (!c) return;
+      openConfirmModal('Delete Lecture Section?', `Delete "${c.lectures[idx].title}"?`, () => {
+        c.lectures.splice(idx, 1);
+        persistCoursesAndRefresh();
+        renderEditorLectureBlocks(c);
+        showToast('Lecture section deleted.', 'info');
+      });
+    }
+
+    function persistCoursesAndRefresh() {
+      safeStorage.set(STORAGE_KEYS.COURSES, coursesData);
+      updateHeroStats();
+      renderCoursesGrid();
+      if (activeCourseId) renderCourseReader();
+    }
+
+    function updateAdminPasscode() {
+      const val = document.getElementById('adm-new-passcode').value.trim();
+      if (val.length < 4) {
+        showToast('Passcode must be at least 4 characters.', 'error');
+        return;
+      }
+      safeStorage.set(STORAGE_KEYS.PASSCODE, val);
+      document.getElementById('adm-new-passcode').value = '';
+      showToast('Admin passcode updated.', 'success');
+    }
+
+    function exportFullBackupJson() {
+      const backup = {
+        exportedAt: new Date().toISOString(),
+        courses: coursesData,
+        wordList: wordListData,
+        mastery: masteryMap
+      };
+      downloadBlob(new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' }), 'ATU_Portal_Full_Backup.json');
+      showToast('Full JSON backup downloaded.', 'success');
+    }
+
+    function restoreFullBackupJson(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (Array.isArray(parsed.courses)) coursesData = parsed.courses;
+          if (Array.isArray(parsed.wordList)) wordListData = parsed.wordList;
+          if (parsed.mastery && typeof parsed.mastery === 'object') masteryMap = parsed.mastery;
+          safeStorage.set(STORAGE_KEYS.COURSES, coursesData);
+          safeStorage.set(STORAGE_KEYS.WORDLIST, wordListData);
+          safeStorage.set(STORAGE_KEYS.MASTERY, masteryMap);
+          persistCoursesAndRefresh();
+          persistWordListAndRefresh();
+          initCourseEditor();
+          showToast('Backup restored successfully!', 'success');
+        } catch (err) {
+          showToast('Invalid JSON backup file.', 'error');
+        }
+        event.target.value = '';
+      };
+      reader.readAsText(file);
+    }
+
+    function confirmResetAllData() {
+      openConfirmModal('Reset All Portal Data?', 'This restores all 10 default courses, 40 legal terms, and clears mastery progress.', () => {
+        coursesData = structuredClone(DEFAULT_COURSES);
+        wordListData = structuredClone(DEFAULT_WORDLIST);
+        masteryMap = {};
+        safeStorage.set(STORAGE_KEYS.COURSES, coursesData);
+        safeStorage.set(STORAGE_KEYS.WORDLIST, wordListData);
+        safeStorage.set(STORAGE_KEYS.MASTERY, masteryMap);
+        persistCoursesAndRefresh();
+        persistWordListAndRefresh();
+        initCourseEditor();
+        showToast('All data reset to defaults.', 'info');
+      });
+    }
+
+    /* =========================================================================
+       15. UTILITIES: CLIPBOARD, TOASTS, CONFIRM MODAL, SANITIZATION
+       ========================================================================= */
+    function copyToClipboard(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast(t('copiedToast')(text), 'success');
+      } catch (err) {
+        showToast('Could not copy text.', 'error');
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      const colors = {
+        success: 'bg-emerald-800 text-white border-emerald-600',
+        error: 'bg-rose-800 text-white border-rose-600',
+        info: 'bg-navy text-ivory dark:bg-slate-800 border-navy-light dark:border-gold/50'
+      };
+      toast.className = `pointer-events-auto px-4 py-2.5 rounded-xl border shadow-lg text-xs font-semibold transition-all duration-300 opacity-0 translate-y-2 max-w-sm ${colors[type] || colors.info}`;
+      toast.textContent = message;
+      container.appendChild(toast);
+      requestAnimationFrame(() => {
+        toast.classList.remove('opacity-0', 'translate-y-2');
+      });
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 2800);
+    }
+
+    function openConfirmModal(title, message, onConfirm) {
+      document.getElementById('confirm-modal-title').textContent = title;
+      document.getElementById('confirm-modal-message').textContent = message;
+      confirmCallback = onConfirm;
+      document.getElementById('confirm-modal').classList.remove('hidden');
+    }
+
+    function closeConfirmModal(confirmed) {
+      document.getElementById('confirm-modal').classList.add('hidden');
+      if (confirmed && typeof confirmCallback === 'function') {
+        confirmCallback();
+      }
+      confirmCallback = null;
+    }
+
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function escapeAttr(str) {
+      return escapeHtml(str);
+    }
+
+    function escapeJs(str) {
+      return String(str ?? '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+    }
+
+    function stripHtml(html) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || '';
+    }
+
+    function persianToEnglishDigits(str) {
+      return String(str).replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
+    }
+
+    function highlightText(escapedText, query) {
+      const safeQ = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      return escapedText.replace(new RegExp(`(${safeQ})`, 'gi'), '<mark class="search-hl">$1</mark>');
+    }
+
+    function highlightHtmlContent(html, query) {
+      const container = document.createElement('div');
+      container.innerHTML = html;
+      const safeQ = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`(${safeQ})`, 'gi');
+
+      const walk = (node) => {
+        if (node.nodeType === 3) {
+          if (regex.test(node.nodeValue)) {
+            const span = document.createElement('span');
+            span.innerHTML = escapeHtml(node.nodeValue).replace(regex, '<mark class="search-hl">$1</mark>');
+            node.replaceWith(span);
+          }
+        } else if (node.nodeType === 1 && node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
+          Array.from(node.childNodes).forEach(walk);
+        }
+      };
+      walk(container);
+      return container.innerHTML;
+    }
+
+    // Boot application on DOM ready
+    document.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>
