@@ -7366,27 +7366,61 @@
     }
 
     async function fetchRemoteGitHubFile(cfg) {
-      const apiUrl = `https://api.github.com/repos/${encodeURIComponent(cfg.owner)}/${encodeURIComponent(cfg.repo)}/contents/${cfg.path.split('/').map(encodeURIComponent).join('/')}`;
-      const res = await fetch(`${apiUrl}?ref=${encodeURIComponent(cfg.branch)}`, {
-        headers: {
-          Authorization: `Bearer ${cfg.token}`,
-          Accept: 'application/vnd.github+json'
-        }
-      });
-      if (!res.ok) {
+      const repoBase = `https://api.github.com/repos/${encodeURIComponent(cfg.owner)}/${encodeURIComponent(cfg.repo)}`;
+      const headers = {
+        Authorization: `Bearer ${cfg.token}`,
+        Accept: 'application/vnd.github+json'
+      };
+      const apiUrl = `${repoBase}/contents/${cfg.path.split('/').map(encodeURIComponent).join('/')}`;
+
+      // 1. Get the branch HEAD commit SHA & tree SHA via Git Data API (no 1 MB limit)
+      const refRes = await fetch(`${repoBase}/git/ref/heads/${encodeURIComponent(cfg.branch)}`, { headers });
+      if (!refRes.ok) {
         let detail = '';
         try {
-          const errJson = await res.json();
+          const errJson = await refRes.json();
           detail = errJson.message ? ` — ${errJson.message}` : '';
         } catch (_) {}
-        throw new Error(`GitHub GET failed (${res.status})${detail}`);
+        throw new Error(`GitHub branch lookup failed (${refRes.status})${detail}`);
       }
-      const data = await res.json();
-      if (!data.content) {
-        throw new Error('Remote file content is empty or too large for the Contents API.');
+      const refData = await refRes.json();
+      const headCommitSha = refData.object.sha;
+
+      const commitRes = await fetch(`${repoBase}/git/commits/${headCommitSha}`, { headers });
+      if (!commitRes.ok) {
+        throw new Error(`GitHub commit lookup failed (${commitRes.status})`);
       }
-      const decodedHtml = base64ToUtf8(data.content);
-      return { apiUrl, sha: data.sha, html: decodedHtml };
+      const commitData = await commitRes.json();
+      const baseTreeSha = commitData.tree.sha;
+
+      // 2. Locate the target file's blob SHA in the repository tree
+      const treeRes = await fetch(`${repoBase}/git/trees/${baseTreeSha}?recursive=1`, { headers });
+      if (!treeRes.ok) {
+        throw new Error(`GitHub tree lookup failed (${treeRes.status})`);
+      }
+      const treeData = await treeRes.json();
+      const normalizedPath = cfg.path.replace(/^\/+/, '');
+      const entry = (treeData.tree || []).find(item => item.path === normalizedPath && item.type === 'blob');
+      if (!entry) {
+        throw new Error(`File "${normalizedPath}" was not found on branch "${cfg.branch}".`);
+      }
+
+      // 3. Fetch full file content via the Git Blobs API (supports files up to 100 MB)
+      const blobRes = await fetch(`${repoBase}/git/blobs/${entry.sha}`, { headers });
+      if (!blobRes.ok) {
+        let detail = '';
+        try {
+          const errJson = await blobRes.json();
+          detail = errJson.message ? ` — ${errJson.message}` : '';
+        } catch (_) {}
+        throw new Error(`GitHub Blob GET failed (${blobRes.status})${detail}`);
+      }
+      const blobData = await blobRes.json();
+      if (!blobData.content) {
+        throw new Error('Remote blob content is empty.');
+      }
+      const decodedHtml = base64ToUtf8(blobData.content);
+      return { apiUrl, repoBase, sha: entry.sha, headCommitSha, baseTreeSha, html: decodedHtml };
     }
 
     async function testGitHubConnection() {
@@ -7437,7 +7471,7 @@
 
       try {
         setGitHubStatus('info', `<strong>Step 1/3:</strong> Fetching current <code>${escapeHtml(cfg.path)}</code> from <code>${escapeHtml(cfg.owner)}/${escapeHtml(cfg.repo)}@${escapeHtml(cfg.branch)}</code>...`);
-        const { apiUrl, sha, html } = await fetchRemoteGitHubFile(cfg);
+        const { repoBase, headCommitSha, baseTreeSha, html } = await fetchRemoteGitHubFile(cfg);
 
         setGitHubStatus('info', `<strong>Step 2/3:</strong> Injecting ${coursesData.length} courses and ${wordListData.length} legal terms into <code>${escapeHtml(cfg.path)}</code>...`);
         const markerRegex = /\/\/ __PORTAL_DATA_START__[\s\S]*?\/\/ __PORTAL_DATA_END__/;
@@ -7456,34 +7490,74 @@
         const updatedHtml = html.replace(markerRegex, () => newDataBlock);
         const encodedContent = utf8ToBase64(updatedHtml);
 
-        setGitHubStatus('info', '<strong>Step 3/3:</strong> Committing updated HTML to GitHub...');
-        const putRes = await fetch(apiUrl, {
-          method: 'PUT',
-          headers: {
-            Authorization: `Bearer ${cfg.token}`,
-            Accept: 'application/vnd.github+json',
-            'Content-Type': 'application/json'
-          },
+        setGitHubStatus('info', '<strong>Step 3/3:</strong> Committing updated HTML to GitHub via Git Blobs API...');
+        const jsonHeaders = {
+          Authorization: `Bearer ${cfg.token}`,
+          Accept: 'application/vnd.github+json',
+          'Content-Type': 'application/json'
+        };
+
+        // 3a. Create new blob (supports files up to 100 MB)
+        const createBlobRes = await fetch(`${repoBase}/git/blobs`, {
+          method: 'POST',
+          headers: jsonHeaders,
+          body: JSON.stringify({ content: encodedContent, encoding: 'base64' })
+        });
+        if (!createBlobRes.ok) {
+          let detail = '';
+          try { detail = ` — ${(await createBlobRes.json()).message || ''}`; } catch (_) {}
+          throw new Error(`GitHub Blob POST failed (${createBlobRes.status})${detail}`);
+        }
+        const newBlob = await createBlobRes.json();
+
+        // 3b. Create new tree referencing the new blob
+        const normalizedPath = cfg.path.replace(/^\/+/, '');
+        const createTreeRes = await fetch(`${repoBase}/git/trees`, {
+          method: 'POST',
+          headers: jsonHeaders,
           body: JSON.stringify({
-            message: cfg.commitMsg || 'chore(portal): update courses & wordlist via admin panel',
-            content: encodedContent,
-            sha,
-            branch: cfg.branch
+            base_tree: baseTreeSha,
+            tree: [{ path: normalizedPath, mode: '100644', type: 'blob', sha: newBlob.sha }]
           })
         });
-
-        if (!putRes.ok) {
+        if (!createTreeRes.ok) {
           let detail = '';
-          try {
-            const errJson = await putRes.json();
-            detail = errJson.message ? ` — ${errJson.message}` : '';
-          } catch (_) {}
-          throw new Error(`GitHub PUT failed (${putRes.status})${detail}`);
+          try { detail = ` — ${(await createTreeRes.json()).message || ''}`; } catch (_) {}
+          throw new Error(`GitHub Tree POST failed (${createTreeRes.status})${detail}`);
+        }
+        const newTree = await createTreeRes.json();
+
+        // 3c. Create new commit
+        const createCommitRes = await fetch(`${repoBase}/git/commits`, {
+          method: 'POST',
+          headers: jsonHeaders,
+          body: JSON.stringify({
+            message: cfg.commitMsg || 'chore(portal): update courses & wordlist via admin panel',
+            tree: newTree.sha,
+            parents: [headCommitSha]
+          })
+        });
+        if (!createCommitRes.ok) {
+          let detail = '';
+          try { detail = ` — ${(await createCommitRes.json()).message || ''}`; } catch (_) {}
+          throw new Error(`GitHub Commit POST failed (${createCommitRes.status})${detail}`);
+        }
+        const newCommit = await createCommitRes.json();
+
+        // 3d. Update branch ref to point to the new commit
+        const updateRefRes = await fetch(`${repoBase}/git/refs/heads/${encodeURIComponent(cfg.branch)}`, {
+          method: 'PATCH',
+          headers: jsonHeaders,
+          body: JSON.stringify({ sha: newCommit.sha })
+        });
+        if (!updateRefRes.ok) {
+          let detail = '';
+          try { detail = ` — ${(await updateRefRes.json()).message || ''}`; } catch (_) {}
+          throw new Error(`GitHub Ref PATCH failed (${updateRefRes.status})${detail}`);
         }
 
-        const result = await putRes.json();
-        const commitUrl = result.commit?.html_url || `https://github.com/${cfg.owner}/${cfg.repo}/commits/${cfg.branch}`;
-        const commitSha = (result.commit?.sha || '').slice(0, 7);
+        const commitUrl = newCommit.html_url || `https://github.com/${cfg.owner}/${cfg.repo}/commit/${newCommit.sha}`;
+        const commitSha = (newCommit.sha || '').slice(0, 7);
 
         setGitHubStatus('success', `
           <p><strong>Published live to GitHub!</strong> Commit <code>${escapeHtml(commitSha)}</code> succeeded. GitHub Pages will rebuild automatically in ~30–60 seconds.</p>
