@@ -520,9 +520,25 @@
           <h3 class="text-base sm:text-lg font-bold">ATU Translation Hub — Content & Terminology Manager</h3>
         </div>
         <div class="flex items-center gap-2">
+          <button onclick="publishToGitHubFromUI()" id="btn-header-publish" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-1.5 transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+            </svg>
+            <span>Publish Live to GitHub</span>
+          </button>
           <button onclick="logoutAdmin()" class="px-3 py-1.5 rounded-lg bg-rose-600/90 hover:bg-rose-600 text-white text-xs font-semibold">Logout</button>
           <button onclick="closeAdminDashboard()" class="px-3 py-1.5 rounded-lg bg-white/15 hover:bg-white/25 text-white text-xs font-semibold">Close &times;</button>
         </div>
+      </div>
+
+      <!-- Admin 5-Tab Bar -->
+      <div class="px-5 pt-3 bg-parchment/70 dark:bg-slate-900 border-b border-stone-200 dark:border-slate-800 flex items-center gap-1 overflow-x-auto">
+        <button onclick="switchAdminTab('paste')" id="admtab-paste" class="adm-tab-btn px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-t-xl whitespace-nowrap border-b-2 transition-colors">1. Table-Paste Bulk Importer</button>
+        <button onclick="switchAdminTab('xlsx')" id="admtab-xlsx" class="adm-tab-btn px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-t-xl whitespace-nowrap border-b-2 transition-colors">2. Excel / CSV Upload & Export</button>
+        <button onclick="switchAdminTab('crud')" id="admtab-crud" class="adm-tab-btn px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-t-xl whitespace-nowrap border-b-2 transition-colors">3. Single-Term CRUD</button>
+        <button onclick="switchAdminTab('courses')" id="admtab-courses" class="adm-tab-btn px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-t-xl whitespace-nowrap border-b-2 transition-colors">4. Course Editor & Settings</button>
+        <button onclick="switchAdminTab('github')" id="admtab-github" class="adm-tab-btn px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-t-xl whitespace-nowrap border-b-2 transition-colors">5. GitHub Live Publish</button>
+      </div>
       </div>
 
       <!-- Admin 4-Tab Bar -->
@@ -751,6 +767,58 @@
             </div>
           </div>
         </div>
+
+        <!-- ADMIN TAB 5: GITHUB LIVE PUBLISH BACKEND -->
+        <div id="admpanel-github" class="hidden space-y-5">
+          <div class="rounded-xl bg-parchment/70 dark:bg-slate-800/60 p-4 border border-stone-200 dark:border-slate-700 text-xs sm:text-sm space-y-1">
+            <p class="font-bold text-navy dark:text-gold">GitHub Pages Live Backend Publisher (GitHub Contents REST API)</p>
+            <p class="text-slate-600 dark:text-slate-300">Directly commits your live courses and legal word list into <code>index.html</code> on GitHub, triggering an automatic GitHub Pages rebuild. Your Fine-Grained Personal Access Token is stored strictly in this browser's <code>localStorage</code> and never written into the HTML file.</p>
+          </div>
+
+          <div class="rounded-2xl border border-stone-200 dark:border-slate-700 p-5 bg-ivory/40 dark:bg-slate-950/40 space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+              <div>
+                <label class="block font-semibold mb-1">GitHub Owner (Username or Org)</label>
+                <input id="gh-owner" type="text" dir="ltr" placeholder="e.g. alirezaee" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Repository Name</label>
+                <input id="gh-repo" type="text" dir="ltr" placeholder="e.g. atu-translation-hub" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Branch</label>
+                <input id="gh-branch" type="text" dir="ltr" value="main" placeholder="main" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">File Path</label>
+                <input id="gh-path" type="text" dir="ltr" value="index.html" placeholder="index.html" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5" />
+              </div>
+              <div class="md:col-span-2">
+                <label class="block font-semibold mb-1">Commit Message</label>
+                <input id="gh-commit-msg" type="text" dir="ltr" value="chore(portal): update courses & wordlist via admin panel" class="w-full rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5" />
+              </div>
+              <div class="md:col-span-2 lg:col-span-3">
+                <label class="block font-semibold mb-1">Fine-Grained Personal Access Token (Contents: Read & Write)</label>
+                <div class="flex gap-2">
+                  <input id="gh-token" type="password" dir="ltr" autocomplete="off" placeholder="github_pat_..." class="flex-1 rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5 font-mono" />
+                  <button type="button" onclick="toggleGitHubTokenVisibility()" id="gh-token-toggle-btn" class="px-3.5 py-2 rounded-xl border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-parchment dark:hover:bg-slate-700 text-xs font-semibold">Show</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-stone-200 dark:border-slate-800">
+              <div class="flex flex-wrap items-center gap-2">
+                <button onclick="saveGitHubConfig()" class="px-4 py-2.5 rounded-xl bg-navy dark:bg-gold text-white dark:text-slate-950 text-xs font-bold">Save GitHub Config</button>
+                <button onclick="clearGitHubToken()" class="px-4 py-2.5 rounded-xl border border-rose-300 dark:border-rose-800 bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 text-xs font-semibold">Clear Token</button>
+                <button onclick="testGitHubConnection()" id="btn-gh-test" class="px-4 py-2.5 rounded-xl border border-stone-300 dark:border-slate-600 bg-white dark:bg-slate-800 hover:bg-parchment dark:hover:bg-slate-700 text-xs font-semibold">Test Connection</button>
+              </div>
+              <button onclick="publishToGitHubFromUI()" id="btn-gh-publish" class="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold shadow-sm transition-colors">Publish Live to GitHub</button>
+            </div>
+          </div>
+
+          <!-- Real-Time Status & Commit Link Box -->
+          <div id="gh-status-box" class="hidden rounded-2xl border p-4 text-xs leading-relaxed space-y-2"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -782,7 +850,8 @@
       WORDLIST: 'atu_portal_wordlist_v1',
       MASTERY: 'atu_portal_mastery_v1',
       PASSCODE: 'atu_portal_admin_pass_v1',
-      ADMIN_AUTH: 'atu_portal_admin_auth_session'
+      ADMIN_AUTH: 'atu_portal_admin_auth_session',
+      GITHUB_CFG: 'atu_portal_gh_cfg_v1'
     };
 
     const DEFAULT_PASSCODE = 'ATU2026';
@@ -826,9 +895,9 @@
         navFlashcards: 'فلش‌کارت تمرینی',
         langSwitch: 'EN',
         heroBadge: 'کارشناسی مترجمی زبان انگلیسی • نیمسال تحصیلی ۱۴۰۵–۱۴۰۴',
-        heroTitle: 'سامانه یکپارچه جزوه‌های درسی ',
-        heroDesc: 'دسترسی سریع و ساختاریافته به جزوه‌های ۱۰ درس ، واژه‌نامه تخصصی ترجمه اسناد رسمی و حقوقی، و سیستم تمرین تعاملی فلش‌کارت.',
-        statCourses: 'درس ',
+        heroTitle: 'سامانه یکپارچه جزوه‌های درسی و منابع ترجمه رسمی',
+        heroDesc: 'دسترسی سریع و ساختاریافته به جزوه‌های ۱۰ درس رسمی، واژه‌نامه تخصصی ترجمه اسناد رسمی و حقوقی، و سیستم تمرین تعاملی فلش‌کارت.',
+        statCourses: 'درس رسمی',
         statUnits: 'واحد درسی',
         statTerms: 'اصطلاح حقوقی',
         catAll: 'همه دروس',
@@ -985,6 +1054,7 @@
     /* =========================================================================
        3. DEFAULT DATASET: ALL 10 OFFICIAL CURRICULUM COURSES & LECTURE NOTES
        ========================================================================= */
+    // __PORTAL_DATA_START__
     const DEFAULT_COURSES = [
       {
         id: 'course-1',
@@ -1007,100 +1077,41 @@
         lectures: [
           {
             id: 'c1-l1',
-            title: 'جلسه ۱ — معرفی درس، آشنایی با نظام‌های حقوقی، دسته‌بندی اسناد رسمی و ضوابط فنی ترجمه',
+            title: 'جلسه ۱: ویژگی‌های زبان حقوقی و ساختار اسناد رسمی',
             content: `
-             <p>این درس با هدف آشنایی دانشجویان با مفاهیم، اصطلاحات حقوقی، ساختار متون رسمی و فنون ترجمه انواع اسناد دولتی و قضایی طراحی شده است.</p>
-
-<div class="lecture-callout">
-  <strong>اهداف کلیدی و کاربرد حرفه‌ای:</strong> آمادگی برای بازار کار دارالترجمه‌ها و آزمون مترجمی رسمی قوه قضائیه، شناخت تطبیقی متون حقوقی و اداری، و آشنایی کاربردی با قراردادها، شروط ضمن عقد، وکالت‌نامه‌ها و اسناد شرکتی.
-</div>
-
-<h4>۱. مقررات کلاسی، تحویل تکالیف و ارزیابی</h4>
-<ul>
-  <li><strong>ارسال تکالیف:</strong> صرفاً از طریق سامانه <span class="bidi-iso" dir="ltr">LMS</span> دانشگاه و با نام‌گذاری صحیح فایل؛ ارسال با تأخیر مشمول کسر نمره است.</li>
-  <li><strong>اصالت کار و منع سرقت علمی (<span class="bidi-iso" dir="ltr">Plagiarism</span>):</strong> تکالیف باید به‌صورت انفرادی انجام شوند. کپی‌برداری یا اتکای صرف به خروجی هوش مصنوعی بدون ویرایش و اعتبارسنجی حقوقی ممنوع است.</li>
-  <li><strong>حضور و غیاب:</strong> حضور منظم الزامی است و غیبت‌ها مشمول کسر نمره پله‌ای می‌شوند.</li>
-  <li><strong>واژه‌نامه شخصی (<span class="bidi-iso" dir="ltr">Word List</span>):</strong> تهیه جدول منظم اصطلاحات در <span class="bidi-iso" dir="ltr">Word</span> الزامی است؛ در امتحان پایانی فقط استفاده از <span class="bidi-iso" dir="ltr">Word List</span> شخصی مجاز خواهد بود.</li>
-</ul>
-
-<h4>۲. نظام‌های حقوقی و مفاهیم ویژه فرهنگی-حقوقی</h4>
-<ul>
-  <li><strong>نظام کامن‌لا (<span class="bidi-iso" dir="ltr">Common Law</span>):</strong> مبتنی بر رویه قضایی، احکام محاکم پیشین و عرف قضایی (انگلستان، آمریکا و...).</li>
-  <li><strong>نظام حقوق مدنی (<span class="bidi-iso" dir="ltr">Civil Law</span>):</strong> متکی بر قوانین موضوعه، متون مدون و کدهای قانونی مصوب (اروپای قاره‌ای).</li>
-  <li><strong>نظام حقوقی ایران:</strong> ساختاری ترکیبی، متأثر از <span class="bidi-iso" dir="ltr">Civil Law</span> (مانند قانون مدنی) و آمیخته با فقه امامیه و شریعت اسلامی.</li>
-</ul>
-
-<div class="lecture-callout">
-  <strong>مفاهیم ویژه فرهنگی-حقوقی (<span class="bidi-iso" dir="ltr">Culture-Bound Concepts</span>):</strong> مفاهیمی مانند <em>مهریه</em> (<span class="bidi-iso" dir="ltr">Mahr / Dowry</span>)، <em>شیربها</em>، <em>اجرت‌المثل</em> و <em>نفقه</em> ما‌به‌ازای مستقیم در حقوق غرب ندارند. همچنین <em>سند ازدواج</em> در ایران یک «عقد و سند الزام‌آور» (<span class="bidi-iso" dir="ltr">Deed of Marriage / Marriage Contract</span>) است و با گواهی صرف ازدواج (<span class="bidi-iso" dir="ltr">Marriage Certificate</span>) تفاوت ساختاری دارد.
-</div>
-
-<h4>۳. سرفصل‌های اسناد مورد بررسی در طول ترم</h4>
-<ul>
-  <li><strong>اسناد هویتی و ثبت احوال (<span class="bidi-iso" dir="ltr">Civil Registration Documents</span>):</strong> صادره از سازمان ثبت احوال کشور (<span class="bidi-iso" dir="ltr">NOCR</span>) شامل شناسنامه (<span class="bidi-iso" dir="ltr">Birth Certificate / Identity Booklet</span>)، کارت ملی (<span class="bidi-iso" dir="ltr">National Identity Card</span>)، گواهی فوت (<span class="bidi-iso" dir="ltr">Death Certificate</span>) و گواهی ولادت.</li>
-  <li><strong>اسناد دفاتر اسناد رسمی (<span class="bidi-iso" dir="ltr">Notarial Documents</span>):</strong> تنظیمی در دفترخانه (<span class="bidi-iso" dir="ltr">Notary Public Office</span>) شامل وکالت‌نامه (<span class="bidi-iso" dir="ltr">Power of Attorney - POA</span>)، تعهدنامه (<span class="bidi-iso" dir="ltr">Letter / Deed of Undertaking</span>) و اقرارنامه/رضایت‌نامه (<span class="bidi-iso" dir="ltr">Affidavit / Deed of Declaration / Letter of Consent</span>). فعل <span class="bidi-iso" dir="ltr">To execute a document</span> در این بافت به معنای تنظیم، امضا و نهایی‌کردن رسمی سند است.</li>
-  <li><strong>اسناد مالکیت و املاک (<span class="bidi-iso" dir="ltr">Property &amp; Title Deeds</span>):</strong> زیر نظر سازمان ثبت اسناد و املاک؛ شامل سند تک‌برگ کاداستری (<span class="bidi-iso" dir="ltr">Cadastral Title Deed</span>) و سند دفترچه‌ای (منگوله‌دار). <span class="bidi-iso" dir="ltr">Title</span> به معنای سند و حق مالکیت قانونی است، در حالی که <span class="bidi-iso" dir="ltr">Ownership</span> مفهوم عام تصرف و مالکیت عینی دارد.</li>
-  <li><strong>اسناد شرکتی و تجاری (<span class="bidi-iso" dir="ltr">Corporate &amp; Commercial Documents</span>):</strong> شامل شرکت سهامی خاص (<span class="bidi-iso" dir="ltr">Private Joint-Stock Company</span>)، با مسئولیت محدود (<span class="bidi-iso" dir="ltr">LLC</span>)، اساسنامه (<span class="bidi-iso" dir="ltr">Articles of Association - AOA / By-laws</span>)، شرکت‌نامه (<span class="bidi-iso" dir="ltr">Articles of Incorporation</span>)، صورتجلسه (<span class="bidi-iso" dir="ltr">Minutes of Meeting - MOM</span>)، روزنامه رسمی (<span class="bidi-iso" dir="ltr">Official Gazette</span>) و اسناد بازرگانی نظیر <span class="bidi-iso" dir="ltr">Commercial Invoice</span>، <span class="bidi-iso" dir="ltr">Certificate of Origin</span> و اینکوترمز (<span class="bidi-iso" dir="ltr">FOB</span>).</li>
-</ul>
-
-<h4>۴. اصول و ضوابط فنی ترجمه متون رسمی</h4>
-<table>
-  <thead>
-    <tr><th>اصل فنی</th><th>توضیحات و الزامات</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>امانت‌داری کامل</td><td>هیچ کلمه یا عبارتی نباید حذف، تحریف یا تفسیر به رأی شود؛ لحن باید حقوقی و دقیق باقی بماند.</td></tr>
-    <tr><td>حفظ محرمانگی (<span class="bidi-iso" dir="ltr">Confidentiality &amp; Privacy</span>)</td><td>اسناد ارباب‌رجوع حاوی داده‌های هویتی و مالی حساس هستند؛ انتشار یا به‌اشتراک‌گذاری آن‌ها نقض اخلاق حرفه‌ای است.</td></tr>
-    <tr><td>بازتاب عناصر دیداری در متن</td><td>المان‌های گرافیکی نظیر هولوگرام، بارکد، <span class="bidi-iso" dir="ltr">QR-Code</span> و مهرهای برجسته باید داخل قلاب ذکر شوند؛ مانند <span class="bidi-iso" dir="ltr">[Embossed Seal: ...]</span> یا <span class="bidi-iso" dir="ltr">[Official QR Code]</span>.</td></tr>
-    <tr><td>پلمب و ابطال اسناد</td><td>واژه <span class="bidi-iso" dir="ltr">Sealed</span> و نشانه‌های لاک‌ومهر، پانچ و سیم‌کشی پلمب باید به‌روشنی منعکس گردند.</td></tr>
-    <tr><td>صفحه‌آرایی (<span class="bidi-iso" dir="ltr">Layout</span>)</td><td>ترجمه باید نظم ساختاری سند اصلی (تیترها، جداول، ردیف امضاها و شماره سریال) را تا حد امکان حفظ کند.</td></tr>
-  </tbody>
-</table>
+              <p>زبان حقوقی (<span class="bidi-iso" dir="ltr">Legalese</span>) به دلیل ماهیت الزام‌آور خود، دارای ویژگی‌های نحوی و واژگانی متمایزی است. در ترجمه اسناد رسمی، دقت حقوقی بر زیبایی‌شناسی ادبی اولویت مطلق دارد.</p>
+              <div class="lecture-callout">
+                <strong>تعریف کلیدی:</strong> <em>ترجمه رسمی (Certified / Official Translation)</em> ترجمه‌ای است که توسط مترجم رسمی دارای پروانه از قوه قضائیه روی سربرگ رسمی انجام و ممهور به مهر مترجم شود.
+              </div>
+              <h4>ویژگی‌های اصلی نثر حقوقی انگلیسی:</h4>
+              <ul>
+                <li>استفاده از قیدهای مرکب کهن مانند <span class="bidi-iso" dir="ltr">hereinafter, hereby, thereof, whereas</span>.</li>
+                <li>به‌کارگیری زوج‌واژه‌ها (<span class="bidi-iso" dir="ltr">Legal Doublets</span>) مانند <span class="bidi-iso" dir="ltr">null and void</span> (باطل و بلااثر) و <span class="bidi-iso" dir="ltr">terms and conditions</span>.</li>
+                <li>کاربرد فعل وجهی <span class="bidi-iso" dir="ltr">shall</span> برای بیان تکلیف و الزام حقوقی، نه زمان آینده.</li>
+              </ul>
+              <table>
+                <thead><tr><th>ویژگی در متن فارسی</th><th>معادل استاندارد انگلیسی</th><th>نکته اجرایی</th></tr></thead>
+                <tbody>
+                  <tr><td>بدین‌وسیله گواهی می‌شود</td><td dir="ltr">This is to certify that / It is hereby certified</td><td>پرهیز از ترجمه تحت‌اللفظی</td></tr>
+                  <tr><td>در اجرای ماده ...</td><td dir="ltr">Pursuant to Article ...</td><td>عدم استفاده از In execution of</td></tr>
+                  <tr><td>برابر با اصل است</td><td dir="ltr">Certified True Copy</td><td>مهر و امضای دفترخانه یا دادگستری</td></tr>
+                </tbody>
+              </table>
             `
           },
           {
             id: 'c1-l2',
-            title: 'جلسه ۲ — کلیات و اصطلاحات تخصصی حقوق',
+            title: 'جلسه ۲: ترجمه اسناد سجلی (شناسنامه، سند ازدواج و طلاق)',
             content: `
-              <p>در واژه‌شناسی حقوقی، واژه «قانون/حقوق» (<span class="bidi-iso" dir="ltr">Law</span>) دارای دو گستره معنایی است: <strong>معنای عام</strong> (<span class="bidi-iso" dir="ltr">Broad Sense</span>) شامل تمام فرآیندها و ساختارهای علم حقوق، و <strong>معنای خاص</strong> (<span class="bidi-iso" dir="ltr">Strict Sense</span>) یعنی مجموعه قواعد مدونی که رفتار انسان‌ها را قاعده‌مند می‌سازد.</p>
-
-<h4>۱. تعریف قاعده حقوقی و تمایز حقوق از اخلاق</h4>
-<ul>
-  <li><strong>قاعده رفتار انسانی (<span class="bidi-iso" dir="ltr">Rule of Human Conduct</span>):</strong> هنجاری که مرز بایدها و نبایدها را تعیین می‌کند.</li>
-  <li><strong>تنظیم روابط اجتماعی (<span class="bidi-iso" dir="ltr">Regulating Human Behavior</span>):</strong> با هدف استقرار نظم اجتماعی (<span class="bidi-iso" dir="ltr">Social Order</span>) و عدالت (<span class="bidi-iso" dir="ltr">Justice</span>).</li>
-  <li><strong>عمومیت و شمول (<span class="bidi-iso" dir="ltr">Generality</span>):</strong> وضع و اعمال کلی برای همگان، نه یک فرد معین.</li>
-  <li><strong>تفاوت حقوق و اخلاق (<span class="bidi-iso" dir="ltr">Law vs. Morality</span>):</strong> رفتارهای غیراخلاقی زمانی وارد قلمرو حقوق کیفری و جرم‌انگاری (<span class="bidi-iso" dir="ltr">Criminalization</span>) می‌شوند که به نظم عمومی خدشه وارد کنند یا امنیت شهروندان را تهدید نمایند.</li>
-</ul>
-
-<h4>۲. ضمانت اجرا و اعتبار قاعده حقوقی (<span class="bidi-iso" dir="ltr">Enforcement &amp; Sanctions</span>)</h4>
-<ul>
-  <li><strong>وضع قانون (<span class="bidi-iso" dir="ltr">Imposition / To Impose</span>):</strong> الزام و تحمیل قاعده از سوی مرجع ذی‌صلاح.</li>
-  <li><strong>اجرای قانون (<span class="bidi-iso" dir="ltr">Enforcement / Implementation</span>):</strong> عملیاتی کردن احکام توسط نهادهای مجری قانون (<span class="bidi-iso" dir="ltr">Law Enforcement</span>).</li>
-  <li><strong>ضمانت اجرا (<span class="bidi-iso" dir="ltr">Sanction</span>):</strong> کیفر، جریمه یا اقدام قانونی برای تضمین پایبندی (<span class="bidi-iso" dir="ltr">Protected by Sanction</span>).</li>
-  <li><strong>الزام‌آور بودن (<span class="bidi-iso" dir="ltr">Binding Nature</span>):</strong> واجب‌الاتباع بودن تصمیمات مانند آراء الزام‌آور دادگاه (<span class="bidi-iso" dir="ltr">Binding Judgment/Ruling</span>).</li>
-  <li><strong>نقض قانون و قرارداد:</strong> نقض قانون عام با <span class="bidi-iso" dir="ltr">Violate / Defy</span> و نقض تعهدات قراردادی با <span class="bidi-iso" dir="ltr">Breach of Contract</span> بیان می‌شود.</li>
-</ul>
-
-<h4>۳. نظام حقوقی و تفکیک قوا (<span class="bidi-iso" dir="ltr">Legal System &amp; State Powers</span>)</h4>
-<table>
-  <thead>
-    <tr><th>قوه</th><th>معادل انگلیسی</th><th>وظیفه و نهادهای اصلی</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>قوه مقننه</td><td dir="ltr">Legislative Branch / Legislature</td><td>قانون‌گذاری (<span class="bidi-iso" dir="ltr">Legislate</span>)؛ مجلس شورای اسلامی / پارلمان (<span class="bidi-iso" dir="ltr">Parliament / Islamic Consultative Assembly</span>)</td></tr>
-    <tr><td>قوه قضائیه</td><td dir="ltr">Judicial Branch / The Judiciary</td><td>دادرسی و قضاوت (<span class="bidi-iso" dir="ltr">Adjudication</span>)؛ رئیس قوه قضائیه (<span class="bidi-iso" dir="ltr">Chief Justice</span>)، قضات و دادگستری (<span class="bidi-iso" dir="ltr">Administration of Justice</span>)</td></tr>
-    <tr><td>قوه مجریه</td><td dir="ltr">Executive Branch / Administration</td><td>اداره امور عمومی و اجرای مصوبات و احکام قضایی و تقنینی</td></tr>
-  </tbody>
-</table>
-
-<div class="lecture-callout">
-  <strong>مفاهیم قضایی فراملی:</strong> <em>صلاحیت و قلمرو قضایی</em> (<span class="bidi-iso" dir="ltr">Jurisdiction</span>) محدوده جغرافیایی یا موضوعی اختیارات دادگاه است، و <em>استرداد مجرمین</em> (<span class="bidi-iso" dir="ltr">Extradition</span>) فرایند قانونی تسلیم مجرم یا متهم فراری میان کشورها در چارچوب معاهدات است.
-</div>
-
-<h4>۴. سنت‌های بزرگ حقوقی جهان (<span class="bidi-iso" dir="ltr">Major Legal Traditions</span>)</h4>
-<ul>
-  <li><strong>نظام رومی-ژرمنی / سیویل لا (<span class="bidi-iso" dir="ltr">Civil Law</span>):</strong> مبتنی بر قوانین مدون (<span class="bidi-iso" dir="ltr">Codified Law</span>) و کدهای قانونی (مانند <span class="bidi-iso" dir="ltr">Civil Code</span>)؛ قاضی مجری قانون مصوب است نه خالق قاعده.</li>
-  <li><strong>نظام کامن‌لا (<span class="bidi-iso" dir="ltr">Common Law</span>):</strong> مبتنی بر آرای قضایی (<span class="bidi-iso" dir="ltr">Judge-made Law / Case Law</span>) و سابقه قضایی الزام‌آور (<span class="bidi-iso" dir="ltr">Judicial Precedent</span>). ترجمه آن به «حقوق عرفی» با تسامح است، زیرا با عرف عام مردمی (<span class="bidi-iso" dir="ltr">Customary Law</span>) تفاوت دارد.</li>
-</ul>
+              <p>اسناد سجلی صادره از سازمان ثبت احوال کشور (<span class="bidi-iso" dir="ltr">National Organization for Civil Registration</span>) پرکاربردترین اسناد در دارالترجمه‌های رسمی هستند.</p>
+              <ul>
+                <li><strong>شماره شناسنامه:</strong> <span class="bidi-iso" dir="ltr">Birth Certificate No. / ID No.</span></li>
+                <li><strong>کد ملی:</strong> <span class="bidi-iso" dir="ltr">National ID No.</span></li>
+                <li><strong>توضیحات صفحه آخر شناسنامه:</strong> درج دقیق تغییرات نام، ازدواج، طلاق و فرزندان با ذکر تاریخ شمسی و معادل میلادی.</li>
+              </ul>
+              <div class="lecture-callout">
+                <strong>نکته طلایی:</strong> در ترجمه مهریه (<span class="bidi-iso" dir="ltr">Marriage Portion / Dower</span>)، ذکر دقیق عبارت <em>عندالمطالبه</em> (<span class="bidi-iso" dir="ltr">payable upon demand</span>) یا <em>عندالاستطاعه</em> (<span class="bidi-iso" dir="ltr">payable upon financial ability</span>) الزامی است.
+              </div>
             `
           },
           {
@@ -1383,12 +1394,12 @@
       {
         id: 'course-8',
         code: 'FL-2048',
-        titleFa: 'زبان دوم (3) — اسپانیایی',
-        titleEn: 'Foreign Language (3) — Spanish',
+        titleFa: 'زبان دوم (۲) — اسپانیایی',
+        titleEn: 'Foreign Language (2) — Spanish',
         category: 'اختیاری',
         units: 2,
-        prereqFa: 'زبان دوم (2) — اسپانیایی',
-        prereqEn: 'Foreign Language (2) — Spanish',
+        prereqFa: 'زبان دوم (۱) — اسپانیایی',
+        prereqEn: 'Foreign Language (1) — Spanish',
         objFa: 'گسترش مهارت‌های دستوری و واژگانی زبان اسپانیایی در سطح A2 شامل زمان‌های گذشته (Pretérito Indefinido و Imperfecto)، ضمایر مفعولی و مکالمات روزمره و دانشگاهی.',
         objEn: 'Expanding Spanish grammar and vocabulary to CEFR A2 level, covering past tenses (Pretérito Indefinido & Imperfecto), object pronouns, and everyday academic communication.',
         syllabus: [
@@ -1566,6 +1577,7 @@
       { id: 39, fa: 'استشهادیه محلی', en: 'Local Affidavit / Witness Statement', notes: 'سندی که به امضای چند شاهد مطلع رسیده و در صورت لزوم توسط کلانتری یا دفترخانه تصدیق می‌شود.', source: 'کتاب توانگر - درس ۳' },
       { id: 40, fa: 'تأییدیه دادگستری و وزارت امور خارجه', en: 'Legalization by the Judiciary and Ministry of Foreign Affairs', notes: 'مرحله نهایی اعتباربخشی به ترجمه رسمی برای ارائه به سفارتخانه‌ها و مراجع خارجی.', source: 'کتاب توانگر - درس ۳' }
     ];
+    // __PORTAL_DATA_END__
 
     /* =========================================================================
        5. APPLICATION STATE
@@ -2368,7 +2380,7 @@
 
     function switchAdminTab(tab) {
       activeAdminTab = tab;
-      ['paste', 'xlsx', 'crud', 'courses'].forEach(tName => {
+      ['paste', 'xlsx', 'crud', 'courses', 'github'].forEach(tName => {
         document.getElementById(`admpanel-${tName}`).classList.toggle('hidden', tName !== tab);
         const btn = document.getElementById(`admtab-${tName}`);
         btn.className = tName === tab
@@ -2379,6 +2391,7 @@
       if (tab === 'xlsx') updateAdminCounters();
       if (tab === 'crud') renderAdminCrudTable();
       if (tab === 'courses') initCourseEditor();
+      if (tab === 'github') loadGitHubConfigUI();
     }
 
     function updateAdminCounters() {
@@ -2896,6 +2909,241 @@
         initCourseEditor();
         showToast('All data reset to defaults.', 'info');
       });
+    }
+
+    /* =========================================================================
+       14B. ADMIN TAB 5: GITHUB REST API LIVE BACKEND PUBLISHER
+       ========================================================================= */
+    function base64ToUtf8(b64) {
+      const clean = b64.replace(/\s/g, '');
+      const binary = atob(clean);
+      const bytes = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i++) {
+        bytes[i] = binary.charCodeAt(i);
+      }
+      return new TextDecoder('utf-8').decode(bytes);
+    }
+
+    function utf8ToBase64(str) {
+      const bytes = new TextEncoder().encode(str);
+      const chunkSize = 8192;
+      let binary = '';
+      for (let i = 0; i < bytes.length; i += chunkSize) {
+        const chunk = bytes.subarray(i, i + chunkSize);
+        binary += String.fromCharCode.apply(null, chunk);
+      }
+      return btoa(binary);
+    }
+
+    function getStoredGitHubConfig() {
+      return safeStorage.get(STORAGE_KEYS.GITHUB_CFG, {
+        owner: '',
+        repo: '',
+        branch: 'main',
+        path: 'index.html',
+        commitMsg: 'chore(portal): update courses & wordlist via admin panel',
+        token: ''
+      });
+    }
+
+    function loadGitHubConfigUI() {
+      const cfg = getStoredGitHubConfig();
+      document.getElementById('gh-owner').value = cfg.owner || '';
+      document.getElementById('gh-repo').value = cfg.repo || '';
+      document.getElementById('gh-branch').value = cfg.branch || 'main';
+      document.getElementById('gh-path').value = cfg.path || 'index.html';
+      document.getElementById('gh-commit-msg').value = cfg.commitMsg || 'chore(portal): update courses & wordlist via admin panel';
+      document.getElementById('gh-token').value = cfg.token || '';
+    }
+
+    function readGitHubConfigFromUI() {
+      const stored = getStoredGitHubConfig();
+      const ownerEl = document.getElementById('gh-owner');
+      const isPopulated = ownerEl && (ownerEl.value.trim() || document.getElementById('gh-repo').value.trim());
+      if (!isPopulated && stored.owner && stored.repo && stored.token) {
+        return stored;
+      }
+      return {
+        owner: (document.getElementById('gh-owner').value || '').trim(),
+        repo: (document.getElementById('gh-repo').value || '').trim(),
+        branch: (document.getElementById('gh-branch').value || 'main').trim(),
+        path: (document.getElementById('gh-path').value || 'index.html').trim(),
+        commitMsg: (document.getElementById('gh-commit-msg').value || 'chore(portal): update courses & wordlist via admin panel').trim(),
+        token: (document.getElementById('gh-token').value || '').trim()
+      };
+    }
+
+    function saveGitHubConfig() {
+      const cfg = readGitHubConfigFromUI();
+      safeStorage.set(STORAGE_KEYS.GITHUB_CFG, cfg);
+      showToast('GitHub configuration saved to localStorage.', 'success');
+    }
+
+    function clearGitHubToken() {
+      const cfg = readGitHubConfigFromUI();
+      cfg.token = '';
+      document.getElementById('gh-token').value = '';
+      safeStorage.set(STORAGE_KEYS.GITHUB_CFG, cfg);
+      showToast('GitHub token cleared from localStorage.', 'info');
+    }
+
+    function toggleGitHubTokenVisibility() {
+      const input = document.getElementById('gh-token');
+      const btn = document.getElementById('gh-token-toggle-btn');
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = 'Hide';
+      } else {
+        input.type = 'password';
+        btn.textContent = 'Show';
+      }
+    }
+
+    function setGitHubStatus(type, htmlContent) {
+      const box = document.getElementById('gh-status-box');
+      const styles = {
+        info: 'border-sky-300 dark:border-sky-800 bg-sky-50 dark:bg-sky-950/40 text-sky-900 dark:text-sky-200',
+        success: 'border-emerald-300 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200',
+        error: 'border-rose-300 dark:border-rose-800 bg-rose-50 dark:bg-rose-950/40 text-rose-900 dark:text-rose-200'
+      };
+      box.className = `rounded-2xl border p-4 text-xs leading-relaxed space-y-2 ${styles[type] || styles.info}`;
+      box.innerHTML = htmlContent;
+      box.classList.remove('hidden');
+    }
+
+    async function fetchRemoteGitHubFile(cfg) {
+      const apiUrl = `https://api.github.com/repos/${encodeURIComponent(cfg.owner)}/${encodeURIComponent(cfg.repo)}/contents/${cfg.path.split('/').map(encodeURIComponent).join('/')}`;
+      const res = await fetch(`${apiUrl}?ref=${encodeURIComponent(cfg.branch)}`, {
+        headers: {
+          Authorization: `Bearer ${cfg.token}`,
+          Accept: 'application/vnd.github+json'
+        }
+      });
+      if (!res.ok) {
+        let detail = '';
+        try {
+          const errJson = await res.json();
+          detail = errJson.message ? ` — ${errJson.message}` : '';
+        } catch (_) {}
+        throw new Error(`GitHub GET failed (${res.status})${detail}`);
+      }
+      const data = await res.json();
+      if (!data.content) {
+        throw new Error('Remote file content is empty or too large for the Contents API.');
+      }
+      const decodedHtml = base64ToUtf8(data.content);
+      return { apiUrl, sha: data.sha, html: decodedHtml };
+    }
+
+    async function testGitHubConnection() {
+      const cfg = readGitHubConfigFromUI();
+      if (!cfg.owner || !cfg.repo || !cfg.token) {
+        setGitHubStatus('error', '<strong>Missing credentials:</strong> Please enter GitHub Owner, Repository Name, and Personal Access Token.');
+        return;
+      }
+
+      const btn = document.getElementById('btn-gh-test');
+      btn.disabled = true;
+      setGitHubStatus('info', 'Testing repository connection and checking for data markers...');
+
+      try {
+        const { sha, html } = await fetchRemoteGitHubFile(cfg);
+        const hasStart = html.includes('// __PORTAL_DATA_START__');
+        const hasEnd = html.includes('// __PORTAL_DATA_END__');
+
+        if (hasStart && hasEnd) {
+          setGitHubStatus('success', `<strong>Connection verified!</strong> Found <code>${escapeHtml(cfg.path)}</code> on branch <code>${escapeHtml(cfg.branch)}</code> (SHA: <code>${escapeHtml(sha.slice(0, 7))}</code>). Both <code>__PORTAL_DATA_START__</code> and <code>__PORTAL_DATA_END__</code> markers are present and ready for live publishing.`);
+          showToast('GitHub connection verified.', 'success');
+        } else {
+          setGitHubStatus('error', `<strong>Connected, but markers missing:</strong> Fetched <code>${escapeHtml(cfg.path)}</code>, but could not find <code>// __PORTAL_DATA_START__</code> and <code>// __PORTAL_DATA_END__</code>. Upload this updated <code>index.html</code> to your repo first.`);
+        }
+      } catch (err) {
+        setGitHubStatus('error', `<strong>Connection failed:</strong> ${escapeHtml(err.message)}`);
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async function publishToGitHubFromUI() {
+      const cfg = readGitHubConfigFromUI();
+      if (!cfg.owner || !cfg.repo || !cfg.token) {
+        switchAdminTab('github');
+        setGitHubStatus('error', '<strong>GitHub configuration required:</strong> Enter your Owner, Repository Name, and Fine-Grained Personal Access Token below, then click <strong>Publish Live to GitHub</strong>.');
+        showToast('Configure GitHub settings first.', 'error');
+        return;
+      }
+
+      switchAdminTab('github');
+      safeStorage.set(STORAGE_KEYS.GITHUB_CFG, cfg);
+
+      const pubBtn = document.getElementById('btn-gh-publish');
+      const headerBtn = document.getElementById('btn-header-publish');
+      pubBtn.disabled = true;
+      headerBtn.disabled = true;
+
+      try {
+        setGitHubStatus('info', `<strong>Step 1/3:</strong> Fetching current <code>${escapeHtml(cfg.path)}</code> from <code>${escapeHtml(cfg.owner)}/${escapeHtml(cfg.repo)}@${escapeHtml(cfg.branch)}</code>...`);
+        const { apiUrl, sha, html } = await fetchRemoteGitHubFile(cfg);
+
+        setGitHubStatus('info', `<strong>Step 2/3:</strong> Injecting ${coursesData.length} courses and ${wordListData.length} legal terms into <code>${escapeHtml(cfg.path)}</code>...`);
+        const markerRegex = /\/\/ __PORTAL_DATA_START__[\s\S]*?\/\/ __PORTAL_DATA_END__/;
+        if (!markerRegex.test(html)) {
+          throw new Error('Data markers (// __PORTAL_DATA_START__ ... // __PORTAL_DATA_END__) were not found in the remote file.');
+        }
+
+        const newDataBlock = [
+          '// __PORTAL_DATA_START__',
+          `    const DEFAULT_COURSES = ${JSON.stringify(coursesData, null, 2)};`,
+          `    const DEFAULT_WORDLIST = ${JSON.stringify(wordListData, null, 2)};`,
+          '    // __PORTAL_DATA_END__'
+        ].join('\n');
+
+        // Use a callback function so '$' characters inside notes are never treated as regex tokens
+        const updatedHtml = html.replace(markerRegex, () => newDataBlock);
+        const encodedContent = utf8ToBase64(updatedHtml);
+
+        setGitHubStatus('info', '<strong>Step 3/3:</strong> Committing updated HTML to GitHub...');
+        const putRes = await fetch(apiUrl, {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${cfg.token}`,
+            Accept: 'application/vnd.github+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: cfg.commitMsg || 'chore(portal): update courses & wordlist via admin panel',
+            content: encodedContent,
+            sha,
+            branch: cfg.branch
+          })
+        });
+
+        if (!putRes.ok) {
+          let detail = '';
+          try {
+            const errJson = await putRes.json();
+            detail = errJson.message ? ` — ${errJson.message}` : '';
+          } catch (_) {}
+          throw new Error(`GitHub PUT failed (${putRes.status})${detail}`);
+        }
+
+        const result = await putRes.json();
+        const commitUrl = result.commit?.html_url || `https://github.com/${cfg.owner}/${cfg.repo}/commits/${cfg.branch}`;
+        const commitSha = (result.commit?.sha || '').slice(0, 7);
+
+        setGitHubStatus('success', `
+          <p><strong>Published live to GitHub!</strong> Commit <code>${escapeHtml(commitSha)}</code> succeeded. GitHub Pages will rebuild automatically in ~30–60 seconds.</p>
+          <p><a href="${escapeAttr(commitUrl)}" target="_blank" rel="noopener noreferrer" class="underline font-bold">View Commit on GitHub &rarr;</a></p>
+        `);
+        showToast('Published live to GitHub!', 'success');
+      } catch (err) {
+        console.error('GitHub publish error:', err);
+        setGitHubStatus('error', `<strong>Publish failed:</strong> ${escapeHtml(err.message)}`);
+        showToast('GitHub publish failed. See status details.', 'error');
+      } finally {
+        pubBtn.disabled = false;
+        headerBtn.disabled = false;
+      }
     }
 
     /* =========================================================================
