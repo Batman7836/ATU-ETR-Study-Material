@@ -1145,531 +1145,620 @@
        ========================================================================= */
     // __PORTAL_DATA_START__
     const DEFAULT_COURSES = [
+  {
+    "id": "course-1",
+    "code": "TR-3041",
+    "titleFa": "ترجمه اسناد رسمی",
+    "titleEn": "Translating Legal Documents",
+    "category": "تخصصی",
+    "units": 2,
+    "prereqFa": "اصول و مبانی ترجمه، ترجمه متون ساده",
+    "prereqEn": "Principles of Translation, Translating Simple Texts",
+    "objFa": "تسلط بر ساختار حقوقی، اصطلاحات استاندارد قوه قضائیه، و فنون ترجمه رسمی اسناد سجلی، ثبتی، قضایی و شرکتی از فارسی به انگلیسی و بالعکس.",
+    "objEn": "Mastery of legal syntax, official Judiciary terminology, and certified translation conventions for civil status, notarized, judicial, and corporate documents.",
+    "syllabus": [
+      "آشنایی با آیین‌نامه مترجمان رسمی قوه قضائیه و ویژگی‌های زبان حقوقی",
+      "ترجمه اسناد سجلی: شناسنامه، کارت ملی، سند ازدواج و طلاق",
+      "ترجمه اسناد ثبتی و املاک: سند مالکیت تک‌برگ، مبایعه‌نامه و وکالت‌نامه",
+      "ترجمه اسناد تحصیلی و شغلی: دانشنامه، ریز نمرات، گواهی اشتغال به کار",
+      "ترجمه اسناد قضایی و شرکتی: دادنامه، اساسنامه و روزنامه رسمی"
+    ],
+    "lectures": [
       {
-        id: 'course-1',
-        code: 'TR-3041',
-        titleFa: 'ترجمه اسناد رسمی',
-        titleEn: 'Translating Legal Documents',
-        category: 'تخصصی',
-        units: 2,
-        prereqFa: 'اصول و مبانی ترجمه، ترجمه متون ساده',
-        prereqEn: 'Principles of Translation, Translating Simple Texts',
-        objFa: 'تسلط بر ساختار حقوقی، اصطلاحات استاندارد قوه قضائیه، و فنون ترجمه رسمی اسناد سجلی، ثبتی، قضایی و شرکتی از فارسی به انگلیسی و بالعکس.',
-        objEn: 'Mastery of legal syntax, official Judiciary terminology, and certified translation conventions for civil status, notarized, judicial, and corporate documents.',
-        syllabus: [
-          'آشنایی با آیین‌نامه مترجمان رسمی قوه قضائیه و ویژگی‌های زبان حقوقی',
-          'ترجمه اسناد سجلی: شناسنامه، کارت ملی، سند ازدواج و طلاق',
-          'ترجمه اسناد ثبتی و املاک: سند مالکیت تک‌برگ، مبایعه‌نامه و وکالت‌نامه',
-          'ترجمه اسناد تحصیلی و شغلی: دانشنامه، ریز نمرات، گواهی اشتغال به کار',
-          'ترجمه اسناد قضایی و شرکتی: دادنامه، اساسنامه و روزنامه رسمی'
-        ],
-        lectures: [
-          {
-            id: 'c1-l1',
-            title: 'جلسه ۱: ویژگی‌های زبان حقوقی و ساختار اسناد رسمی',
-            content: `
-              <p>زبان حقوقی (<span class="bidi-iso" dir="ltr">Legalese</span>) به دلیل ماهیت الزام‌آور خود، دارای ویژگی‌های نحوی و واژگانی متمایزی است. در ترجمه اسناد رسمی، دقت حقوقی بر زیبایی‌شناسی ادبی اولویت مطلق دارد.</p>
-              <div class="lecture-callout">
-                <strong>تعریف کلیدی:</strong> <em>ترجمه رسمی (Certified / Official Translation)</em> ترجمه‌ای است که توسط مترجم رسمی دارای پروانه از قوه قضائیه روی سربرگ رسمی انجام و ممهور به مهر مترجم شود.
-              </div>
-              <h4>ویژگی‌های اصلی نثر حقوقی انگلیسی:</h4>
-              <ul>
-                <li>استفاده از قیدهای مرکب کهن مانند <span class="bidi-iso" dir="ltr">hereinafter, hereby, thereof, whereas</span>.</li>
-                <li>به‌کارگیری زوج‌واژه‌ها (<span class="bidi-iso" dir="ltr">Legal Doublets</span>) مانند <span class="bidi-iso" dir="ltr">null and void</span> (باطل و بلااثر) و <span class="bidi-iso" dir="ltr">terms and conditions</span>.</li>
-                <li>کاربرد فعل وجهی <span class="bidi-iso" dir="ltr">shall</span> برای بیان تکلیف و الزام حقوقی، نه زمان آینده.</li>
-              </ul>
-              <table>
-                <thead><tr><th>ویژگی در متن فارسی</th><th>معادل استاندارد انگلیسی</th><th>نکته اجرایی</th></tr></thead>
-                <tbody>
-                  <tr><td>بدین‌وسیله گواهی می‌شود</td><td dir="ltr">This is to certify that / It is hereby certified</td><td>پرهیز از ترجمه تحت‌اللفظی</td></tr>
-                  <tr><td>در اجرای ماده ...</td><td dir="ltr">Pursuant to Article ...</td><td>عدم استفاده از In execution of</td></tr>
-                  <tr><td>برابر با اصل است</td><td dir="ltr">Certified True Copy</td><td>مهر و امضای دفترخانه یا دادگستری</td></tr>
-                </tbody>
-              </table>
-            `
-          },
-          {
-            id: 'c1-l2',
-            title: 'جلسه ۲: ترجمه اسناد سجلی (شناسنامه، سند ازدواج و طلاق)',
-            content: `
-              <p>اسناد سجلی صادره از سازمان ثبت احوال کشور (<span class="bidi-iso" dir="ltr">National Organization for Civil Registration</span>) پرکاربردترین اسناد در دارالترجمه‌های رسمی هستند.</p>
-              <ul>
-                <li><strong>شماره شناسنامه:</strong> <span class="bidi-iso" dir="ltr">Birth Certificate No. / ID No.</span></li>
-                <li><strong>کد ملی:</strong> <span class="bidi-iso" dir="ltr">National ID No.</span></li>
-                <li><strong>توضیحات صفحه آخر شناسنامه:</strong> درج دقیق تغییرات نام، ازدواج، طلاق و فرزندان با ذکر تاریخ شمسی و معادل میلادی.</li>
-              </ul>
-              <div class="lecture-callout">
-                <strong>نکته طلایی:</strong> در ترجمه مهریه (<span class="bidi-iso" dir="ltr">Marriage Portion / Dower</span>)، ذکر دقیق عبارت <em>عندالمطالبه</em> (<span class="bidi-iso" dir="ltr">payable upon demand</span>) یا <em>عندالاستطاعه</em> (<span class="bidi-iso" dir="ltr">payable upon financial ability</span>) الزامی است.
-              </div>
-            `
-          },
-          {
-            id: 'c1-l3',
-            title: 'جلسه ۳: وکالت‌نامه‌ها و اسناد ثبتی املاک',
-            content: `
-              <p>وکالت‌نامه (<span class="bidi-iso" dir="ltr">Power of Attorney - POA</span>) سندی است که به موجب آن موکل (<span class="bidi-iso" dir="ltr">Principal</span>) به وکیل (<span class="bidi-iso" dir="ltr">Attorney-in-Fact / Agent</span>) اختیار انجام امور مشخصی را می‌دهد.</p>
-              <table>
-                <thead><tr><th>نوع سند</th><th>معادل انگلیسی</th><th>مرجع صدور</th></tr></thead>
-                <tbody>
-                  <tr><td>وکالت‌نامه بلاعزل</td><td dir="ltr">Irrevocable Power of Attorney</td><td>دفتر اسناد رسمی</td></tr>
-                  <tr><td>سند مالکیت تک‌برگ</td><td dir="ltr">Single-Page Title Deed</td><td>اداره ثبت اسناد و املاک</td></tr>
-                  <tr><td>مبایعه‌نامه</td><td dir="ltr">Deed of Sale / Purchase Agreement</td><td>دفترخانه یا مشاور املاک</td></tr>
-                </tbody>
-              </table>
-            `
-          }
-        ]
+        "id": "c1-l1",
+        "title": "جلسه ۱ — معرفی درس، آشنایی با نظام‌های حقوقی، دسته‌بندی اسناد رسمی و ضوابط فنی ترجمه",
+        "content": "\n             <p>این درس با هدف آشنایی دانشجویان با مفاهیم، اصطلاحات حقوقی، ساختار متون رسمی و فنون ترجمه انواع اسناد دولتی و قضایی طراحی شده است.</p>\n\n<div class=\"lecture-callout\">\n  <strong>اهداف کلیدی و کاربرد حرفه‌ای:</strong> آمادگی برای بازار کار دارالترجمه‌ها و آزمون مترجمی رسمی قوه قضائیه، شناخت تطبیقی متون حقوقی و اداری، و آشنایی کاربردی با قراردادها، شروط ضمن عقد، وکالت‌نامه‌ها و اسناد شرکتی.\n</div>\n\n<h4>۱. مقررات کلاسی، تحویل تکالیف و ارزیابی</h4>\n<ul>\n  <li><strong>ارسال تکالیف:</strong> صرفاً از طریق سامانه <span class=\"bidi-iso\" dir=\"ltr\">LMS</span> دانشگاه و با نام‌گذاری صحیح فایل؛ ارسال با تأخیر مشمول کسر نمره است.</li>\n  <li><strong>اصالت کار و منع سرقت علمی (<span class=\"bidi-iso\" dir=\"ltr\">Plagiarism</span>):</strong> تکالیف باید به‌صورت انفرادی انجام شوند. کپی‌برداری یا اتکای صرف به خروجی هوش مصنوعی بدون ویرایش و اعتبارسنجی حقوقی ممنوع است.</li>\n  <li><strong>حضور و غیاب:</strong> حضور منظم الزامی است و غیبت‌ها مشمول کسر نمره پله‌ای می‌شوند.</li>\n  <li><strong>واژه‌نامه شخصی (<span class=\"bidi-iso\" dir=\"ltr\">Word List</span>):</strong> تهیه جدول منظم اصطلاحات در <span class=\"bidi-iso\" dir=\"ltr\">Word</span> الزامی است؛ در امتحان پایانی فقط استفاده از <span class=\"bidi-iso\" dir=\"ltr\">Word List</span> شخصی مجاز خواهد بود.</li>\n</ul>\n\n<h4>۲. نظام‌های حقوقی و مفاهیم ویژه فرهنگی-حقوقی</h4>\n<ul>\n  <li><strong>نظام کامن‌لا (<span class=\"bidi-iso\" dir=\"ltr\">Common Law</span>):</strong> مبتنی بر رویه قضایی، احکام محاکم پیشین و عرف قضایی (انگلستان، آمریکا و...).</li>\n  <li><strong>نظام حقوق مدنی (<span class=\"bidi-iso\" dir=\"ltr\">Civil Law</span>):</strong> متکی بر قوانین موضوعه، متون مدون و کدهای قانونی مصوب (اروپای قاره‌ای).</li>\n  <li><strong>نظام حقوقی ایران:</strong> ساختاری ترکیبی، متأثر از <span class=\"bidi-iso\" dir=\"ltr\">Civil Law</span> (مانند قانون مدنی) و آمیخته با فقه امامیه و شریعت اسلامی.</li>\n</ul>\n\n<div class=\"lecture-callout\">\n  <strong>مفاهیم ویژه فرهنگی-حقوقی (<span class=\"bidi-iso\" dir=\"ltr\">Culture-Bound Concepts</span>):</strong> مفاهیمی مانند <em>مهریه</em> (<span class=\"bidi-iso\" dir=\"ltr\">Mahr / Dowry</span>)، <em>شیربها</em>، <em>اجرت‌المثل</em> و <em>نفقه</em> ما‌به‌ازای مستقیم در حقوق غرب ندارند. همچنین <em>سند ازدواج</em> در ایران یک «عقد و سند الزام‌آور» (<span class=\"bidi-iso\" dir=\"ltr\">Deed of Marriage / Marriage Contract</span>) است و با گواهی صرف ازدواج (<span class=\"bidi-iso\" dir=\"ltr\">Marriage Certificate</span>) تفاوت ساختاری دارد.\n</div>\n\n<h4>۳. سرفصل‌های اسناد مورد بررسی در طول ترم</h4>\n<ul>\n  <li><strong>اسناد هویتی و ثبت احوال (<span class=\"bidi-iso\" dir=\"ltr\">Civil Registration Documents</span>):</strong> صادره از سازمان ثبت احوال کشور (<span class=\"bidi-iso\" dir=\"ltr\">NOCR</span>) شامل شناسنامه (<span class=\"bidi-iso\" dir=\"ltr\">Birth Certificate / Identity Booklet</span>)، کارت ملی (<span class=\"bidi-iso\" dir=\"ltr\">National Identity Card</span>)، گواهی فوت (<span class=\"bidi-iso\" dir=\"ltr\">Death Certificate</span>) و گواهی ولادت.</li>\n  <li><strong>اسناد دفاتر اسناد رسمی (<span class=\"bidi-iso\" dir=\"ltr\">Notarial Documents</span>):</strong> تنظیمی در دفترخانه (<span class=\"bidi-iso\" dir=\"ltr\">Notary Public Office</span>) شامل وکالت‌نامه (<span class=\"bidi-iso\" dir=\"ltr\">Power of Attorney - POA</span>)، تعهدنامه (<span class=\"bidi-iso\" dir=\"ltr\">Letter / Deed of Undertaking</span>) و اقرارنامه/رضایت‌نامه (<span class=\"bidi-iso\" dir=\"ltr\">Affidavit / Deed of Declaration / Letter of Consent</span>). فعل <span class=\"bidi-iso\" dir=\"ltr\">To execute a document</span> در این بافت به معنای تنظیم، امضا و نهایی‌کردن رسمی سند است.</li>\n  <li><strong>اسناد مالکیت و املاک (<span class=\"bidi-iso\" dir=\"ltr\">Property &amp; Title Deeds</span>):</strong> زیر نظر سازمان ثبت اسناد و املاک؛ شامل سند تک‌برگ کاداستری (<span class=\"bidi-iso\" dir=\"ltr\">Cadastral Title Deed</span>) و سند دفترچه‌ای (منگوله‌دار). <span class=\"bidi-iso\" dir=\"ltr\">Title</span> به معنای سند و حق مالکیت قانونی است، در حالی که <span class=\"bidi-iso\" dir=\"ltr\">Ownership</span> مفهوم عام تصرف و مالکیت عینی دارد.</li>\n  <li><strong>اسناد شرکتی و تجاری (<span class=\"bidi-iso\" dir=\"ltr\">Corporate &amp; Commercial Documents</span>):</strong> شامل شرکت سهامی خاص (<span class=\"bidi-iso\" dir=\"ltr\">Private Joint-Stock Company</span>)، با مسئولیت محدود (<span class=\"bidi-iso\" dir=\"ltr\">LLC</span>)، اساسنامه (<span class=\"bidi-iso\" dir=\"ltr\">Articles of Association - AOA / By-laws</span>)، شرکت‌نامه (<span class=\"bidi-iso\" dir=\"ltr\">Articles of Incorporation</span>)، صورتجلسه (<span class=\"bidi-iso\" dir=\"ltr\">Minutes of Meeting - MOM</span>)، روزنامه رسمی (<span class=\"bidi-iso\" dir=\"ltr\">Official Gazette</span>) و اسناد بازرگانی نظیر <span class=\"bidi-iso\" dir=\"ltr\">Commercial Invoice</span>، <span class=\"bidi-iso\" dir=\"ltr\">Certificate of Origin</span> و اینکوترمز (<span class=\"bidi-iso\" dir=\"ltr\">FOB</span>).</li>\n</ul>\n\n<h4>۴. اصول و ضوابط فنی ترجمه متون رسمی</h4>\n<table>\n  <thead>\n    <tr><th>اصل فنی</th><th>توضیحات و الزامات</th></tr>\n  </thead>\n  <tbody>\n    <tr><td>امانت‌داری کامل</td><td>هیچ کلمه یا عبارتی نباید حذف، تحریف یا تفسیر به رأی شود؛ لحن باید حقوقی و دقیق باقی بماند.</td></tr>\n    <tr><td>حفظ محرمانگی (<span class=\"bidi-iso\" dir=\"ltr\">Confidentiality &amp; Privacy</span>)</td><td>اسناد ارباب‌رجوع حاوی داده‌های هویتی و مالی حساس هستند؛ انتشار یا به‌اشتراک‌گذاری آن‌ها نقض اخلاق حرفه‌ای است.</td></tr>\n    <tr><td>بازتاب عناصر دیداری در متن</td><td>المان‌های گرافیکی نظیر هولوگرام، بارکد، <span class=\"bidi-iso\" dir=\"ltr\">QR-Code</span> و مهرهای برجسته باید داخل قلاب ذکر شوند؛ مانند <span class=\"bidi-iso\" dir=\"ltr\">[Embossed Seal: ...]</span> یا <span class=\"bidi-iso\" dir=\"ltr\">[Official QR Code]</span>.</td></tr>\n    <tr><td>پلمب و ابطال اسناد</td><td>واژه <span class=\"bidi-iso\" dir=\"ltr\">Sealed</span> و نشانه‌های لاک‌ومهر، پانچ و سیم‌کشی پلمب باید به‌روشنی منعکس گردند.</td></tr>\n    <tr><td>صفحه‌آرایی (<span class=\"bidi-iso\" dir=\"ltr\">Layout</span>)</td><td>ترجمه باید نظم ساختاری سند اصلی (تیترها، جداول، ردیف امضاها و شماره سریال) را تا حد امکان حفظ کند.</td></tr>\n  </tbody>\n</table>\n            "
       },
       {
-        id: 'course-2',
-        code: 'TR-3042',
-        titleFa: 'ترجمه شفاهی پیاپی',
-        titleEn: 'Consecutive Interpreting',
-        category: 'تخصصی',
-        units: 2,
-        prereqFa: 'گفتگو و شنیدار پیشرفته، ترجمه شفاهی (۱)',
-        prereqEn: 'Advanced Listening & Speaking, Interpreting (1)',
-        objFa: 'تقویت حافظه کوتاه‌مدت، مهارت گوش دادن فعال، یادداشت‌برداری ساختاری (Note-taking) و ارائه روان در ترجمه پیاپی کنفرانس‌ها و جلسات دیپلماتیک.',
-        objEn: 'Developing active listening, short-term memory retention, structured note-taking symbols, and fluent target-language delivery in consecutive interpreting.',
-        syllabus: [
-          'مدل تلاش ژیل (Gile’s Effort Model) در ترجمه پیاپی',
-          'اصول هفت‌گانه یادداشت‌برداری ژان فرانسوا روزان (Rozan)',
-          'نمادسازی، چیدمان عمودی و نشانه‌گذاری روابط منطقی',
-          'مدیریت استرس، لحن صدا و بازتولید سخنرانی‌های رسمی'
-        ],
-        lectures: [
-          {
-            id: 'c2-l1',
-            title: 'جلسه ۱: مدل تلاش دانیل ژیل و مراحل دوگانه ترجمه پیاپی',
-            content: `
-              <p>در ترجمه شفاهی پیاپی (<span class="bidi-iso" dir="ltr">Consecutive Interpreting</span>)، مترجم پس از پایان بخشی از صحبت سخنران، پیام را به زبان مقصد منتقل می‌کند. دانیل ژیل این فرایند را به دو فاز تقسیم می‌کند:</p>
-              <ul>
-                <li><strong>فاز ۱ (درک و یادداشت‌برداری):</strong> <span class="bidi-iso" dir="ltr">Listening & Analysis + Note-taking + Short-term Memory</span></li>
-                <li><strong>فاز ۲ (بازتولید پیام):</strong> <span class="bidi-iso" dir="ltr">Remembering + Note-reading + Production</span></li>
-              </ul>
-              <div class="lecture-callout">
-                <strong>قاعده کلیدی:</strong> یادداشت‌برداری جایگزین درک مطلب نیست؛ بلکه صرفاً <em>محرک حافظه (Memory Trigger)</em> است. از نوشتن کلمه‌به‌کلمه پرهیز کنید.
-              </div>
-            `
-          },
-          {
-            id: 'c2-l2',
-            title: 'جلسه ۲: اصول یادداشت‌برداری روزان و نمادهای استاندارد',
-            content: `
-              <p>سیستم یادداشت‌برداری باید بر پایه <strong>ایده</strong> باشد نه واژه، و ساختار <strong>عمودی و پلکانی (Verticality & Shift)</strong> داشته باشد.</p>
-              <table>
-                <thead><tr><th>نماد</th><th>مفهوم</th><th>کاربرد نمونه</th></tr></thead>
-                <tbody>
-                  <tr><td dir="ltr">↑ / ↓</td><td>افزایش / کاهش</td><td>رشد اقتصادی، افت قیمت</td></tr>
-                  <tr><td dir="ltr">∴ / ∵</td><td>بنابراین / زیرا</td><td>نشان دادن روابط علی و معلولی</td></tr>
-                  <tr><td dir="ltr">≠ / =</td><td>تفاوت / برابری</td><td>مقایسه سیاست‌ها یا آمارها</td></tr>
-                  <tr><td dir="ltr">□</td><td>کشور / دولت</td><td>روابط بین‌الملل و دیپلماسی</td></tr>
-                </tbody>
-              </table>
-            `
-          }
-        ]
+        "id": "c1-l2",
+        "title": "جلسه ۲ — کلیات و اصطلاحات تخصصی حقوق",
+        "content": "\n              <p>در واژه‌شناسی حقوقی، واژه «قانون/حقوق» (<span class=\"bidi-iso\" dir=\"ltr\">Law</span>) دارای دو گستره معنایی است: <strong>معنای عام</strong> (<span class=\"bidi-iso\" dir=\"ltr\">Broad Sense</span>) شامل تمام فرآیندها و ساختارهای علم حقوق، و <strong>معنای خاص</strong> (<span class=\"bidi-iso\" dir=\"ltr\">Strict Sense</span>) یعنی مجموعه قواعد مدونی که رفتار انسان‌ها را قاعده‌مند می‌سازد.</p>\n\n<h4>۱. تعریف قاعده حقوقی و تمایز حقوق از اخلاق</h4>\n<ul>\n  <li><strong>قاعده رفتار انسانی (<span class=\"bidi-iso\" dir=\"ltr\">Rule of Human Conduct</span>):</strong> هنجاری که مرز بایدها و نبایدها را تعیین می‌کند.</li>\n  <li><strong>تنظیم روابط اجتماعی (<span class=\"bidi-iso\" dir=\"ltr\">Regulating Human Behavior</span>):</strong> با هدف استقرار نظم اجتماعی (<span class=\"bidi-iso\" dir=\"ltr\">Social Order</span>) و عدالت (<span class=\"bidi-iso\" dir=\"ltr\">Justice</span>).</li>\n  <li><strong>عمومیت و شمول (<span class=\"bidi-iso\" dir=\"ltr\">Generality</span>):</strong> وضع و اعمال کلی برای همگان، نه یک فرد معین.</li>\n  <li><strong>تفاوت حقوق و اخلاق (<span class=\"bidi-iso\" dir=\"ltr\">Law vs. Morality</span>):</strong> رفتارهای غیراخلاقی زمانی وارد قلمرو حقوق کیفری و جرم‌انگاری (<span class=\"bidi-iso\" dir=\"ltr\">Criminalization</span>) می‌شوند که به نظم عمومی خدشه وارد کنند یا امنیت شهروندان را تهدید نمایند.</li>\n</ul>\n\n<h4>۲. ضمانت اجرا و اعتبار قاعده حقوقی (<span class=\"bidi-iso\" dir=\"ltr\">Enforcement &amp; Sanctions</span>)</h4>\n<ul>\n  <li><strong>وضع قانون (<span class=\"bidi-iso\" dir=\"ltr\">Imposition / To Impose</span>):</strong> الزام و تحمیل قاعده از سوی مرجع ذی‌صلاح.</li>\n  <li><strong>اجرای قانون (<span class=\"bidi-iso\" dir=\"ltr\">Enforcement / Implementation</span>):</strong> عملیاتی کردن احکام توسط نهادهای مجری قانون (<span class=\"bidi-iso\" dir=\"ltr\">Law Enforcement</span>).</li>\n  <li><strong>ضمانت اجرا (<span class=\"bidi-iso\" dir=\"ltr\">Sanction</span>):</strong> کیفر، جریمه یا اقدام قانونی برای تضمین پایبندی (<span class=\"bidi-iso\" dir=\"ltr\">Protected by Sanction</span>).</li>\n  <li><strong>الزام‌آور بودن (<span class=\"bidi-iso\" dir=\"ltr\">Binding Nature</span>):</strong> واجب‌الاتباع بودن تصمیمات مانند آراء الزام‌آور دادگاه (<span class=\"bidi-iso\" dir=\"ltr\">Binding Judgment/Ruling</span>).</li>\n  <li><strong>نقض قانون و قرارداد:</strong> نقض قانون عام با <span class=\"bidi-iso\" dir=\"ltr\">Violate / Defy</span> و نقض تعهدات قراردادی با <span class=\"bidi-iso\" dir=\"ltr\">Breach of Contract</span> بیان می‌شود.</li>\n</ul>\n\n<h4>۳. نظام حقوقی و تفکیک قوا (<span class=\"bidi-iso\" dir=\"ltr\">Legal System &amp; State Powers</span>)</h4>\n<table>\n  <thead>\n    <tr><th>قوه</th><th>معادل انگلیسی</th><th>وظیفه و نهادهای اصلی</th></tr>\n  </thead>\n  <tbody>\n    <tr><td>قوه مقننه</td><td dir=\"ltr\">Legislative Branch / Legislature</td><td>قانون‌گذاری (<span class=\"bidi-iso\" dir=\"ltr\">Legislate</span>)؛ مجلس شورای اسلامی / پارلمان (<span class=\"bidi-iso\" dir=\"ltr\">Parliament / Islamic Consultative Assembly</span>)</td></tr>\n    <tr><td>قوه قضائیه</td><td dir=\"ltr\">Judicial Branch / The Judiciary</td><td>دادرسی و قضاوت (<span class=\"bidi-iso\" dir=\"ltr\">Adjudication</span>)؛ رئیس قوه قضائیه (<span class=\"bidi-iso\" dir=\"ltr\">Chief Justice</span>)، قضات و دادگستری (<span class=\"bidi-iso\" dir=\"ltr\">Administration of Justice</span>)</td></tr>\n    <tr><td>قوه مجریه</td><td dir=\"ltr\">Executive Branch / Administration</td><td>اداره امور عمومی و اجرای مصوبات و احکام قضایی و تقنینی</td></tr>\n  </tbody>\n</table>\n\n<div class=\"lecture-callout\">\n  <strong>مفاهیم قضایی فراملی:</strong> <em>صلاحیت و قلمرو قضایی</em> (<span class=\"bidi-iso\" dir=\"ltr\">Jurisdiction</span>) محدوده جغرافیایی یا موضوعی اختیارات دادگاه است، و <em>استرداد مجرمین</em> (<span class=\"bidi-iso\" dir=\"ltr\">Extradition</span>) فرایند قانونی تسلیم مجرم یا متهم فراری میان کشورها در چارچوب معاهدات است.\n</div>\n\n<h4>۴. سنت‌های بزرگ حقوقی جهان (<span class=\"bidi-iso\" dir=\"ltr\">Major Legal Traditions</span>)</h4>\n<ul>\n  <li><strong>نظام رومی-ژرمنی / سیویل لا (<span class=\"bidi-iso\" dir=\"ltr\">Civil Law</span>):</strong> مبتنی بر قوانین مدون (<span class=\"bidi-iso\" dir=\"ltr\">Codified Law</span>) و کدهای قانونی (مانند <span class=\"bidi-iso\" dir=\"ltr\">Civil Code</span>)؛ قاضی مجری قانون مصوب است نه خالق قاعده.</li>\n  <li><strong>نظام کامن‌لا (<span class=\"bidi-iso\" dir=\"ltr\">Common Law</span>):</strong> مبتنی بر آرای قضایی (<span class=\"bidi-iso\" dir=\"ltr\">Judge-made Law / Case Law</span>) و سابقه قضایی الزام‌آور (<span class=\"bidi-iso\" dir=\"ltr\">Judicial Precedent</span>). ترجمه آن به «حقوق عرفی» با تسامح است، زیرا با عرف عام مردمی (<span class=\"bidi-iso\" dir=\"ltr\">Customary Law</span>) تفاوت دارد.</li>\n</ul>\n            "
       },
       {
-        id: 'course-3',
-        code: 'TR-3043',
-        titleFa: 'ترجمه متون رسانه‌ای و مطبوعاتی',
-        titleEn: 'Translating Journalistic Texts',
-        category: 'تخصصی',
-        units: 2,
-        prereqFa: 'ترجمه متون ساده، نگارش فارسی پیشرفته',
-        prereqEn: 'Translating Simple Texts, Advanced Persian Writing',
-        objFa: 'آشنایی با سبک نگارش مطبوعاتی (هرم وارونه)، فنون ترجمه تیترهای خبری (Headlinese)، لید خبر، سرمقاله‌ها و تحلیل سوگیری‌های گفتمانی در رسانه‌های بین‌المللی.',
-        objEn: 'Mastering journalistic style (inverted pyramid), headlinese translation strategies, news leads, editorials, and ideological framing in international media.',
-        syllabus: [
-          'ساختار هرم وارونه و عناصر شش‌گانه خبر (5Ws & H)',
-          'دستور زبان ویژه تیترهای انگلیسی (Headlinese) و بازآفرینی در فارسی',
-          'ترجمه گزارش‌های تحلیلی، مصاحبه‌ها و سرمقاله‌ها',
-          'تشخیص جهت‌گیری واژگانی و نقل‌قول‌های غیرمستقیم در خبرگزاری‌ها'
-        ],
-        lectures: [
-          {
-            id: 'c3-l1',
-            title: 'جلسه ۱: ساختار هرم وارونه و ترجمه لید (Lead)',
-            content: `
-              <p>در روزنامه‌نگاری حرفه‌ای، مهم‌ترین اطلاعات در پاراگراف اول یا <strong>لید (<span class="bidi-iso" dir="ltr">Lead</span>)</strong> می‌آید. در ترجمه لید به فارسی، باید از جملات طولانی و سنگین پرهیز کرد و فعل را در جایگاه طبیعی زبان فارسی قرار داد.</p>
-              <div class="lecture-callout">
-                <strong>نکته ویرایشی:</strong> افعال نقل‌قول در انگلیسی (<span class="bidi-iso" dir="ltr">claimed, alleged, stressed, reiterated</span>) بار معنایی و موضع‌گیری متفاوتی دارند و نباید همه آن‌ها را صرفاً «گفت» ترجمه کرد.
-              </div>
-            `
-          },
-          {
-            id: 'c3-l2',
-            title: 'جلسه ۲: ویژگی‌های تیترهای خبری (Headlinese)',
-            content: `
-              <p>تیترهای انگلیسی برای صرفه‌جویی در فضا از قوانین خاصی پیروی می‌کنند:</p>
-              <ul>
-                <li>حذف افعال کمکی (<span class="bidi-iso" dir="ltr">be, have</span>) و حروف تعریف (<span class="bidi-iso" dir="ltr">a, the</span>).</li>
-                <li>استفاده از زمان حال ساده برای رویدادهای گذشته (مثلاً: <span class="bidi-iso" dir="ltr">UN Approves Resolution</span> ← تصویب قطعنامه در سازمان ملل).</li>
-                <li>استفاده از مصدر با <span class="bidi-iso" dir="ltr">to</span> برای اشاره به آینده (مثلاً: <span class="bidi-iso" dir="ltr">Talks to Resume Monday</span> ← ازسرگیری مذاکرات در روز دوشنبه).</li>
-              </ul>
-            `
-          }
-        ]
+        "id": "course-1-l1795801144072",
+        "title": "جلسه ۳ — آشنایی با سند، اقسام اسناد و ترجمه رسمی",
+        "content": "<h4>۱. مقدمه و تعریف مفاهیم بنیادین</h4>\n<p><strong>۱.۱. تعریف سند (<span class=\"bidi-iso\" dir=\"ltr\">Legal Document / Instrument</span>)</strong></p>\n<p><strong>تعریف حقوقی:</strong> بر طبق متون قانونی، سند عبارت است از هر نوشته‌ای که در مقام دعوی یا دفاع قابل استناد باشد. واژه «سند» متناسب با زمینه و بافت حقوقی معادل‌های گوناگونی دارد؛ از جمله:</p>\n<ul>\n  <li><span class=\"bidi-iso\" dir=\"ltr\">Document</span>: عام‌ترین اصطلاح برای هر نوع مدرک یا سند.</li>\n  <li><span class=\"bidi-iso\" dir=\"ltr\">Instrument</span>: به سندی رسمی و حقوقی گفته می‌شود که اثری حقوقی بر آن مترتب است (<span class=\"bidi-iso\" dir=\"ltr\">Legal Instrument</span>).</li>\n  <li><span class=\"bidi-iso\" dir=\"ltr\">Deed</span>: سندی که حاوی تعهد یا انتقال حق یا ملک است و تشریفات قانونی دارد.</li>\n  <li><span class=\"bidi-iso\" dir=\"ltr\">Title / Title Deed</span>: سند مالکیت.</li>\n  <li><span class=\"bidi-iso\" dir=\"ltr\">Indenture / Record / Act</span>: اسناد خاص ثبتی، قراردادی یا احکام و مصوبات.</li>\n</ul>\n\n<h4>۲. دسته‌بندی اسناد</h4>\n<p>اسناد از منظر نظام حقوقی به دو دسته کلی <strong>اسناد رسمی (<span class=\"bidi-iso\" dir=\"ltr\">Official / Legal Documents</span>)</strong> و <strong>اسناد عادی (<span class=\"bidi-iso\" dir=\"ltr\">Private Documents</span>)</strong> تقسیم می‌شوند.</p>\n<div class=\"lecture-callout\">\n  <strong>اصل کلی:</strong> هر سندی که شرایط قانونی «سند رسمی» را احراز نکند، سند عادی محسوب می‌شود؛ حتی اگر دارای امضا، اثر انگشت، هولوگرام، مهر یا سربرگ معتبر صنفی باشد.\n</div>\n\n<p><strong>۲.۱. شرایط و ارکان اسناد رسمی</strong></p>\n<p>یک نوشته زمانی رسمیت قانونی پیدا می‌کند که شرایط سه‌گانه زیر را داشته باشد:</p>\n<ol>\n  <li><strong>مرجع صدور:</strong> تنظیم‌شده در ادارات ثبت اسناد و املاک، یا دفاتر اسناد رسمی، یا نزد سایر مأموران رسمی دولت.</li>\n  <li><strong>حیطه صلاحیت مأمور:</strong> در حدود صلاحیت و اختیارات مأمور رسمی باشد.</li>\n  <li><strong>رعایت تشریفات:</strong> بر طبق مقررات قانونی صادر و تنظیم شده باشد.</li>\n</ol>\n<ul>\n  <li><strong>نمونه‌های اسناد رسمی:</strong> اسناد مالکیت ملک صادرشده از اداره ثبت اسناد و املاک؛ وکالت‌نامه‌ها و اقرارنامه‌های تنظیمی در دفاتر اسناد رسمی؛ شناسنامه و اسناد هویتی صادرشده از ثبت احوال؛ برگه تشخیص قطعی مالیاتی ممهور به مهر و امضای ممیز رسمی مالیاتی.</li>\n  <li><strong>نمونه‌های اسناد غیررسمی (عادی):</strong> اسناد بنگاه‌های املاک و خودرو (مبایعه‌نامه و اجاره‌نامه‌های صنفی بنگاه‌ها با وجود دارا بودن کد رهگیری، هولوگرام و امضا، سند عادی محسوب می‌شوند زیرا بنگاه‌دار مأمور رسمی دولت نیست)؛ گواهی‌ها و نسخه‌های پزشکی (با وجود مهر و شماره نظام پزشکی، سند عادی به شمار می‌روند).</li>\n</ul>\n\n<p><strong>۲.۲. آثار و تفاوت‌های حقوقی اسناد رسمی و عادی</strong></p>\n<ul>\n  <li><strong>انکار و تردید:</strong> در مقابل سند رسمی، ادعای «انکار» یا «تردید» مسموع نیست؛ طرف فقط می‌تواند ادعای «جعل» مطرح کند.</li>\n  <li><strong>اثبات سند عادی:</strong> سند عادی در صورتی قابلیت استناد کامل پیدا می‌کند که اصالت آن (از طریق اقرار صادرکننده، شهادت شهود، کارشناسی خط و امضا یا اثر انگشت) اثبات شود.</li>\n  <li><strong>ارتقا به وضعیت رسمی (<span class=\"bidi-iso\" dir=\"ltr\">Elevation to Legal Status</span>):</strong> اگر سند عادی در مراجع صالحه قضایی تأیید شود یا صادرکننده در حضور قاضی به اصالت آن اقرار کند، از حیث اعتبار به جایگاه سند رسمی ارتقا می‌یابد.</li>\n</ul>\n\n<p><strong>۲.۳. جایگاه شهادت‌نامه</strong></p>\n<ul>\n  <li><strong>شهادت‌نامه (<span class=\"bidi-iso\" dir=\"ltr\">Attestation</span>):</strong> شهادت‌نامه کتبی حتی اگر در دفاتر اسناد رسمی مکتوب و امضا شود، صرفاً شهادت شهود است و عنوان «سند» بر آن اطلاق نمی‌شود. پذیرش شهادت‌نامه مشروط به حضور شاهد در مرجع صالح، ادای شهادت رسمی و بررسی شرایط قانونی شاهد است.</li>\n</ul>\n\n<p><strong>۲.۴. اعتبار اسناد تنظیم‌شده در خارج از کشور</strong></p>\n<p>اسناد صادرشده در خارج از کشور نزد محاکم داخلی معتبر تلقی می‌شوند، مشروط بر آنکه:</p>\n<ol>\n  <li>به دلیلی قانونی در کشور مبدأ از اعتبار ساقط نشده باشند.</li>\n  <li>مفاد آن‌ها با قوانین نظم عمومی و اخلاق حسنه کشور مغایرت نداشته باشد.</li>\n  <li>کشور مبدأ خود برای آن سند اعتبار قائل باشد.</li>\n  <li>فرآیند تأییدات کنسولی (<span class=\"bidi-iso\" dir=\"ltr\">Consular Legalization</span>) را از طریق کارگزاران و نمایندگی‌های سیاسی/کنسولی رسمی طی کرده باشند.</li>\n</ol>\n\n<h4>۳. ترجمه رسمی و نقش مترجم رسمی</h4>\n<p><strong>۳.۱. اصطلاح‌شناسی: آیا <span class=\"bidi-iso\" dir=\"ltr\">Legal Translation</span> به معنای «ترجمه حقوقی» است یا «ترجمه رسمی»؟</strong></p>\n<ul>\n  <li><span class=\"bidi-iso\" dir=\"ltr\">Legal Translation</span>: در متون آموزشی و بین‌المللی، اغلب به ترجمه‌ای اطلاق می‌شود که نظام حقوقی (<span class=\"bidi-iso\" dir=\"ltr\">Legal System</span>) آن را به رسمیت شناخته و دارای اثر حقوقی معتبر (<span class=\"bidi-iso\" dir=\"ltr\">Legally Valid Instrument</span>) باشد.</li>\n  <li><span class=\"bidi-iso\" dir=\"ltr\">Certified Translation</span>: متداول‌ترین اصطلاح جهانی برای ترجمه رسمی است؛ یعنی ترجمه‌ای که همراه با یک سوگندنامه یا بیانیه گواهی‌شده (<span class=\"bidi-iso\" dir=\"ltr\">Certification Statement</span>) توسط مترجم ارائه می‌شود.</li>\n  <li><strong>نکته بسیار مهم:</strong> صفت «رسمی» در درجه نخست صفتِ مترجم است، نه سند مبدأ. مترجم رسمی صلاحیت ترجمه اسناد عادی و رسمی را بر اساس دستورالعمل‌های شغلی خود دارد و ترجمه تولیدشده توسط او یک سند معتبر رسمی تلقی می‌گردد.</li>\n</ul>\n\n<p><strong>۳.۲. الگوهای گواهی ترجمه رسمی در نظام‌های حقوقی گوناگون</strong></p>\n<ul>\n  <li><strong>نظام مترجمان محلف و دولتی (<span class=\"bidi-iso\" dir=\"ltr\">Sworn / State-Appointed Translators</span>):</strong> مانند ایران و اسپانیا؛ مترجم آزمون‌های تخصصی را گذرانده، پروانه دریافت کرده، سوگند یاد می‌کند و زیر نظر قوه قضاییه فعالیت دارد.</li>\n  <li><strong>نظام تصدیق محضری (<span class=\"bidi-iso\" dir=\"ltr\">Notarized Translation</span>):</strong> مترجم (یا شخص ثالث) ترجمه را همراه با سوگندنامه‌ای نزد دفتر اسناد رسمی (<span class=\"bidi-iso\" dir=\"ltr\">Notary Public</span>) برده و سردفتر اصالت هویت و امضای مترجم را تصدیق می‌کند.</li>\n  <li><strong>نظام انجمن‌های تخصصی (<span class=\"bidi-iso\" dir=\"ltr\">Professional Associations</span>):</strong> مانند آمریکا و استرالیا؛ مدارک توسط مترجمان عضو انجمن‌های حرفه‌ای نظیر <span class=\"bidi-iso\" dir=\"ltr\">ATA (American Translators Association)</span> یا سازمان <span class=\"bidi-iso\" dir=\"ltr\">NAATI (National Accreditation Authority for Translators and Interpreters)</span> مهر و گواهی می‌شود.</li>\n</ul>"
       },
       {
-        id: 'course-4',
-        code: 'TR-3044',
-        titleFa: 'واژه‌شناسی و اصطلاح‌شناسی',
-        titleEn: 'Morphology and Terminology',
-        category: 'تخصصی',
-        units: 2,
-        prereqFa: 'زبان‌شناسی همگانی (۱)',
-        prereqEn: 'General Linguistics (1)',
-        objFa: 'شناخت ساخت‌واژه انگلیسی و فارسی، فرایندهای واژه‌سازی، ریشه‌شناسی یونانی و لاتین، و اصول استانداردسازی و معادل‌یابی اصطلاحات علمی و فنی.',
-        objEn: 'Understanding English and Persian morphological processes, Greek/Latin roots, and international standards for terminology management and neologism creation.',
-        syllabus: [
-          'تکواژهای آزاد و وابسته، وندهای تصریفی و اشتقاقی',
-          'فرایندهای واژه‌سازی: ترکیب، ادغام، سرواژه‌سازی و پسین‌سازی',
-          'اصول اصطلاح‌شناسی (ISO 704) و تفاوت واژه عمومی با اصطلاح تخصصی',
-          'مدیریت واژه‌نامه‌ها (Termbases) و معادل‌گزینی فرهنگستان'
-        ],
-        lectures: [
-          {
-            id: 'c4-l1',
-            title: 'جلسه ۱: تکواژ، ریشه و فرایندهای واژه‌سازی',
-            content: `
-              <p><strong>تکواژ (<span class="bidi-iso" dir="ltr">Morpheme</span>)</strong> کوچک‌ترین واحد معنادار زبان است. شناخت ساختار درونی واژگان به مترجم کمک می‌کند معنای واژه‌های ناآشنا را از بافت و ریشه استخراج کند.</p>
-              <table>
-                <thead><tr><th>فرایند واژه‌سازی</th><th>معادل انگلیسی</th><th>مثال</th></tr></thead>
-                <tbody>
-                  <tr><td>اشتقاق</td><td dir="ltr">Derivation</td><td dir="ltr">legal → legality → illegal</td></tr>
-                  <tr><td>ترکیب</td><td dir="ltr">Compounding</td><td dir="ltr">copyright, courtroom</td></tr>
-                  <tr><td>ادغام (آمیزش)</td><td dir="ltr">Blending</td><td dir="ltr">infotainment, webinar</td></tr>
-                  <tr><td>سرواژه‌سازی</td><td dir="ltr">Acronym / Initialism</td><td dir="ltr">UNESCO, POA, NGO</td></tr>
-                </tbody>
-              </table>
-            `
-          },
-          {
-            id: 'c4-l2',
-            title: 'جلسه ۲: اصول اصطلاح‌شناسی و ایجاد پایگاه واژگان',
-            content: `
-              <p>در اصطلاح‌شناسی تخصصی (<span class="bidi-iso" dir="ltr">Terminology</span>)، اصل بر <strong>تک‌معنایی (Monosemy)</strong> در یک حوزه موضوعی مشخص است. یک مترجم حرفه‌ای باید برای هر پروژه یک برگه اصطلاحات (<span class="bidi-iso" dir="ltr">Termbase</span>) شامل حوزه، تعریف، بافت و منبع تهیه کند.</p>
-            `
-          }
-        ]
+        "id": "course-1-l1795801633063",
+        "title": "جلسه ۴ — چارچوب حقوقی ترجمه رسمی، مراحل تأییدات و ثبت احوال",
+        "content": "<p><strong>نوع جلسه:</strong> نظری – کاربردی (همراه با بررسی پرونده‌ها و اسناد واقعی)</p>\n\n<h4>۱. مقدمه، اخلاق حرفه‌ای و محرمانگی (<span class=\"bidi-iso\" dir=\"ltr\">Confidentiality &amp; Discretion</span>)</h4>\n<p>ترجمه رسمی صرفاً یک مهارت زبانی نیست، بلکه یک مسئولیت حقوقی و قضایی است. مترجم رسمی به عنوان امین مراجعین و بازوی تخصصی دستگاه قضایی شناخته می‌شود.</p>\n<ul>\n  <li><strong>اصل رازداری و حریم خصوصی (<span class=\"bidi-iso\" dir=\"ltr\">Reader Discretion / Privacy</span>):</strong> در مواجهه با اسناد شخصی (شناسنامه، مدارک پزشکی، اسناد تمکن مالی، احکام طلاق و...)، مترجم و کارآموزان موظف به حفظ کامل هویت مراجعین هستند. هرگونه تصویربرداری، افشای اسامی یا اشتراک‌گذاری داده‌ها تخلف انضباطی و قانونی محسوب می‌شود.</li>\n  <li><strong>ارتباط با مشتری و مراقبت حرفه‌ای:</strong> شناخت نیاز مراجع (اینکه سند را برای چه کشوری و چه مقصدی می‌خواهد) به مترجم کمک می‌کند تا متقاضی را در خصوص نوع تأییدات راهنمایی کند.</li>\n</ul>\n\n<h4>۲. بررسی ساختاری و نشانه‌شناسی اسناد (<span class=\"bidi-iso\" dir=\"ltr\">Document Inspection</span>)</h4>\n<ul>\n  <li><strong>اجزای امنیتی و استعلامی:</strong> بارکدها و کدهای تصویری (<span class=\"bidi-iso\" dir=\"ltr\">Barcodes &amp; QR Codes</span>)، مهرهای برجسته، مهرهای جوهری و نشان‌های رسمی (<span class=\"bidi-iso\" dir=\"ltr\">Embossed Seals, Ink Stamps</span>)، و امضاهای مجاز و نام و عنوان امضاکنندگان (<span class=\"bidi-iso\" dir=\"ltr\">Signatures &amp; Titles</span>).</li>\n  <li><strong>قواعد برجسته‌سازی اطلاعات کلیدی (<span class=\"bidi-iso\" dir=\"ltr\">Bold / Capitalization</span>):</strong> در فرمت استاندارد ترجمه، اطلاعاتی که برای افسر بررسی‌کننده (<span class=\"bidi-iso\" dir=\"ltr\">Immigration/Consular Officer</span>) حیاتی است، برجسته (<span class=\"bidi-iso\" dir=\"ltr\">Bold</span>) یا با حروف بزرگ نوشته می‌شود. موارد شمول شامل نام متقاضی اصلی پرونده، شماره سند، مشخصات دقیق ملک/دارایی، و همراهان اصلی (مانند فرزندانی که نامشان در گذرنامه و پرونده قید شده است) می‌شود. در اسناد چندصفحه‌ای یا زنجیره‌ای معاملات، تمرکز ارزیاب بر متقاضی فعلی یا مالکان اخیر است؛ لذا مشخصات افراد خارج از پرونده عادی درج می‌شود.</li>\n</ul>\n\n<h4>۳. زبان‌شناسی حقوقی و اصطلاحات خاص در اسناد ایران</h4>\n<ul>\n  <li><strong>دلیل دشواری زبان حقوقی:</strong> برای ایجاد صراحت و معانی مضیق و خاص به کار می‌رود تا از تأویل‌های سلیقه‌ای یا معانی عامیانه عرفی جلوگیری کند.</li>\n  <li><strong>اصطلاحات فقهی-عربی در حقوق ایران:</strong>\n    <ul>\n      <li><strong>خیار:</strong> اختیار فسخ معامله (حق برهم زدن قرارداد).</li>\n      <li><strong>اسقاط کافه خیارات:</strong> ساقط کردن و سلب تمام اختیارات فسخ از طرفین معامله.</li>\n      <li><strong>مشاع (<span class=\"bidi-iso\" dir=\"ltr\">Undivided</span>):</strong> مال یا ملکی که سهم شرکا در آن به صورت فیزیکی از یکدیگر تفکیک نشده است (مثلاً در یک آشپزخانه یا حیاط مشاع، همه شرکا در جزءجزء آن سهیم‌اند و خط‌کشی مرزی معنا ندارد).</li>\n    </ul>\n  </li>\n  <li><strong>اصل حمل الفاظ بر معانی عرفیه (ماده ۲۲۴ ق.م):</strong> در تفسیر قراردادها، الفاظ عقود بر معانی عرفیه حمل می‌شوند، مگر اینکه طرفین قرارداد یا قانون‌گذار تعریف اصطلاحی و خاصی برای آن معین کرده باشند.</li>\n</ul>\n\n<h4>۴. تعریف سند و تفکیک سند رسمی از سند عادی</h4>\n<p>بر اساس ماده ۱۲۸۷ قانون مدنی، سند در صورتی رسمی است که دارای سه شرط هم‌زمان باشد: (۱) در اداره ثبت اسناد و املاک تنظیم شده باشد؛ یا (۲) در دفاتر اسناد رسمی ثبت شده باشد؛ یا (۳) نزد سایر مأمورین رسمی دولت در حدود صلاحیت آن‌ها و طبق مقررات قانونی تنظیم شده باشد (مانند شناسنامه صادره از ثبت احوال یا احکام دادگاه‌ها). هر سندی که فاقد یکی از این شروط سه‌گانه باشد <strong>سند عادی</strong> است (مانند قولنامه بنگاهی، قراردادهای دست‌نویس با امضای شهود، گواهی اشتغال به کار شرکت‌های خصوصی). عادی بودن سند به معنای بی‌اعتباری آن نیست؛ بلکه قدرت اثباتی، نحوه استناد در دادگاه و نحوه ترجمه و تأیید آن متفاوت است.</p>\n\n<h4>۵. ترجمه رسمی و انواع گواهی‌های بین‌المللی</h4>\n<table>\n  <thead>\n    <tr><th>نوع ترجمه</th><th>تعریف و دامنه اعتبار</th><th>مرجع تأییدکننده</th><th>موارد کاربرد معمول</th></tr>\n  </thead>\n  <tbody>\n    <tr><td dir=\"ltr\">Certified Translation (ترجمه رسمی با مهر مترجم)</td><td>ترجمه‌ای که توسط مترجم صاحب صلاحیت و سوگندخورده انجام شده و با سربرگ، مهر و امضای وی تأیید می‌شود.</td><td>مترجم رسمی قوه قضائیه</td><td>اپلای دانشگاه‌ها، ارزیابی مدارک تحصیلی اولیه، رزومه‌ها</td></tr>\n    <tr><td dir=\"ltr\">Legalized / Authenticated Translation (ترجمه قانونی‌شده/تأییدشده)</td><td>ترجمه‌ای که علاوه بر مهر مترجم، صحت مهر و امضای مترجم توسط نهادهای دولتی و دیپلماتیک تصدیق شده است.</td><td>قوه قضائیه + وزارت امور خارجه (+ سفارت کشور مقصد)</td><td>مهاجرت دائم، پرونده‌های اقامت، دادگاه‌های خارجی، وکالت‌نامه‌های بین‌المللی</td></tr>\n  </tbody>\n</table>\n\n<h4>۶. فرایند اخذ پروانه و اشتغال در مترجمی رسمی (در ایران)</h4>\n<ol>\n  <li><strong>شرایط اولیه:</strong> حداقل سن ۲۵ سال، انجام یا معافیت دائم خدمت نظام وظیفه (برای آقایان)، عدم سوءپیشینه کیفری.</li>\n  <li><strong>آزمون کتبی دو مرحله‌ای:</strong> مرحله تستی (زبان عمومی و تخصصی در سطح پیشرفته) و مرحله تشریحی (ترجمه رفت و برگشتی متون حقوقی، اسناد، آرای قضایی و قوانین).</li>\n  <li><strong>مصاحبه شفاهی و گزینش علمی:</strong> سنجش تسلط به حقوق مدنی، قوانین ثبتی، مقررات دفاتر ترجمه و ادبیات حقوقی.</li>\n  <li><strong>کارآموزی:</strong> سپری کردن دوره کارآموزی نزد مترجم رسمی سرپرست جهت آشنایی با مهارت‌های دفتری و فنی.</li>\n  <li><strong>مراسم تحلیف (<span class=\"bidi-iso\" dir=\"ltr\">Swearing-in</span>):</strong> ادای سوگند رسمی در پیشگاه دادگاه و دریافت پروانه با شماره شناسه اختصاصی.</li>\n</ol>\n<p><strong>انواع جایگاه کاری:</strong> <strong>مترجم رسمی مسئول</strong> (دارنده پروانه که دارالترجمه به نام او تأسیس شده و مسئولیت تمام اسناد صادره و امور مالی دفتر را بر عهده دارد) و <strong>مترجم رسمی همکار</strong> (مترجم دارای پروانه‌ای که در دارالترجمه مترجم دیگر فعالیت می‌کند و مسئولیت صحت ترجمه‌های تحت امضای خود را دارد).</p>\n\n<h4>۷. مراحل صدور ترجمه رسمی مدارک داخلی (<span class=\"bidi-iso\" dir=\"ltr\">Outbound Documents</span>)</h4>\n<ol>\n  <li>دریافت اصل سند و استعلام اصالت</li>\n  <li>ثبت در سامانه سنام (قوه قضائیه) و دریافت بارکد</li>\n  <li>پیاده‌سازی و چاپ روی سربرگ مخصوص قوه قضائیه</li>\n  <li>بستن متن ترجمه، درج تاریخ، مهر و امضای مترجم</li>\n  <li>الصاق کپی برابر با اصل و پلمب فیزیکی (پرچ + تمبر)</li>\n  <li>ارسال به اداره امور مترجمان قوه قضائیه (در صورت نیاز به تأیید)</li>\n  <li>ارسال به اداره تأیید اسناد وزارت امور خارجه (میدان توپخانه)</li>\n</ol>\n<ul>\n  <li><strong>نحوه پلمب فیزیکی:</strong> صفحات ترجمه به همراه کپی برابر با اصل سند مبدأ پانچ شده، پرچ می‌گردد و تمبر/لیبل امنیتی روی پرچ چسبانده می‌شود تا هیچ صفحه‌ای قابل تعویض نباشد.</li>\n  <li><strong>الزامات انتهای متن ترجمه:</strong> بسته شدن انتهای ترجمه، درج عبارت تصدیق صحت ترجمه (<span class=\"bidi-iso\" dir=\"ltr\">True translation certified</span>)، تاریخ دقیق، محل صدور، و شماره مرجع بایگانی دارالترجمه.</li>\n</ul>\n\n<h4>۸. مدارک پیش‌نیاز جهت اخذ تأییدات دادگستری و امور خارجه (<span class=\"bidi-iso\" dir=\"ltr\">Supporting Documents</span>)</h4>\n<ul>\n  <li><strong>دانشنامه‌های دانشگاهی:</strong> نیاز به تأییدیه سیستمی (سامانه سجاد برای وزارت علوم، سازمان مرکزی برای دانشگاه آزاد، سامانه وزارت بهداشت).</li>\n  <li><strong>اسناد پزشکی:</strong> لزوم تأیید امضا و نظام پزشکی پزشک معالج توسط سازمان نظام پزشکی کل کشور.</li>\n  <li><strong>سند ازدواج / طلاق:</strong> لزوم ارائه شناسنامه یکی از طرفین برای احراز عدم ابطال یا فسخ بعدی واقعه.</li>\n  <li><strong>گواهی‌های شغلی بخش خصوصی:</strong> نیاز به ارائه سابقه بیمه تأمین اجتماعی معتبر دارای رمز استعلام یا روزنامه رسمی شرکت صادرکننده.</li>\n  <li><strong>وکالت‌نامه‌ها:</strong> ارائه شناسنامه موکل جهت احراز اهلیت و بقای وکالت.</li>\n</ul>\n\n<h4>۹. ترجمه اسناد صادره از خارج از کشور (<span class=\"bidi-iso\" dir=\"ltr\">Inbound Documents</span>)</h4>\n<ol>\n  <li>تأیید مرجع محلی کشور مبدأ (مانند دفتر ثبت اسناد، اتاق بازرگانی، یا وزارت خارجه آن کشور).</li>\n  <li>تأیید توسط سرکنسولگری یا سفارت جمهوری اسلامی ایران در آن کشور (از طریق سامانه تاک/میخک). در کشورهایی که ایران سفارت ندارد (مانند آمریکا)، این کار توسط دفتر حفاظت منافع (<span class=\"bidi-iso\" dir=\"ltr\">Interests Section</span>) انجام می‌شود.</li>\n  <li>تأیید مهر و امضای مأمور کنسولی ایران توسط وزارت امور خارجه در تهران.</li>\n  <li>تحویل سند تأییدشده به دارالترجمه رسمی در ایران برای ترجمه به زبان فارسی و تأیید نهایی توسط قوه قضائیه.</li>\n</ol>\n\n<h4>۱۰. حقوق ثبت احوال و وقایع حیاتی (<span class=\"bidi-iso\" dir=\"ltr\">Civil Registration &amp; Vital Events</span>)</h4>\n<p><strong>الف) تعریف ثبت احوال (<span class=\"bidi-iso\" dir=\"ltr\">Civil Registration</span>):</strong> به فرایند مداوم (<span class=\"bidi-iso\" dir=\"ltr\">Continuous</span>)، دائمی (<span class=\"bidi-iso\" dir=\"ltr\">Permanent</span>)، اجباری (<span class=\"bidi-iso\" dir=\"ltr\">Compulsory</span>) و همگانی (<span class=\"bidi-iso\" dir=\"ltr\">Universal</span>) ثبت وقوع و ویژگی‌های وقایع حیاتی یک جامعه گفته می‌شود. داده‌های حاصل از این فرایند مبنای آمار حیاتی (<span class=\"bidi-iso\" dir=\"ltr\">Vital Statistics</span>) و برنامه‌ریزی‌های ملی است.</p>\n<p><strong>ب) دسته‌بندی وقایع حیاتی و احوال شخصیه:</strong></p>\n<ul>\n  <li><strong>وقایع حیاتی پایه (<span class=\"bidi-iso\" dir=\"ltr\">Vital Events</span>):</strong> تولد زنده (<span class=\"bidi-iso\" dir=\"ltr\">Live Birth</span>: خروج کامل جنین از بدن مادر به شرط بروز حداقل یک نشانه از حیات نظیر تپش قلب، تنفس و...)؛ مرگ جنینی / مرده‌زایی (<span class=\"bidi-iso\" dir=\"ltr\">Fetal Death / Stillborn</span>: فوت جنین پیش از خروج کامل از رحم، بدون بروز علائم حیات)؛ وفات (<span class=\"bidi-iso\" dir=\"ltr\">Death</span>: قطع دائمی و برگشت‌ناپذیر تمامی علائم زیستی بعد از تولد زنده).</li>\n  <li><strong>وقایع مربوط به تغییر وضعیت خانوادگی و احوال شخصیه (<span class=\"bidi-iso\" dir=\"ltr\">Personal Status</span>):</strong> ازدواج (<span class=\"bidi-iso\" dir=\"ltr\">Marriage</span>)؛ طلاق (<span class=\"bidi-iso\" dir=\"ltr\">Divorce</span>)؛ فسخ / ابطال نکاح (<span class=\"bidi-iso\" dir=\"ltr\">Annulment of Marriage</span>: لغو و بی‌اثر شدن ازدواج به دلیل کشف عیب، بطلان اولیه یا عدم تحقق شروط لازم، انگار از ابتدا عقدی واقع نشده)؛ متارکه / تفریق جسمانی (<span class=\"bidi-iso\" dir=\"ltr\">Judicial Separation</span>: جدایی فیزیکی و حقوقی با حکم دادگاه بدون وقوع صیغه طلاق و بدون امکان ازدواج مجدد)؛ احراز نسب و مشروعیت (<span class=\"bidi-iso\" dir=\"ltr\">Legitimation &amp; Recognition</span>)؛ فرزندخواندگی / سرپرستی (<span class=\"bidi-iso\" dir=\"ltr\">Adoption</span>: با نظارت مراجع قضایی و بهزیستی).</li>\n</ul>\n\n<div class=\"lecture-callout\">\n  <strong>نکات کلیدی برای آزمون و بازار کار:</strong>\n  <ul>\n    <li>هیچ‌گاه اسامی خاص، شماره پلاک‌ها و کدهای رهگیری را حدس نزنید؛ همواره تصویر صفحه اول گذرنامه برای مطابقت املای نام الزامی است.</li>\n    <li>عدم وجود اصل مدرک (مگر در موارد اسناد نوین بارکددار الکترونیک) مانع از دریافت تأییدات دادگستری و امور خارجه است.</li>\n    <li>رعایت ساختار اصلی صفحه سند، جدول‌بندی منظم و درج تمام حواشی و مهرها، جزو ارکان پذیرش سند در سفارت‌خانه‌هاست.</li>\n  </ul>\n</div>"
       },
       {
-        id: 'course-5',
-        code: 'EN-3045',
-        titleFa: 'داستان کوتاه و رمان در ادبیات انگلیسی',
-        titleEn: 'English Literature: Short Story & Novel',
-        category: 'تخصصی',
-        units: 2,
-        prereqFa: 'نمونه‌های نثر ساده، خواندن و درک مفاهیم (۳)',
-        prereqEn: 'Simple Prose, Reading Comprehension (3)',
-        objFa: 'تحلیل عناصر روایی در داستان کوتاه و رمان انگلیسی، شناخت سبک‌های ادبی از رئالیسم تا مدرنیسم، و بررسی چالش‌های ترجمه ادبی در بازآفرینی لحن و شخصیت‌پردازی.',
-        objEn: 'Analyzing narrative elements in English short stories and novels from Realism to Modernism, with emphasis on literary translation of voice, tone, and characterization.',
-        syllabus: [
-          'عناصر داستان: پیرنگ، شخصیت‌پردازی، زاویه دید و فضاسازی',
-          'خوانش تحلیلی داستان‌های کوتاه جیمز جویس، ویرجینیا وولف و همینگوی',
-          'سیر تحول رمان انگلیسی (دیکنز، آستین، جورج اورول)',
-          'جریان سیال ذهن، کنایه (Irony) و ترجمه دیالوگ‌های گویشی'
-        ],
-        lectures: [
-          {
-            id: 'c5-l1',
-            title: 'جلسه ۱: عناصر بنیادین روایت و زاویه دید',
-            content: `
-              <p>شناخت دقیق <strong>زاویه دید (<span class="bidi-iso" dir="ltr">Point of View</span>)</strong> و <strong>گفتار غیرمستقیم آزاد (<span class="bidi-iso" dir="ltr">Free Indirect Discourse</span>)</strong> برای حفظ لحن نویسنده در ترجمه ادبی حیاتی است.</p>
-              <ul>
-                <li><strong>راوی اول‌شخص (<span class="bidi-iso" dir="ltr">First-person Narrator</span>):</strong> انتقال صمیمیت و محدودیت دیدگاه راوی.</li>
-                <li><strong>راوی دانای کل محدود (<span class="bidi-iso" dir="ltr">Third-person Limited</span>):</strong> تمرکز بر ذهنیت یک شخصیت مشخص.</li>
-              </ul>
-            `
-          },
-          {
-            id: 'c5-l2',
-            title: 'جلسه ۲: مطالعه موردی «دوبلینی‌ها» و مفهوم اپیفانی',
-            content: `
-              <p>در داستان‌های کوتاه جیمز جویس، به‌ویژه <em>Araby</em>، کل ساختار داستان به سوی لحظه <strong>اپیفانی (<span class="bidi-iso" dir="ltr">Epiphany</span>)</strong> یا اشراق ناگهانی پیش می‌رود. در ترجمه، حفظ ایجاز، تصاویر حسی و تضاد نور و تاریکی ضروری است.</p>
-            `
-          }
-        ]
+        "id": "course-1-l1795801730112",
+        "title": "جلسه ۵ — کارگاه ترجمه اسناد رسمی: صفحه‌آرایی، اسناد سجلی و آوانگاری",
+        "content": "<h4>۱. اصول ساختاری و صفحه‌آرایی در ترجمه اسناد (<span class=\"bidi-iso\" dir=\"ltr\">Document Layout &amp; Formatting</span>)</h4>\n<p><strong>قانون فشردگی حداکثری و یک‌صفحه‌ای بودن (<span class=\"bidi-iso\" dir=\"ltr\">Compact Layout</span>):</strong> ترجمه اسناد هویتی نظیر شناسنامه و کارت ملی ترجیحاً باید در یک صفحه تنظیم شود. دلایل الزام فشردگی سند عبارتند از:</p>\n<ul>\n  <li><strong>کاهش هزینه‌های مادی و مصرف کاغذ:</strong> صرفه‌جویی در مصرف سربرگ‌های رسمی قوه قضائیه.</li>\n  <li><strong>تعرفه ترجمه و هزینه‌های دفتری:</strong> در دارالترجمه‌ها و تأییدات دادگستری/وزارت امور خارجه، به ازای هر برگ پلمب یا صفحه اضافی هزینه تصاعدی دریافت می‌شود.</li>\n  <li><strong>محدودیت حجم سامانه‌های مهاجرتی و سفارتخانه‌ها:</strong> پورتال‌های بارگذاری مدارک (مانند اداره مهاجرت کانادا) سقف حجمی مشخصی (مثلاً زیر ۲ مگابایت) برای هر فایل دارند.</li>\n  <li><strong>خوانایی و دسترسی مأمور پرونده (<span class=\"bidi-iso\" dir=\"ltr\">Visa Officer</span>):</strong> مطالعه خلاصه و یکپارچه مشخصات در یک نگاه از سردرگمی مأمور جلوگیری می‌کند.</li>\n</ul>\n\n<p><strong>فنون نرم‌افزاری برای فشرده‌سازی در <span class=\"bidi-iso\" dir=\"ltr\">Word</span>:</strong></p>\n<ul>\n  <li><strong>اندازه قلم (<span class=\"bidi-iso\" dir=\"ltr\">Font Size</span>):</strong> انتخاب اندازه فونت بین ۸ تا ۱۰ برای متن اصلی.</li>\n  <li><strong>فاصله خطوط و پاراگراف‌ها (<span class=\"bidi-iso\" dir=\"ltr\">Line &amp; Paragraph Spacing</span>):</strong> صفر کردن مقادیر <span class=\"bidi-iso\" dir=\"ltr\">Before</span> و <span class=\"bidi-iso\" dir=\"ltr\">After</span> و قرار دادن <span class=\"bidi-iso\" dir=\"ltr\">Line Spacing</span> روی <span class=\"bidi-iso\" dir=\"ltr\">Single</span> یا مقادیر اعشاری کمتر از یک (نظیر <span class=\"bidi-iso\" dir=\"ltr\">0.9</span> الی <span class=\"bidi-iso\" dir=\"ltr\">0.95</span>).</li>\n  <li><strong>حاشیه‌های صفحه (<span class=\"bidi-iso\" dir=\"ltr\">Page Margins</span>):</strong> به دلیل سربرگ رسمی، حاشیه بالا (<span class=\"bidi-iso\" dir=\"ltr\">Top Margin</span>) حداقل ۵ سانتی‌متر (۵۰ میلی‌متر) خالی بماند؛ حاشیه‌های چپ، راست و پایین روی حالت باریک (<span class=\"bidi-iso\" dir=\"ltr\">Narrow</span> یا ۱۰ الی ۱۵ میلی‌متر) تنظیم شود.</li>\n  <li><strong>حذف فضاهای خالی سفید (<span class=\"bidi-iso\" dir=\"ltr\">No Blank Lines</span>):</strong> هیچ فضای خالی اضافی نباید رها شود تا از امکان الحاق متن یا جعل سوءاستفاده نگردد. بخش‌های خالی باید با نماد، پیوستگی خطوط یا عبارت‌های استاندارد مسدود شوند.</li>\n</ul>\n\n<p><strong>انتخاب نوع قلم (<span class=\"bidi-iso\" dir=\"ltr\">Typography</span>) و قواعد نشانه‌گذاری:</strong></p>\n<ul>\n  <li><strong>فونت‌های سِریف (<span class=\"bidi-iso\" dir=\"ltr\">Serif</span>):</strong> دارای پایه‌ها و زوائد کوچک (نظیر <span class=\"bidi-iso\" dir=\"ltr\">Times New Roman</span> یا <span class=\"bidi-iso\" dir=\"ltr\">Garamond</span>)؛ استاندارد چاپ اسناد طولانی.</li>\n  <li><strong>فونت‌های سنس‌سِریف (<span class=\"bidi-iso\" dir=\"ltr\">Sans-Serif</span>):</strong> فاقد زائده و صاف (نظیر <span class=\"bidi-iso\" dir=\"ltr\">Arial</span> یا <span class=\"bidi-iso\" dir=\"ltr\">Calibri</span>)؛ مناسب برای تیترها، عناوین جداول یا نمایش روی مانیتور.</li>\n  <li><strong>قالب‌بندی کلمات (<span class=\"bidi-iso\" dir=\"ltr\">Case Style</span>):</strong> استفاده از <span class=\"bidi-iso\" dir=\"ltr\">Title Case</span> در عناوین اسناد و شناسه‌ها (حرف اول تمامی کلمات محتوایی بزرگ).</li>\n  <li><strong>عدم تکرار هدرها در صفحات دوم:</strong> در صورت دوصفحه‌ای شدن، تکرار عنوان کامل جمهوری اسلامی و نشان‌ها در صفحه دوم مجاز نیست.</li>\n  <li><strong>شماره صفحه و انتقال صفحه:</strong> درج شماره صفحه پویا در پانویس به فرمت <span class=\"bidi-iso\" dir=\"ltr\">Page X of Y</span> (همراه با نوع سند به صورت ایتالیک). از عبارت‌های عامیانه نظیر <span class=\"bidi-iso\" dir=\"ltr\">To be continued...</span> خودداری و عبارت رسمی <span class=\"bidi-iso\" dir=\"ltr\">Continued on next page</span> استفاده شود.</li>\n</ul>\n\n<h4>۲. ضوابط متن‌شناسی و برگردان اسناد سجلی و هویتی</h4>\n<p><strong>الف) واژه‌شناسی عناوین اسناد و ارکان اداری</strong></p>\n<ul>\n  <li><strong>شناسنامه:</strong> <span class=\"bidi-iso\" dir=\"ltr\">Birth Certificate</span> یا <span class=\"bidi-iso\" dir=\"ltr\">Identity Booklet</span> (استفاده از <span class=\"bidi-iso\" dir=\"ltr\">Identity Certificate</span> توصیه نمی‌شود زیرا برای گواهی تجرد یا گواهی‌های موقت هویتی است).</li>\n  <li><strong>کارت ملی:</strong> <span class=\"bidi-iso\" dir=\"ltr\">National ID Card</span>؛ <strong>گواهی ولادت:</strong> <span class=\"bidi-iso\" dir=\"ltr\">Birth Certificate</span>.</li>\n  <li><strong>پشت / روی سند:</strong> در اسناد کارتی از <span class=\"bidi-iso\" dir=\"ltr\">Front</span> و <span class=\"bidi-iso\" dir=\"ltr\">Back / Reverse</span> استفاده شود (<span class=\"bidi-iso\" dir=\"ltr\">Overleaf</span> صرفاً برای برگه‌های کاغذی دورو است).</li>\n  <li><strong>ارکان دولتی:</strong> جمهوری اسلامی ایران (<span class=\"bidi-iso\" dir=\"ltr\">Islamic Republic of Iran</span>)، وزارت کشور (<span class=\"bidi-iso\" dir=\"ltr\">Ministry of Interior</span>)، سازمان ثبت احوال کشور (<span class=\"bidi-iso\" dir=\"ltr\">National Organization for Civil Registration - NOCR</span>)، اداره ثبت احوال (<span class=\"bidi-iso\" dir=\"ltr\">Civil Registration Office / Registry Office</span>)، مسئول/رئیس اداره (<span class=\"bidi-iso\" dir=\"ltr\">Registrar / Civil Registration Officer</span> — نه <span class=\"bidi-iso\" dir=\"ltr\">Office Manager</span>).</li>\n</ul>\n\n<p><strong>ب) تقسیمات کشوری در آدرس‌ها و بخش‌های داخلی شناسنامه</strong></p>\n<ul>\n  <li><strong>تقسیمات کشوری:</strong> ترتیب در انگلیسی از کوچک به بزرگ است (حوزه، منطقه، شهر، شهرستان/استان). بخش/منطقه: <span class=\"bidi-iso\" dir=\"ltr\">District</span>؛ حوزه ثبتی شهری/روستایی: <span class=\"bidi-iso\" dir=\"ltr\">Urban / Rural Registration District</span> (مانند حوزه ۱ شهری فسا)؛ شهرستان: <span class=\"bidi-iso\" dir=\"ltr\">County</span> و شهر: <span class=\"bidi-iso\" dir=\"ltr\">City</span> (در صورت هم‌پوشانی نامی، هر دو ذکر شوند).</li>\n  <li><strong>مشخصات فردی:</strong> جنسیت: <span class=\"bidi-iso\" dir=\"ltr\">Sex</span> (نه <span class=\"bidi-iso\" dir=\"ltr\">Gender</span>)؛ حذف پیشوندهای دوشیزه/بانو/آقا و در صورت لزوم استفاده از <span class=\"bidi-iso\" dir=\"ltr\">Mr. / Ms.</span>؛ ماه‌های میلادی به صورت حروف کامل یا مخفف سه‌حرفی (<span class=\"bidi-iso\" dir=\"ltr\">May, Sept</span>) و پرهیز از تاریخ تمام‌عددی به دلیل تفاوت فرمت آمریکایی و بریتانیایی.</li>\n  <li><strong>ازدواج، طلاق، فرزندان، وفات و انتخابات:</strong> برای طلاق از <span class=\"bidi-iso\" dir=\"ltr\">Divorce</span> و شماره دفترخانه (<span class=\"bidi-iso\" dir=\"ltr\">Divorce Registry Office No. ...</span>) استفاده شود؛ برای جداول خالی <span class=\"bidi-iso\" dir=\"ltr\">Blank / None</span> یا مسدودسازی در یادداشت مترجم؛ مشخصات فرزندان با سرستون‌های مشخص؛ برای بخش وفات فرد زنده عبارت <span class=\"bidi-iso\" dir=\"ltr\">The holder is alive</span> یا یادداشت مترجم کفایت می‌کند؛ مهرهای انتخابات و ارزاق فاقد بار حقوقی هویتی‌اند و به‌صورت کلی تحت عنوان <span class=\"bidi-iso\" dir=\"ltr\">Official Election / Ration Stamps</span> قید می‌شوند.</li>\n</ul>\n\n<h4>۳. قواعد نشانه‌گذاری حقوقی و یادداشت‌های مترجم (<span class=\"bidi-iso\" dir=\"ltr\">Translator's Notes</span>)</h4>\n<div class=\"lecture-callout\">\n  هرگونه توضیح، بازخوانی نامفهوم یا ذکر عناصر بصری باید در داخل براکت <span class=\"bidi-iso\" dir=\"ltr\">[...]</span> یا ایتالیک قرار گیرد تا با محتوای سند مشتبه نشود: عکس <span class=\"bidi-iso\" dir=\"ltr\">[Photo Affixed / Bearer's Photo]</span>، هولوگرام <span class=\"bidi-iso\" dir=\"ltr\">[Security Hologram]</span>، امضا و مهر <span class=\"bidi-iso\" dir=\"ltr\">[Signed &amp; Sealed]</span> یا <span class=\"bidi-iso\" dir=\"ltr\">[Signed by: Registrar]</span>، بارکد <span class=\"bidi-iso\" dir=\"ltr\">[Barcode Inserted / Scannable Barcode]</span>، مهر برجسته/ابطال <span class=\"bidi-iso\" dir=\"ltr\">[Embossed Seal]</span> یا <span class=\"bidi-iso\" dir=\"ltr\">[Nullified / Cancelled]</span>، و عبارات ناخوانا/مخدوش <span class=\"bidi-iso\" dir=\"ltr\">[Illegible / Unreadable]</span> (مترجم حق حدس زدن ندارد).\n</div>\n\n<h4>۴. آوانگاری نام‌های خاص و اصطلاحات زبانی (<span class=\"bidi-iso\" dir=\"ltr\">Transliteration &amp; Proper Nouns</span>)</h4>\n<ul>\n  <li><strong>انطباق با گذرنامه (<span class=\"bidi-iso\" dir=\"ltr\">Passport Conformity</span>):</strong> مطابقت کامل با املای گذرنامه؛ برای تفکیک نام خانوادگی، تایپ با حروف تمام‌بزرگ (<span class=\"bidi-iso\" dir=\"ltr\">ALL-CAPS</span>) مانند <span class=\"bidi-iso\" dir=\"ltr\">Reza MOHAMMADI</span>.</li>\n  <li><strong>اسامی دارای پیشوند و نام پدر:</strong> در متون عربی یا کشورهای حوزه خلیج فارس ذکر نام پدر به عنوان نام میانی بدون واژه «ابن» مرسوم است (مثلاً <span class=\"bidi-iso\" dir=\"ltr\">Mehdi Mohammad Hosseini</span>)؛ مترجم باید هویت نام خانوادگی اصلی را حفظ کند.</li>\n  <li><strong>شهرت و اسامی مستعار:</strong> با <span class=\"bidi-iso\" dir=\"ltr\">A.K.A. (Also Known As)</span> یا <span class=\"bidi-iso\" dir=\"ltr\">Alias</span> مشخص شوند؛ در صورت تغییر نام خانوادگی قانونی، متن توضیحات شناسنامه عیناً ترجمه می‌شود.</li>\n  <li><strong>آوانگاری حروف خاص عربی و فارسی:</strong> در اسناد بین‌المللی گاهی تلفظ عربی (مانند <span class=\"bidi-iso\" dir=\"ltr\">Rida / Ramadan</span>) دیده می‌شود، اما در ترجمه اسناد ایرانی مطابق عرف اسپل شناسنامه‌ای و تلفظ فارسی (مانند <span class=\"bidi-iso\" dir=\"ltr\">Z</span> برای ض/ظ/ذ/ز) عمل می‌شود.</li>\n</ul>"
       },
       {
-        id: 'course-6',
-        code: 'TR-3046',
-        titleFa: 'بررسی آثار ترجمه‌شده اسلامی (۲)',
-        titleEn: 'The Study of Translated Islamic Texts (2)',
-        category: 'تخصصی',
-        units: 2,
-        prereqFa: 'بررسی آثار ترجمه‌شده اسلامی (۱)',
-        prereqEn: 'The Study of Translated Islamic Texts (1)',
-        objFa: 'نقد و ارزیابی تطبیقی ترجمه‌های انگلیسی قرآن کریم، نهج‌البلاغه، صحیفه سجادیه و متون عرفانی و فلسفی اسلام بر پایه نظریه‌های نقد ترجمه.',
-        objEn: 'Comparative criticism and evaluation of English translations of the Holy Quran, Nahj al-Balagha, Sahifa Sajjadiyya, and classical Islamic philosophical/mystical texts.',
-        syllabus: [
-          'معیارهای ارزیابی ترجمه‌های متون مقدس و دینی',
-          'مقایسه ترجمه‌های قرآن (آربری، پیکتال، یوسف علی، قرایی)',
-          'بررسی ترجمه‌های نهج‌البلاغه و چالش‌های بلاغت و ایجاز',
-          'رویکردهای بومی‌سازی و بیگانه‌سازی در ترجمه متون عرفانی'
-        ],
-        lectures: [
-          {
-            id: 'c6-l1',
-            title: 'جلسه ۱: مقایسه سبک‌شناختی ترجمه‌های انگلیسی قرآن کریم',
-            content: `
-              <p>مترجمان قرآن کریم در زبان انگلیسی میان دو قطب <strong>نثر کهن کتاب‌مقدسی (Biblical Archaic Style)</strong> و <strong>انگلیسی معاصر روان</strong> حرکت کرده‌اند.</p>
-              <table>
-                <thead><tr><th>مترجم</th><th>رویکرد غالب</th><th>ویژگی شاخص</th></tr></thead>
-                <tbody>
-                  <tr><td dir="ltr">A. J. Arberry</td><td>ادبی و آهنگین</td><td>تلاش برای حفظ ریتم و زیبایی شعرگونه</td></tr>
-                  <tr><td dir="ltr">A. Quli Qara'i</td><td>عبارت‌به‌عبارت (Phrase-by-phrase)</td><td>دقت معنایی بالا و وفاداری تفسیری</td></tr>
-                  <tr><td dir="ltr">M. A. S. Abdel Haleem</td><td>انگلیسی معاصر روان</td><td>خوانایی بالا برای مخاطب امروز</td></tr>
-                </tbody>
-              </table>
-            `
-          },
-          {
-            id: 'c6-l2',
-            title: 'جلسه ۲: چالش‌های ترجمه اصطلاحات فقهی و عرفانی',
-            content: `
-              <p>مفاهیمی مانند <em>تقوا، توکل، عصمت، اجتهاد</em> فاقد معادل یک‌به‌یک کامل در زبان انگلیسی هستند. استفاده از آوانگاری همراه با پانویس (<span class="bidi-iso" dir="ltr">Transliteration + Gloss</span>) یا معادل‌سازی توصیفی از راهکارهای اصلی است.</p>
-            `
-          }
-        ]
+        "id": "course-1-l1795801753848",
+        "title": "جلسه ۶ — حقوق قراردادها و احکام عقد نکاح",
+        "content": "<h4>۱. تعریف و ماهیت عقد و قرارداد (<span class=\"bidi-iso\" dir=\"ltr\">Contract &amp; Agreement</span>)</h4>\n<ul>\n  <li><strong>مفهوم عام عقد:</strong> در لغت و اصطلاح حقوقی به معنای قرارداد و توافق اراده‌هاست و ذاتاً تنها محدود به «ازدواج» نیست.</li>\n  <li><strong>ماده ۱۸۳ قانون مدنی:</strong> «عقد عبارت است از اینکه یک یا چند نفر در مقابل یک یا چند نفر دیگر تعهد بر امری نمایند و مورد قبول آن‌ها باشد.»</li>\n  <li><strong>نقد تعهد‌محور بودن ماده ۱۸۳ (دکترین حقوقی):</strong> تعهد هسته تمامی عقود نیست؛ در عقد نکاح هدف اصلی زوجیت و در عقد بیع هدف تملیک و انتقال مال است؛ لذا برخی اساتید عقد را «توافق الزام‌آور ارادی» تعریف می‌کنند.</li>\n  <li><strong>آثار عقد:</strong> ایجاد تعهد (<span class=\"bidi-iso\" dir=\"ltr\">Creating Obligations</span>)، انتقال مال یا تملیک (مانند بیع)، و سقوط تعهد (لغو یا تبدیل تعهد با توافق طرفین).</li>\n</ul>\n\n<h4>۲. تمایز اعمال حقوقی: عقد (<span class=\"bidi-iso\" dir=\"ltr\">Contract</span>) در برابر ایقاع (<span class=\"bidi-iso\" dir=\"ltr\">Unilateral Act</span>)</h4>\n<div class=\"lecture-callout\">\n  <strong>عقد (توافق دوطرفه):</strong> نیازمند اراده دو یا چند طرف (ایجاب و قبول). <strong>ایقاع (عمل حقوقی یک‌طرفه):</strong> انشای اثر حقوقی تنها با اراده یک طرف بدون نیاز به قبول طرف مقابل؛ مانند <em>طلاق</em> (در اصول اولیه فقه)، <em>ابراء یا بخشیدن دین/مهریه</em> (اسقاط مافی‌الذمه توسط داین) و <em>اعراض از مال</em> (اسقاط حق مالکیت به اراده مالک).\n</div>\n\n<h4>۳. شرایط اساسی صحت معاملات و عقود (ماده ۱۹۰ ق.م)</h4>\n<ul>\n  <li><strong>الف) قصد و رضای طرفین (<span class=\"bidi-iso\" dir=\"ltr\">Intention &amp; Consent</span>):</strong> قصد (عزم انشا) و رضا (تمایل باطنی) رکن بنیادین عقد است. فقدان رضایت یا اکراه و اجبار موجب بطلان یا عدم نفوذ عقد است (ازدواج زوری و بدون رضایت شرعاً و قانوناً باطل است).</li>\n  <li><strong>ب) اهلیت طرفین (<span class=\"bidi-iso\" dir=\"ltr\">Legal Capacity / Competence</span>):</strong> شامل اهلیت تصرف و اهلیت تمتع، با سه رکن:\n    <ul>\n      <li><strong>بلوغ (<span class=\"bidi-iso\" dir=\"ltr\">Puberty / Legal Age</span>):</strong> تمایز میان بلوغ جسمی و بلوغ قانونی (<span class=\"bidi-iso\" dir=\"ltr\">Age of Majority</span>).</li>\n      <li><strong>عقل (<span class=\"bidi-iso\" dir=\"ltr\">Sanity</span>):</strong> سلامت روانی در برابر جنون (<span class=\"bidi-iso\" dir=\"ltr\">Insanity</span>).</li>\n      <li><strong>رشد (<span class=\"bidi-iso\" dir=\"ltr\">Maturity / Wisdom</span>):</strong> قدرت تشخیص صلاح و مصلحت در امور مالی، در برابر «سَفَه» (فرد سفیه). افراد دارای سندرم داون از نظر حقوقی عاقل، ولی نوعاً غیررشید (سفیه) در امور مالی محسوب می‌شوند و برای تصرفات مالی نیاز به قیم یا ولی دارند.</li>\n    </ul>\n  </li>\n  <li><strong>ج) معین و مشروع بودن موضوع و جهت معامله.</strong></li>\n</ul>\n\n<h4>۴. مکانیسم انعقاد عقد: ایجاب و قبول (<span class=\"bidi-iso\" dir=\"ltr\">Offer &amp; Acceptance</span>)</h4>\n<ul>\n  <li><strong>ایجاب (<span class=\"bidi-iso\" dir=\"ltr\">Offer</span>):</strong> پیشنهاد انشای عقد از سوی موجب (<span class=\"bidi-iso\" dir=\"ltr\">Offeror</span>).</li>\n  <li><strong>قبول (<span class=\"bidi-iso\" dir=\"ltr\">Acceptance</span>):</strong> پذیرش بی‌قید و شرط (<span class=\"bidi-iso\" dir=\"ltr\">Unqualified Acceptance</span>) از سوی قابل (<span class=\"bidi-iso\" dir=\"ltr\">Offeree</span>) منطبق بر مفاد ایجاب.</li>\n  <li><strong>ایجاب متقابل (<span class=\"bidi-iso\" dir=\"ltr\">Counter-Offer</span>):</strong> هرگونه تغییر در شروط یا قیمت در حکم رد ایجاب اول و صدور ایجاب جدید است.</li>\n  <li><strong>صیغه عقد (<span class=\"bidi-iso\" dir=\"ltr\">Formula</span>):</strong> الفاظ معین در شرع و حقوق برای انشای التزام زناشویی یا معاملات.</li>\n</ul>\n\n<h4>۵. تقسیم‌بندی انواع عقود در نظام حقوقی</h4>\n<table>\n  <thead>\n    <tr><th>نوع تقسیم‌بندی</th><th>اقسام</th><th>تعریف و ویژگی‌ها</th><th>معادل انگلیسی</th></tr>\n  </thead>\n  <tbody>\n    <tr><td rowspan=\"2\">از حیث لزوم و جواز (قابلیت فسخ یک‌طرفه)</td><td>عقد لازم</td><td>هیچ‌یک از طرفین حق فسخ یک‌طرفه ندارد مگر در موارد قانونی (خیارات) یا اقاله (مانند بیع و نکاح).</td><td dir=\"ltr\">Irrevocable / Binding Contract</td></tr>\n    <tr><td>عقد جائز</td><td>هر طرف هر زمان بخواهد می‌تواند یک‌طرفه برهم زند؛ با فوت یا جنون یکی از طرفین منفسخ می‌شود (مانند وکالت و ودیعه).</td><td dir=\"ltr\">Revocable Contract</td></tr>\n    <tr><td rowspan=\"2\">از حیث نام‌گذاری در قانون</td><td>عقد معین</td><td>نام، آثار و شرایط اختصاصی آن‌ها صریحاً در قانون مدنی ذکر شده است (نکاح، بیع، اجاره، وکالت).</td><td dir=\"ltr\">Nominate Contract</td></tr>\n    <tr><td>عقد نامعین</td><td>بر پایه اصل آزادی اراده (ماده ۱۰ ق.م) منعقد شده و عنوان اختصاصی در فقه/قانون قدیم ندارند (مانند انتقال فناوری یا دیجیتال مارکتینگ).</td><td dir=\"ltr\">Innominate Contract</td></tr>\n    <tr><td rowspan=\"2\">از حیث ترتب اثر</td><td>عقد منجّز</td><td>تحقق و اثر آن معلق به امر دیگری نبوده و بلافاصله پس از انشا نافذ است.</td><td dir=\"ltr\">Absolute Contract</td></tr>\n    <tr><td>عقد معلّق</td><td>اثر یا ایجاد آن موکول به وقوع شرط یا حادثه احتمالی در آینده شده باشد (نکاح معلق باطل است).</td><td dir=\"ltr\">Conditional / Contingent Contract</td></tr>\n  </tbody>\n</table>\n\n<h4>۶. بررسی تخصصی عقد نکاح و ابعاد حقوقی و عرفی آن</h4>\n<ul>\n  <li><strong>ماهیت عقد نکاح:</strong> یک «عقد لازم» و قراردادی رسمی و شرعی (<span class=\"bidi-iso\" dir=\"ltr\">Marriage Contract</span>).</li>\n  <li><strong>تفکیک مراحل عرفی و قانونی:</strong>\n    <ul>\n      <li><strong>خواستگاری و بله‌برون:</strong> وعده ازدواج بوده و هیچ‌گونه التزام حقوقی یا زوجیت ایجاد نمی‌کند.</li>\n      <li><strong>اجرای صیغه عقد:</strong> به محض انشای ایجاب و قبول و ثبت رسمی، رابطه زوجیت قانونی و شرعی مستقر می‌شود.</li>\n      <li><strong>دوران عقد تا عروسی:</strong> فاصله‌ای عرفی که با وجود رسمیت علقه زوجیت، عرفاً وضعیت غیرمدخوله (<span class=\"bidi-iso\" dir=\"ltr\">Unconsummated Marriage</span>) حفظ می‌شود.</li>\n      <li><strong>مراسم عروسی:</strong> امر تشریفاتی و عرفی برای اعلام و جشن بدون نقش در اصل رابطه حقوقی و شرعی.</li>\n    </ul>\n  </li>\n  <li><strong>پشت‌قباله و مهریه:</strong> مهریه مال معینی است که به موجب عقد به زن تعلق می‌گیرد. در اموال غیرمنقول (زمین و خانه)، تعهدات باید با پلاک ثبتی دقیق در دفاتر اسناد رسمی یا ضمن سند نکاح ثبت شود تا از دعاوی اثبات مالکیت یا بطلان به دلیل مجهول بودن جلوگیری گردد.</li>\n</ul>"
       },
       {
-        id: 'course-7',
-        code: 'TR-3047',
-        titleFa: 'ترجمه متون اسلامی از فارسی (۲)',
-        titleEn: 'Translating Persian Islamic Texts (2)',
-        category: 'تخصصی',
-        units: 2,
-        prereqFa: 'ترجمه متون اسلامی از فارسی (۱)',
-        prereqEn: 'Translating Persian Islamic Texts (1)',
-        objFa: 'تمرین عملی ترجمه متون پیشرفته کلامی، تفسیری، اخلاقی و تاریخی از فارسی به انگلیسی با رعایت دقت اصطلاح‌شناختی و بلاغت زبان مقصد.',
-        objEn: 'Practical translation of advanced Persian theological, exegetical, ethical, and historical Islamic texts into idiomatic, terminologically accurate English.',
-        syllabus: [
-          'تحلیل ساختار جملات متون کلاسیک و معاصر اسلامی فارسی',
-          'ترجمه گزیده‌هایی از متون اخلاقی و تفسیری معاصر',
-          'اصول استناد به آیات و روایات درون متن فارسی هنگام ترجمه به انگلیسی',
-          'ویرایش و بازنگری متون اسلامی ترجمه‌شده برای خواننده انگلیسی‌زبان'
-        ],
-        lectures: [
-          {
-            id: 'c7-l1',
-            title: 'جلسه ۱: راهبردهای ترجمه متون کلامی و تفسیری فارسی به انگلیسی',
-            content: `
-              <p>در ترجمه متون اسلامی از فارسی به انگلیسی، مترجم اغلب با جملات بلند حاوی عبارات دعایی (<span class="bidi-iso" dir="ltr">Eulogical Formulas</span>) و استشهادات قرآنی مواجه است.</p>
-              <ul>
-                <li>رعایت یکنواختی در ترجمه القاب معصومین (ع) مانند <span class="bidi-iso" dir="ltr">(PBUH)</span> یا <span class="bidi-iso" dir="ltr">(AS)</span>.</li>
-                <li>شکستن جملات بسیار بلند فارسی به جملات روشن و منسجم در انگلیسی بدون حذف پیوندهای منطقی.</li>
-              </ul>
-            `
-          },
-          {
-            id: 'c7-l2',
-            title: 'جلسه ۲: واژه‌گزینی دقیق در متون اخلاقی و فلسفی',
-            content: `
-              <table>
-                <thead><tr><th>اصطلاح فارسی</th><th>معادل دقیق انگلیسی</th><th>معادل نادرست رایج</th></tr></thead>
-                <tbody>
-                  <tr><td>علم کلام</td><td dir="ltr">Islamic Theology / Kalam</td><td dir="ltr">Science of Speech</td></tr>
-                  <tr><td>حجت شرعی</td><td dir="ltr">Canonical Proof / Religious Authority</td><td dir="ltr">Legal Argument</td></tr>
-                  <tr><td>تزکیه نفس</td><td dir="ltr">Purification of the Soul</td><td dir="ltr">Self-cleaning</td></tr>
-                </tbody>
-              </table>
-            `
-          }
-        ]
+        "id": "course-1-l1795801802617",
+        "title": "جلسه ۷ — مبانی حقوقی، فقهی و فنون ترجمه اسناد رسمی (احوال شخصیه)",
+        "content": "<h4>بخش اول: تحلیل تطبیقی جایگاه زن، خانواده و حقوق احوال شخصیه</h4>\n<p><strong>۱. مقایسه نظام خانواده در غرب و اسلام</strong></p>\n<ul>\n  <li><strong>رویکرد مکتب غرب (مدرنیته و پست‌مدرنیته):</strong>\n    <ul>\n      <li><strong>تضعیف نهاد ازدواج رسمی:</strong> در کشورهایی مانند فرانسه حدود ۶۰ درصد از متولدین خارج از چارچوب ازدواج رسمی (<span class=\"bidi-iso\" dir=\"ltr\">Out-of-wedlock children</span>) به دنیا می‌آیند که در تقابل با مفهوم سنتی فرزندان مشروع (<span class=\"bidi-iso\" dir=\"ltr\">Legitimate children</span>) است.</li>\n      <li><strong>فقدان تعهد ساختارمند:</strong> ورود به رابطه و ترک خانواده بدون عقد الزام‌آور و تشریفات حقوقی.</li>\n      <li><strong>برداشت از عدالت:</strong> عدالت به معنای «یکسان‌سازی» (<span class=\"bidi-iso\" dir=\"ltr\">Sameness</span>) و نادیده گرفتن تفاوت‌های زیستی و فیزیولوژیک.</li>\n    </ul>\n  </li>\n  <li><strong>رویکرد مکتب اسلام:</strong>\n    <ul>\n      <li><strong>قانون‌مندسازی روابط:</strong> تشکیل خانواده و ارضای نیازها مشروط به چارچوب‌های قانونی و تعهدآور.</li>\n      <li><strong>جایگاه زن در خانواده:</strong> بر اساس روایت <em>«المرأة ریحانة و لیست بقهرمانة»</em>، زن مایه آرامش و حیات خانه (همچون هوا برای تنفس) است و «قهرمان» (در عربی به معنای کارگزار، کارگر یا مباشر) نیست؛ لذا مسئولیت تأمین معاش و کار اجباری بر دوش او نیست.</li>\n      <li><strong>تفاوت «جواز قانونی» با «توصیه اخلاقی»:</strong> گزینه‌هایی همچون «تعدد زوجات» برای پوشش شرایط خاص جوامع (مانند جوامع روستایی) پیش‌بینی شده تا روابط بی‌قاعده شکل نگیرد؛ با این حال اصل بر تک‌همسری و رعایت عدالت کامل (شرطی بسیار دشوار و نزدیک به محال در قرآن) است.</li>\n    </ul>\n  </li>\n</ul>\n\n<p><strong>۲. بررسی فقهی و تفسیری آیه ۳۴ سوره نساء</strong></p>\n<ul>\n  <li><strong>دیدگاه سلسله‌مراتبی و اصلاحی:</strong> در مواجهه با ناسازگاری و نافرمانی (نشوز)، گام‌های تدریجی توصیه می‌شود: موعظه و گفتگو ← دوری گزیدن در بستر ← واکنشی با قیود شدید (غیرموجب دیه، غیرکبودکننده و صرفاً نمادین) جهت جلوگیری از خشونت واقعی.</li>\n  <li><strong>دیدگاه زبان‌شناختی و تاریخی (امام محمد العاصی):</strong> با استناد به ادبیات کلاسیک عرب، یکی از معانی کهن فعل «ضرب»، نزدیکی و هم‌بستری (<span class=\"bidi-iso\" dir=\"ltr\">Intercourse / Sleeping together</span>) به عنوان راهکاری برای رفع کدورت و بازگرداندن صمیمیت تفسیر شده است.</li>\n</ul>\n\n<p><strong>۳. تحلیل حقوقی شروط ضمن عقد، مهریه و حضانت</strong></p>\n<ul>\n  <li><strong>تفاوت «عندالمطالبه» و «عندالاستطاعه»:</strong> در عندالمطالبه زوج از لحظه عقد باید توان پرداخت داشته باشد؛ در عندالاستطاعه پرداخت منوط به اثبات توانایی مالی زوج است (نقل‌وانتقال اموال پس از ثبت دادخواست طلاق به قصد فرار از دین قابل ابطال است).</li>\n  <li><strong>مقایسه شروط ضمن عقد با <span class=\"bidi-iso\" dir=\"ltr\">Prenup</span>:</strong> در قوانین آمریکا (<span class=\"bidi-iso\" dir=\"ltr\">Common Law</span>)، اموال دوران ازدواج (<span class=\"bidi-iso\" dir=\"ltr\">Marital Assets</span>) به‌طور پیش‌فرض ۵۰-۵۰ (<span class=\"bidi-iso\" dir=\"ltr\">In halves / Equal split</span>) تقسیم می‌شود مگر با قرارداد <span class=\"bidi-iso\" dir=\"ltr\">Prenuptial Agreement (Prenup)</span>. این مفهوم در ایران معادل <strong>شرط تنصیف دارایی</strong> (انتقال تا نصف دارایی دوران زناشویی به زوجه، مشروط به اینکه طلاق به درخواست زوجه یا ناشی از تخلف او نباشد) است.</li>\n  <li><strong>وکالت در طلاق (<span class=\"bidi-iso\" dir=\"ltr\">Power of Attorney for Divorce</span>):</strong> اعطای وکالت بلاعزل با حق توکیل به غیر از سوی مرد به زن.</li>\n  <li><strong>شروط باطل در سند ازدواج:</strong> هر شرط خلاف قوانین آمره باطل است؛ مثلاً تعیین تکلیف قطعی درباره حضانت فرزندان آینده پیش از تولد وجاهت قانونی ندارد زیرا دادگاه بر اساس «مصلحت طفل» تصمیم می‌گیرد.</li>\n</ul>\n\n<h4>بخش دوم: اصول و فنون ترجمه رسمی اسناد سجلی و محضری</h4>\n<ul>\n  <li><strong>یکدستی (<span class=\"bidi-iso\" dir=\"ltr\">Consistency</span>):</strong> یکنواختی در معادل‌ها، حروف بزرگ (<span class=\"bidi-iso\" dir=\"ltr\">Capitalization</span>) و علائم نگارشی در سراسر سند.</li>\n  <li><strong>توضیحات مترجم (<span class=\"bidi-iso\" dir=\"ltr\">Translator's Notes</span>):</strong> استفاده از کروشه <span class=\"bidi-iso\" dir=\"ltr\">[...]</span> با حرف بزرگ در ابتدا و پرهیز از پرانتز (چون ممکن است در متن اصلی وجود داشته باشد).</li>\n  <li><strong>تیترها و عناوین:</strong> عدم استفاده از دونقطه (<span class=\"bidi-iso\" dir=\"ltr\">:</span>) پس از تیترهای مستقل، مگر اینکه متن بلافاصله در ادامه همان خط بیاید.</li>\n  <li><strong>بولد کردن (<span class=\"bidi-iso\" dir=\"ltr\">Bolding</span>):</strong> فقط مواردی بولد شوند که در اصل سند بولد هستند (مانند تاریخ‌های کلیدی)؛ از بولد کردن خودسرانه اسامی و اطلاعات عادی خودداری شود.</li>\n  <li><strong>بخش‌های خالی (<span class=\"bidi-iso\" dir=\"ltr\">Blank Fields</span>):</strong> عناوین فیلدهای مهم خالی (مانند توضیحات یا مشخصات وکیل) حذف نشوند و مقابلشان <span class=\"bidi-iso\" dir=\"ltr\">Blank</span> درج شود.</li>\n  <li><strong>آدرس‌دهی استاندارد:</strong> حذف عبارت‌های مسیریابی محلی (نبش، روبروی، پشت) و نوشتن نشانی از جزء به کل (پلاک، کوچه/خیابان، محله، شهر).</li>\n</ul>\n\n<div class=\"lecture-callout\">\n  <strong>جمع‌بندی نکات کلیدی:</strong> جایگزینی واژه‌هایی مانند <span class=\"bidi-iso\" dir=\"ltr\">Confession</span> به جای <span class=\"bidi-iso\" dir=\"ltr\">Declaration</span> یا <span class=\"bidi-iso\" dir=\"ltr\">Notary Public</span> به جای <span class=\"bidi-iso\" dir=\"ltr\">Marriage Registrar</span> بار حقوقی سند را تغییر داده و اعتبار ترجمه را نزد سفارت‌خانه‌ها و دادگاه‌های خارجی زیر سؤال می‌برد.\n</div>"
       },
       {
-        id: 'course-8',
-        code: 'FL-2048',
-        titleFa: 'زبان دوم (۳) — اسپانیایی',
-        titleEn: 'Foreign Language (3) — Spanish',
-        category: 'اختیاری',
-        units: 2,
-        prereqFa: 'زبان دوم (۲)',
-        prereqEn: 'Foreign Language (2)',
-        objFa: 'تسلط بر دستور زبان میانی اسپانیایی (سطح B1)، کاربرد وجه التزامی (Subjuntivo)، تقابل زمان‌های گذشته، و تمرین ترجمه متون فرهنگی و مطبوعاتی اسپانیایی.',
-        objEn: 'Developing intermediate Spanish grammar (CEFR B1), mastering the subjunctive mood (Presente de Subjuntivo), contrasting past tenses, and practicing cultural and journalistic translation.',
-        syllabus: [
-          'تقابل کاربردی زمان‌های گذشته (Pretérito Indefinido در برابر Imperfecto و Pluscuamperfecto)',
-          'وجه التزامی حال (Presente de Subjuntivo) در جملات پیرو، بیان آرزو، تردید و توصیه',
-          'جملات شرطی، ربط‌دهنده‌های استدلالی و ساختارهای مجهول (Se pasiva)',
-          'درک مطلب و ترجمه متون کوتاه ادبی، فرهنگی و خبری اسپانیایی به فارسی'
-        ],
-        lectures: [
-          {
-            id: 'c8-l1',
-            title: 'جلسه ۱: وجه التزامی حال (Presente de Subjuntivo) و کاربردهای آن',
-            content: `
-              <p>وجه التزامی (<span class="bidi-iso" dir="ltr">Subjuntivo</span>) در زبان اسپانیایی برای بیان آرزو، تردید، احساسات، توصیه و رویدادهای غیرقطعی در جملات پیرو پس از <span class="bidi-iso" dir="ltr">que</span> به کار می‌رود.</p>
-              <table>
-                <thead><tr><th>ضمیر</th><th dir="ltr">-AR (hablar)</th><th dir="ltr">-ER / -IR (comer / vivir)</th></tr></thead>
-                <tbody>
-                  <tr><td dir="ltr">yo</td><td dir="ltr">hable</td><td dir="ltr">coma / viva</td></tr>
-                  <tr><td dir="ltr">tú</td><td dir="ltr">hables</td><td dir="ltr">comas / vivas</td></tr>
-                  <tr><td dir="ltr">él / ella / usted</td><td dir="ltr">hable</td><td dir="ltr">coma / viva</td></tr>
-                  <tr><td dir="ltr">nosotros/as</td><td dir="ltr">hablemos</td><td dir="ltr">comamos / vivamos</td></tr>
-                </tbody>
-              </table>
-              <div class="lecture-callout">
-                <strong>نکته ترجمه:</strong> در جملاتی مانند <span class="bidi-iso" dir="ltr">Espero que vengas pronto</span>، وجه التزامی اسپانیایی دقیقاً معادل وجه التزامی فارسی («امیدوارم زود بیایی») است.
-              </div>
-            `
-          },
-          {
-            id: 'c8-l2',
-            title: 'جلسه ۲: تقابل زمان‌های گذشته و فنون ترجمه متون اسپانیایی',
-            content: `
-              <p>تشخیص دقیق تفاوت میان <span class="bidi-iso" dir="ltr">Indefinido</span> (کنش نقطه‌ای و کامل‌شده) و <span class="bidi-iso" dir="ltr">Imperfecto</span> (زمینه، عادت یا کنش مستمر در گذشته) در ترجمه متون روایی و خبری کلیدی است.</p>
-              <ul>
-                <li><strong dir="ltr" class="bidi-iso">Imperfecto + Indefinido:</strong> <span class="bidi-iso" dir="ltr">Mientras leía el informe, sonó el teléfono</span> ← «در حالی که داشتم گزارش را می‌خواندم، تلفن زنگ زد.»</li>
-                <li><strong dir="ltr" class="bidi-iso">Se pasiva refleja:</strong> <span class="bidi-iso" dir="ltr">Se publicaron los resultados</span> ← «نتایج منتشر شد.»</li>
-              </ul>
-            `
-          }
-        ]
-      },
-      {
-        id: 'course-9',
-        code: 'GN-1049',
-        titleFa: 'تاریخ تحلیلی صدر اسلام',
-        titleEn: 'Analytical History of Early Islam',
-        category: 'عمومی',
-        units: 2,
-        prereqFa: 'ندارد',
-        prereqEn: 'None',
-        objFa: 'بررسی تحلیلی بسترهای اجتماعی، سیاسی و فرهنگی شبه‌جزیره عربستان پیش از اسلام، سیره نبوی در مکه و مدینه، و تحولات سیاسی دوران خلفا و امامت امام علی (ع).',
-        objEn: 'Analytical examination of pre-Islamic Arabian society, the Prophetic era in Mecca and Medina, and early political developments in Islamic history.',
-        syllabus: [
-          'روش‌شناسی تاریخ تحلیلی و منابع دست‌اول تاریخ اسلام',
-          'اوضاع اجتماعی و قبایلی حجاز پیش از بعثت',
-          'تشکیل حکومت اسلامی در مدینه و پیمان عمومی (صحیفه مدینه)',
-          'تحلیل رویدادهای پس از رحلت پیامبر (ص) و دوران خلافت امام علی (ع)'
-        ],
-        lectures: [
-          {
-            id: 'c9-l1',
-            title: 'جلسه ۱: روش‌شناسی تاریخ تحلیلی و ویژگی‌های جامعه جاهلی',
-            content: `
-              <p>تفاوت <strong>تاریخ نقلی</strong> با <strong>تاریخ تحلیلی</strong> در جستجوی علل، زمینه‌ها و پیامدهای رویدادها است. نظام اجتماعی حجاز بر پایه <em>عصبیت قبیله‌ای</em> و اقتصاد تجاری مکه استوار بود.</p>
-              <div class="lecture-callout">
-                <strong>نکته کلیدی:</strong> اسلام با جایگزین کردن «امت» به جای «قبیله»، پیوندهای ایمانی و اخلاقی را محور همبستگی اجتماعی قرار داد.
-              </div>
-            `
-          },
-          {
-            id: 'c9-l2',
-            title: 'جلسه ۲: هجرت به مدینه و پیمان مدینه',
-            content: `
-              <p>هجرت نقطه عطف تبدیل دعوت فردی و جمعی به یک جامعه سیاسی سازمان‌یافته بود. <strong>پیمان مدینه (صحیفه مدینه)</strong> نخستین منشور حقوقی-سیاسی برای همزیستی مسالمت‌آمیز و دفاع مشترک در تاریخ اسلام به شمار می‌رود.</p>
-            `
-          }
-        ]
-      },
-      {
-        id: 'course-10',
-        code: 'GN-1050',
-        titleFa: 'آشنایی با دفاع مقدس',
-        titleEn: 'Introduction to Sacred Defense',
-        category: 'عمومی',
-        units: 2,
-        prereqFa: 'ندارد',
-        prereqEn: 'None',
-        objFa: 'شناخت ریشه‌های ژئوپلیتیکی و تاریخی جنگ تحمیلی هشت‌ساله، تحلیل عملیات‌های سرنوشت‌ساز، نقش دیپلماسی و قطعنامه ۵۹۸، و دستاوردهای فرهنگی و امنیتی دفاع مقدس.',
-        objEn: 'Studying the geopolitical and historical roots of the eight-year Sacred Defense, key operations, diplomatic milestones including UNSCR 598, and its socio-cultural legacy.',
-        syllabus: [
-          'زمینه تاریخی اختلافات مرزی و قرارداد ۱۹۷۵ الجزایر',
-          'آغاز تهاجم و مراحل چهارگانه جنگ تحمیلی',
-          'آزادسازی خرمشهر (عملیات بیت‌المقدس) و موازنه راهبردی',
-          'بررسی حقوقی قطعنامه ۵۹۸ شورای امنیت سازمان ملل'
-        ],
-        lectures: [
-          {
-            id: 'c10-l1',
-            title: 'جلسه ۱: ریشه‌های تاریخی و قرارداد ۱۹۷۵ الجزایر',
-            content: `
-              <p>اختلافات مرزی بر سر خط تالوگ (<span class="bidi-iso" dir="ltr">Thalweg Line</span>) در اروندرود با امضای قرارداد ۱۹۷۵ الجزایر حل‌وفصل شد؛ اما رژیم بعث عراق در شهریور ۱۳۵۹ به‌صورت یک‌جانبه آن را لغو کرد.</p>
-            `
-          },
-          {
-            id: 'c10-l2',
-            title: 'جلسه ۲: قطعنامه ۵۹۸ و ابعاد حقوق بین‌الملل',
-            content: `
-              <p><strong>قطعنامه ۵۹۸ شورای امنیت سازمان ملل</strong> (<span class="bidi-iso" dir="ltr">UN Security Council Resolution 598</span>) نخستین قطعنامه‌ای بود که بر اساس فصل هفتم منشور ملل متحد خواستار آتش‌بس، بازگشت به مرزهای بین‌المللی و تعیین متجاوز شد.</p>
-            `
-          }
-        ]
+        "id": "course-1-l1795801826417",
+        "title": "جلسه ۸ — مبانی حقوقی، ساختار و اصول ترجمه سند طلاق",
+        "content": "<h4>بخش اول: کلیات و ماهیت حقوقی طلاق</h4>\n<p><strong>۱.۱. تفاوت ماهوی سند ازدواج و سند طلاق در ترجمه:</strong> ازدواج یک <strong>عقد لازم (<span class=\"bidi-iso\" dir=\"ltr\">Bilateral Contract</span>)</strong> است و با <span class=\"bidi-iso\" dir=\"ltr\">Marriage Certificate / Contract</span> ترجمه می‌شود. اما طلاق یک <strong>ایقاع (<span class=\"bidi-iso\" dir=\"ltr\">Unilateral Legal Act</span>)</strong> است که با اراده یک طرف (اصولاً مرد، حتی اگر زن با وکالت یا حکم دادگاه اقدام کند) واقع می‌شود؛ لذا هرگز از واژه <span class=\"bidi-iso\" dir=\"ltr\">Contract</span> استفاده نمی‌شود و معادل دقیق آن <span class=\"bidi-iso\" dir=\"ltr\">Divorce Certificate</span> است.</p>\n\n<p><strong>۱.۲. تمایز طلاق با «فسخ نکاح» و «ابطال ازدواج»</strong></p>\n<table>\n  <thead>\n    <tr><th>معیار مقایسه</th><th>طلاق (<span class=\"bidi-iso\" dir=\"ltr\">Dissolution of Marriage</span>)</th><th>فسخ نکاح (<span class=\"bidi-iso\" dir=\"ltr\">Rescission / Annulment</span>)</th><th>ابطال ازدواج (<span class=\"bidi-iso\" dir=\"ltr\">Voiding of Marriage</span>)</th></tr>\n  </thead>\n  <tbody>\n    <tr><td>ماهیت حقوقی</td><td>انحلال عقد نکاحِ صحیح و جاری از طریق تشریفات خاص</td><td>برهم زدن عقد به دلیل وجود عیب، تدلیس یا تخلف از شرط (خیارات)</td><td>بی‌اعتبار شناختن عقد از ابتدا به دلیل فقدان ارکان اساسی یا شرایط قانونی</td></tr>\n    <tr><td>تشریفات و صیغه</td><td>نیازمند حکم دادگاه (گواهی عدم امکان سازش)، صیغه عربی و حضور دو شاهد عادل</td><td>نیازمند صیغه طلاق و تشریفات پیچیده طلاق نیست</td><td>نیازمند صیغه طلاق نیست و رکورد ازدواج پاک می‌شود</td></tr>\n    <tr><td>موارد مصداق</td><td>درخواست زوج، وکالت زوجه، عسر و حرج، توافق طرفین</td><td>عیب و تدلیس (پنهان کردن بیماری‌های صعب‌العلاج مثل سرطان، ایدز، صرع، اختلالات شدید روانی/پوستی) و جنون هر یک از زوجین</td><td>عدم تحقق شرایط اساسی صحت عقد یا عدم دخول در شرایط خاص قانونی</td></tr>\n    <tr><td>اثر بر ازدواج مجدد</td><td>تکرار سه بار طلاق موجب ایجاد حُرمت بین زوجین می‌شود</td><td>حرمت ایجاد نمی‌کند (حتی اگر چندین بار رخ دهد)</td><td>رابطه‌ای وجود نداشته که ایجاد حرمت کند</td></tr>\n  </tbody>\n</table>\n\n<ul>\n  <li><strong>۱.۳. مفاهیم مرتبط:</strong> <strong>متارکه قانونی (<span class=\"bidi-iso\" dir=\"ltr\">Legal Separation</span>):</strong> جدایی موقت با توافق یا دستور دادگاه برای فرصت سازش بدون انحلال زوجیت (معمولاً پیش از طلاق رجعی لحاظ می‌شود). <strong>لِعان (<span class=\"bidi-iso\" dir=\"ltr\">Li'an</span>):</strong> سازوکاری در فقه (به‌ویژه اهل سنت) با سوگندهای ویژه در اتهام زنا یا نفی ولد که موجب انحلال قهری و حرمت ابدی می‌شود.</li>\n  <li><strong>۱.۴. مهارت تخمین ذهنی تاریخ‌ها (<span class=\"bidi-iso\" dir=\"ltr\">Approximation</span>):</strong> در بازبینی (<span class=\"bidi-iso\" dir=\"ltr\">Proofreading</span>)، مترجم باید تطبیق ماه‌ها را بداند (مثلاً اول مهر حدود ۲۲ یا ۲۳ سپتامبر است) و ۱ تا ۲ روز تلورانس (<span class=\"bidi-iso\" dir=\"ltr\">Tolerance</span>) سال کبیسه (<span class=\"bidi-iso\" dir=\"ltr\">Leap Year</span>) میان سال ۳۶۵ روزه شمسی و میلادی را بشناسد (برخلاف سال قمری که در تقویم جابه‌جا می‌شود).</li>\n</ul>\n\n<h4>بخش دوم: فرآیند قانونی، ارکان و شرط صحت طلاق</h4>\n<p><strong>۲.۱. تشریفات دادگاهی و اداری ثبت طلاق در ایران:</strong></p>\n<ol>\n  <li><strong>ثبت دادخواست در دادگاه خانواده:</strong> توسط زوج، زوجه (با وکالت/دلیل موجه) یا هر دو (توافقی).</li>\n  <li><strong>ارجاع به مشاوره و داوری:</strong> برگرفته از حکم قرآنی <em>«فابعثوا حكماً من أهله وحكماً من أهلها»</em> جهت صلح و سازش.</li>\n  <li><strong>صدور رأی دادگاه:</strong> صدور گواهی عدم امکان سازش (<span class=\"bidi-iso\" dir=\"ltr\">Certificate of Incompatibility / Non-reconciliation</span>) و دادنامه (<span class=\"bidi-iso\" dir=\"ltr\">Divorce Decree / Written Judgment</span>) در حکم <span class=\"bidi-iso\" dir=\"ltr\">Court Authorization for Divorce</span>.</li>\n  <li><strong>مهلت اعتبار دادنامه (۳ ماه):</strong> پس از قطعی شدن، طرفین فقط ۳ ماه فرصت مراجعه به دفتر رسمی ثبت طلاق (<span class=\"bidi-iso\" dir=\"ltr\">Divorce Registry Office</span>) دارند؛ پس از آن از اعتبار ساقط می‌شود.</li>\n  <li><strong>طلاق غیابی (<span class=\"bidi-iso\" dir=\"ltr\">Divorce in Absentia</span>):</strong> در صورت عدم حضور یکی از طرفین، پس از تعیین تکلیف حقوق مالی (واریز نقدی مهریه به حساب دادگستری یا حکم تقسیط) صادر می‌شود.</li>\n</ol>\n\n<p><strong>۲.۲. ارکان هفت‌گانه اجرا و ثبت طلاق:</strong> (۱) مُطَلِّق (<span class=\"bidi-iso\" dir=\"ltr\">Divorcer</span>: همیشه مرد)، (۲) مُطَلَّقَه (<span class=\"bidi-iso\" dir=\"ltr\">Divorcee</span>: زن)، (۳) صیغه طلاق (<span class=\"bidi-iso\" dir=\"ltr\">Divorce Formula / Fixed ritual utterance</span>)، (۴) شُهود عَدلَین (<span class=\"bidi-iso\" dir=\"ltr\">Two Just Male Witnesses</span>: شرط صحت طلاق)، (۵) مُعَرِّفین (<span class=\"bidi-iso\" dir=\"ltr\">Identifiers</span>)، (۶) دادنامه / گواهی عدم امکان سازش، و (۷) سردفتر رسمی طلاق (<span class=\"bidi-iso\" dir=\"ltr\">Head of Divorce Registry Office</span>).</p>\n\n<p><strong>۲.۳. شرط صحت اجرای صیغه طلاق (طُهر غیرمواقعه):</strong> معادل <span class=\"bidi-iso\" dir=\"ltr\">Non-pregnant, Intercourse-free Intermenstrual State</span>؛ یعنی زوجه در دوران پاکی (<span class=\"bidi-iso\" dir=\"ltr\">After menstruation</span>) باشد، در این دوران نزدیکی (<span class=\"bidi-iso\" dir=\"ltr\">Intercourse</span>) صورت نگرفته باشد، و باردار نباشد (برای جلوگیری از اختلاط نسل). با گواهی آزمایش عدم بارداری و اقرار صریح زوجه (<span class=\"bidi-iso\" dir=\"ltr\">Express Admission</span>) احراز می‌شود.</p>\n\n<h4>بخش سوم: انواع طلاق در فقه و حقوق ایران</h4>\n<ul>\n  <li><strong>۳.۱. طلاق رِجعی (<span class=\"bidi-iso\" dir=\"ltr\">Revocable Divorce</span>):</strong> مرد در مدت عده (<span class=\"bidi-iso\" dir=\"ltr\">Iddah / Waiting Period</span>؛ سه طهر / <span class=\"bidi-iso\" dir=\"ltr\">Three menstrual cycles</span>، حدود ۳ ماه یا ۱۰۰ روز) حق رجوع (<span class=\"bidi-iso\" dir=\"ltr\">Renouncing the divorce / Return</span>) بدون عقد جدید و بدون رضایت زن دارد. در عده رجعی، محرمیت، نفقه و ارث برقرار است و با رجوع و ثبت آن، طلاق باطل (<span class=\"bidi-iso\" dir=\"ltr\">Voided</span>) می‌شود. در طلاق به درخواست مرد بدون دلیل موجه، علاوه بر مهریه، نفقه و اجرت‌المثل، در صورت وجود شرط تنصیف دارایی، تا نصف اموال دوران زناشویی به زن منتقل می‌شود.</li>\n  <li><strong>۳.۲. طلاق بائن (<span class=\"bidi-iso\" dir=\"ltr\">Irrevocable Divorce</span>):</strong> مرد حق رجوع ندارد و زوجین بلافاصله نامحرم می‌شوند (بازگشت فقط با عقد جدید). اقسام مهم آن:\n    <ul>\n      <li><strong>طلاق خُلع (<span class=\"bidi-iso\" dir=\"ltr\">Khul' Divorce</span>):</strong> کراهت زن و بذل (<span class=\"bidi-iso\" dir=\"ltr\">Cede / Waive</span>) مال/مهریه («مهرم حلال، جانم آزاد»). زن عده دارد اما مرد حق رجوع ندارد، مگر اینکه زن در عده از بذل رجوع کند که در این صورت به رجعی تبدیل می‌شود.</li>\n      <li><strong>طلاق مُبارات (<span class=\"bidi-iso\" dir=\"ltr\">Mubarat Divorce</span>):</strong> کراهت دوطرفه؛ مالی که زن می‌بخشد نباید بیش از مهریه باشد.</li>\n      <li><strong>طلاق زن یائسه (<span class=\"bidi-iso\" dir=\"ltr\">Post-menopausal Woman</span>):</strong> بائن است و عده ندارد.</li>\n      <li><strong>طلاق غیرمدخوله (<span class=\"bidi-iso\" dir=\"ltr\">Unconsummated Marriage</span>):</strong> بدون دخول (<span class=\"bidi-iso\" dir=\"ltr\">Consummation</span>)؛ بائن است و عده ندارد.</li>\n      <li><strong>طلاق سوم (<span class=\"bidi-iso\" dir=\"ltr\">Third Divorce</span>):</strong> بائن بوده و موجب حرمت می‌شود.</li>\n    </ul>\n  </li>\n</ul>\n\n<table>\n  <thead>\n    <tr><th>ویژگی</th><th>طلاق رجعی (<span class=\"bidi-iso\" dir=\"ltr\">Revocable</span>)</th><th>طلاق بائن (<span class=\"bidi-iso\" dir=\"ltr\">Irrevocable</span>)</th></tr>\n  </thead>\n  <tbody>\n    <tr><td>حق رجوع مرد در عده</td><td>دارد (بدون عقد جدید و بدون رضایت زن)</td><td>ندارد (بازگشت فقط با عقد جدید ممکن است)</td></tr>\n    <tr><td>محرمیت در دوران عده</td><td>زوجین به هم محرم هستند</td><td>زوجین بلافاصله نامحرم می‌شوند</td></tr>\n    <tr><td>وجود عده</td><td>دارد (سه طهر / حدود ۳ ماه)</td><td>در خلع و مبارات دارد؛ در یائسه و غیرمدخوله ندارد</td></tr>\n    <tr><td>نفقه ایام عده</td><td>بر عهده مرد است</td><td>بر عهده مرد نیست (مگر در صورت بارداری)</td></tr>\n    <tr><td>ارث در دوران عده</td><td>برقرار است</td><td>ساقط می‌شود</td></tr>\n  </tbody>\n</table>\n\n<h4>بخش چهارم: تحلیل اجزای سند طلاق و حقوق مالی و غیرمالی</h4>\n<ul>\n  <li><strong>وضعیت اسناد پس از طلاق:</strong> سند ازدواج پانچ/باطل نمی‌شود؛ سند طلاق مستقل صادر و واقعه در شناسنامه ثبت می‌شود. در صورت مفقودی، رونوشت (<span class=\"bidi-iso\" dir=\"ltr\">Certified Copy / Duplicate</span>) صادر می‌گردد و نوبت طلاق (مثلاً «نوبت اول» – <span class=\"bidi-iso\" dir=\"ltr\">First instance</span>) قید می‌شود.</li>\n  <li><strong>مهریه (<span class=\"bidi-iso\" dir=\"ltr\">Mahr / Marriage Settlement</span>):</strong> تعیین تکلیف پرداخت کامل، تقسیط طبق حکم دادگاه یا بذل مهریه (<span class=\"bidi-iso\" dir=\"ltr\">Cession / Waiver of Mahr</span>).</li>\n  <li><strong>نفقه (<span class=\"bidi-iso\" dir=\"ltr\">Maintenance / Alimony</span>):</strong> شامل نفقه معوقه (<span class=\"bidi-iso\" dir=\"ltr\">Overdue Maintenance</span>) و نفقه حال/جاری (<span class=\"bidi-iso\" dir=\"ltr\">Current Maintenance</span>).</li>\n  <li><strong>اُجرَةُالمِثل ایام زوجیت (<span class=\"bidi-iso\" dir=\"ltr\">Compensation for Household Services</span>):</strong> دستمزد عادلانه کارهای منزل (آشپزی، نظافت، خرید و...) که شرعاً وظیفه زن نبوده است.</li>\n  <li><strong>جهیزیه (<span class=\"bidi-iso\" dir=\"ltr\">Dowry / Trousseau</span>):</strong> تصریح به استرداد یا عدم ادعای زوجه نسبت به جهیزیه.</li>\n  <li><strong>امور فرزندان:</strong>\n    <ul>\n      <li><strong>حضانت (<span class=\"bidi-iso\" dir=\"ltr\">Child Custody</span>):</strong> تا ۷ سالگی با مادر و پس از آن تا بلوغ قانونی با پدر (پس از بلوغ با تصمیم فرزند). در صورت عدم صلاحیت والدین (اعتیاد شدید، جرم یا جنون)، دادگاه قَیِّم (<span class=\"bidi-iso\" dir=\"ltr\">Guardian</span>) تعیین می‌کند. در انگلیسی از <span class=\"bidi-iso\" dir=\"ltr\">Custody is granted to...</span> استفاده می‌شود.</li>\n      <li><strong>نفقه فرزند (<span class=\"bidi-iso\" dir=\"ltr\">Child Support</span>):</strong> همیشه بر عهده پدر است (حتی وقتی حضانت با مادر است).</li>\n      <li><strong>حق ملاقات (<span class=\"bidi-iso\" dir=\"ltr\">Visitation Rights</span>):</strong> زمان و مکان دقیق ملاقات برای والد غیرحضانت‌دار (مثلاً ۲۴ ساعت در هفته از عصر پنجشنبه تا عصر جمعه).</li>\n    </ul>\n  </li>\n</ul>\n\n<h4>بخش پنجم: قواعد و تکنیک‌های ترجمه رسمی سند طلاق</h4>\n<div class=\"lecture-callout\">\n  <ul>\n    <li><strong>آوانویسی + توضیح (<span class=\"bidi-iso\" dir=\"ltr\">Transliteration + Explanation</span>):</strong> برای اصطلاحات فقهی بدون معادل یک‌به‌یک، مانند <span class=\"bidi-iso\" dir=\"ltr\">Khul' [irrevocable divorce granted at the wife's request against compensation]</span> و <span class=\"bidi-iso\" dir=\"ltr\">Roj'i [mutually revocable divorce]</span>.</li>\n    <li><strong>پرهیز از واژگان گمراه‌کننده:</strong> برای «دادنامه» از <span class=\"bidi-iso\" dir=\"ltr\">Written Judgment</span> یا <span class=\"bidi-iso\" dir=\"ltr\">Court Decree</span> (نه صرفاً <span class=\"bidi-iso\" dir=\"ltr\">Judgment</span>) و برای «دفتر/سردفتر طلاق» از <span class=\"bidi-iso\" dir=\"ltr\">Divorce Registry Office / Head of Divorce Registry Office</span> (نه <span class=\"bidi-iso\" dir=\"ltr\">Notary Public</span>) استفاده شود.</li>\n    <li><strong>مدیریت بخش‌های تکراری و مذهبی:</strong> اطلاعات هویتی صفحه اول در شرح طلاق تکرار نمی‌شود؛ عبارات مذهبی، احادیث یا نصایح اخلاقی حاشیه فرم‌های قدیمی جزء مفاد حقوقی نیستند و نیازی به ترجمه مفصل ندارند.</li>\n  </ul>\n</div>"
       }
-    ];
-
-    /* =========================================================================
-       4. DEFAULT DATASET: 40 REALISTIC PERSIAN–ENGLISH LEGAL TERMS
-       Distributed across صوت جلسه ۱–۸ and کتاب توانگر - درس ۱–۳
-       ========================================================================= */
+    ]
+  },
+  {
+    "id": "course-2",
+    "code": "TR-3042",
+    "titleFa": "ترجمه شفاهی پیاپی",
+    "titleEn": "Consecutive Interpreting",
+    "category": "تخصصی",
+    "units": 2,
+    "prereqFa": "گفتگو و شنیدار پیشرفته، ترجمه شفاهی (۱)",
+    "prereqEn": "Advanced Listening & Speaking, Interpreting (1)",
+    "objFa": "تقویت حافظه کوتاه‌مدت، مهارت گوش دادن فعال، یادداشت‌برداری ساختاری (Note-taking) و ارائه روان در ترجمه پیاپی کنفرانس‌ها و جلسات دیپلماتیک.",
+    "objEn": "Developing active listening, short-term memory retention, structured note-taking symbols, and fluent target-language delivery in consecutive interpreting.",
+    "syllabus": [
+      "مدل تلاش ژیل (Gile’s Effort Model) در ترجمه پیاپی",
+      "اصول هفت‌گانه یادداشت‌برداری ژان فرانسوا روزان (Rozan)",
+      "نمادسازی، چیدمان عمودی و نشانه‌گذاری روابط منطقی",
+      "مدیریت استرس، لحن صدا و بازتولید سخنرانی‌های رسمی"
+    ],
+    "lectures": [
+      {
+        "id": "c2-l1",
+        "title": "جلسه ۱: مدل تلاش دانیل ژیل و مراحل دوگانه ترجمه پیاپی",
+        "content": "\n              <p>در ترجمه شفاهی پیاپی (<span class=\"bidi-iso\" dir=\"ltr\">Consecutive Interpreting</span>)، مترجم پس از پایان بخشی از صحبت سخنران، پیام را به زبان مقصد منتقل می‌کند. دانیل ژیل این فرایند را به دو فاز تقسیم می‌کند:</p>\n              <ul>\n                <li><strong>فاز ۱ (درک و یادداشت‌برداری):</strong> <span class=\"bidi-iso\" dir=\"ltr\">Listening & Analysis + Note-taking + Short-term Memory</span></li>\n                <li><strong>فاز ۲ (بازتولید پیام):</strong> <span class=\"bidi-iso\" dir=\"ltr\">Remembering + Note-reading + Production</span></li>\n              </ul>\n              <div class=\"lecture-callout\">\n                <strong>قاعده کلیدی:</strong> یادداشت‌برداری جایگزین درک مطلب نیست؛ بلکه صرفاً <em>محرک حافظه (Memory Trigger)</em> است. از نوشتن کلمه‌به‌کلمه پرهیز کنید.\n              </div>\n            "
+      },
+      {
+        "id": "c2-l2",
+        "title": "جلسه ۲: اصول یادداشت‌برداری روزان و نمادهای استاندارد",
+        "content": "\n              <p>سیستم یادداشت‌برداری باید بر پایه <strong>ایده</strong> باشد نه واژه، و ساختار <strong>عمودی و پلکانی (Verticality & Shift)</strong> داشته باشد.</p>\n              <table>\n                <thead><tr><th>نماد</th><th>مفهوم</th><th>کاربرد نمونه</th></tr></thead>\n                <tbody>\n                  <tr><td dir=\"ltr\">↑ / ↓</td><td>افزایش / کاهش</td><td>رشد اقتصادی، افت قیمت</td></tr>\n                  <tr><td dir=\"ltr\">∴ / ∵</td><td>بنابراین / زیرا</td><td>نشان دادن روابط علی و معلولی</td></tr>\n                  <tr><td dir=\"ltr\">≠ / =</td><td>تفاوت / برابری</td><td>مقایسه سیاست‌ها یا آمارها</td></tr>\n                  <tr><td dir=\"ltr\">□</td><td>کشور / دولت</td><td>روابط بین‌الملل و دیپلماسی</td></tr>\n                </tbody>\n              </table>\n            "
+      }
+    ]
+  },
+  {
+    "id": "course-3",
+    "code": "TR-3043",
+    "titleFa": "ترجمه متون رسانه‌ای و مطبوعاتی",
+    "titleEn": "Translating Journalistic Texts",
+    "category": "تخصصی",
+    "units": 2,
+    "prereqFa": "ترجمه متون ساده، نگارش فارسی پیشرفته",
+    "prereqEn": "Translating Simple Texts, Advanced Persian Writing",
+    "objFa": "آشنایی با سبک نگارش مطبوعاتی (هرم وارونه)، فنون ترجمه تیترهای خبری (Headlinese)، لید خبر، سرمقاله‌ها و تحلیل سوگیری‌های گفتمانی در رسانه‌های بین‌المللی.",
+    "objEn": "Mastering journalistic style (inverted pyramid), headlinese translation strategies, news leads, editorials, and ideological framing in international media.",
+    "syllabus": [
+      "ساختار هرم وارونه و عناصر شش‌گانه خبر (5Ws & H)",
+      "دستور زبان ویژه تیترهای انگلیسی (Headlinese) و بازآفرینی در فارسی",
+      "ترجمه گزارش‌های تحلیلی، مصاحبه‌ها و سرمقاله‌ها",
+      "تشخیص جهت‌گیری واژگانی و نقل‌قول‌های غیرمستقیم در خبرگزاری‌ها"
+    ],
+    "lectures": [
+      {
+        "id": "c3-l1",
+        "title": "جلسه ۱: ساختار هرم وارونه و ترجمه لید (Lead)",
+        "content": "\n              <p>در روزنامه‌نگاری حرفه‌ای، مهم‌ترین اطلاعات در پاراگراف اول یا <strong>لید (<span class=\"bidi-iso\" dir=\"ltr\">Lead</span>)</strong> می‌آید. در ترجمه لید به فارسی، باید از جملات طولانی و سنگین پرهیز کرد و فعل را در جایگاه طبیعی زبان فارسی قرار داد.</p>\n              <div class=\"lecture-callout\">\n                <strong>نکته ویرایشی:</strong> افعال نقل‌قول در انگلیسی (<span class=\"bidi-iso\" dir=\"ltr\">claimed, alleged, stressed, reiterated</span>) بار معنایی و موضع‌گیری متفاوتی دارند و نباید همه آن‌ها را صرفاً «گفت» ترجمه کرد.\n              </div>\n            "
+      },
+      {
+        "id": "c3-l2",
+        "title": "جلسه ۲: ویژگی‌های تیترهای خبری (Headlinese)",
+        "content": "\n              <p>تیترهای انگلیسی برای صرفه‌جویی در فضا از قوانین خاصی پیروی می‌کنند:</p>\n              <ul>\n                <li>حذف افعال کمکی (<span class=\"bidi-iso\" dir=\"ltr\">be, have</span>) و حروف تعریف (<span class=\"bidi-iso\" dir=\"ltr\">a, the</span>).</li>\n                <li>استفاده از زمان حال ساده برای رویدادهای گذشته (مثلاً: <span class=\"bidi-iso\" dir=\"ltr\">UN Approves Resolution</span> ← تصویب قطعنامه در سازمان ملل).</li>\n                <li>استفاده از مصدر با <span class=\"bidi-iso\" dir=\"ltr\">to</span> برای اشاره به آینده (مثلاً: <span class=\"bidi-iso\" dir=\"ltr\">Talks to Resume Monday</span> ← ازسرگیری مذاکرات در روز دوشنبه).</li>\n              </ul>\n            "
+      }
+    ]
+  },
+  {
+    "id": "course-4",
+    "code": "TR-3044",
+    "titleFa": "واژه‌شناسی و اصطلاح‌شناسی",
+    "titleEn": "Morphology and Terminology",
+    "category": "تخصصی",
+    "units": 2,
+    "prereqFa": "زبان‌شناسی همگانی (۱)",
+    "prereqEn": "General Linguistics (1)",
+    "objFa": "شناخت ساخت‌واژه انگلیسی و فارسی، فرایندهای واژه‌سازی، ریشه‌شناسی یونانی و لاتین، و اصول استانداردسازی و معادل‌یابی اصطلاحات علمی و فنی.",
+    "objEn": "Understanding English and Persian morphological processes, Greek/Latin roots, and international standards for terminology management and neologism creation.",
+    "syllabus": [
+      "تکواژهای آزاد و وابسته، وندهای تصریفی و اشتقاقی",
+      "فرایندهای واژه‌سازی: ترکیب، ادغام، سرواژه‌سازی و پسین‌سازی",
+      "اصول اصطلاح‌شناسی (ISO 704) و تفاوت واژه عمومی با اصطلاح تخصصی",
+      "مدیریت واژه‌نامه‌ها (Termbases) و معادل‌گزینی فرهنگستان"
+    ],
+    "lectures": [
+      {
+        "id": "c4-l1",
+        "title": "جلسه ۱: تکواژ، ریشه و فرایندهای واژه‌سازی",
+        "content": "\n              <p><strong>تکواژ (<span class=\"bidi-iso\" dir=\"ltr\">Morpheme</span>)</strong> کوچک‌ترین واحد معنادار زبان است. شناخت ساختار درونی واژگان به مترجم کمک می‌کند معنای واژه‌های ناآشنا را از بافت و ریشه استخراج کند.</p>\n              <table>\n                <thead><tr><th>فرایند واژه‌سازی</th><th>معادل انگلیسی</th><th>مثال</th></tr></thead>\n                <tbody>\n                  <tr><td>اشتقاق</td><td dir=\"ltr\">Derivation</td><td dir=\"ltr\">legal → legality → illegal</td></tr>\n                  <tr><td>ترکیب</td><td dir=\"ltr\">Compounding</td><td dir=\"ltr\">copyright, courtroom</td></tr>\n                  <tr><td>ادغام (آمیزش)</td><td dir=\"ltr\">Blending</td><td dir=\"ltr\">infotainment, webinar</td></tr>\n                  <tr><td>سرواژه‌سازی</td><td dir=\"ltr\">Acronym / Initialism</td><td dir=\"ltr\">UNESCO, POA, NGO</td></tr>\n                </tbody>\n              </table>\n            "
+      },
+      {
+        "id": "c4-l2",
+        "title": "جلسه ۲: اصول اصطلاح‌شناسی و ایجاد پایگاه واژگان",
+        "content": "\n              <p>در اصطلاح‌شناسی تخصصی (<span class=\"bidi-iso\" dir=\"ltr\">Terminology</span>)، اصل بر <strong>تک‌معنایی (Monosemy)</strong> در یک حوزه موضوعی مشخص است. یک مترجم حرفه‌ای باید برای هر پروژه یک برگه اصطلاحات (<span class=\"bidi-iso\" dir=\"ltr\">Termbase</span>) شامل حوزه، تعریف، بافت و منبع تهیه کند.</p>\n            "
+      }
+    ]
+  },
+  {
+    "id": "course-5",
+    "code": "EN-3045",
+    "titleFa": "داستان کوتاه و رمان در ادبیات انگلیسی",
+    "titleEn": "English Literature: Short Story & Novel",
+    "category": "تخصصی",
+    "units": 2,
+    "prereqFa": "نمونه‌های نثر ساده، خواندن و درک مفاهیم (۳)",
+    "prereqEn": "Simple Prose, Reading Comprehension (3)",
+    "objFa": "تحلیل عناصر روایی در داستان کوتاه و رمان انگلیسی، شناخت سبک‌های ادبی از رئالیسم تا مدرنیسم، و بررسی چالش‌های ترجمه ادبی در بازآفرینی لحن و شخصیت‌پردازی.",
+    "objEn": "Analyzing narrative elements in English short stories and novels from Realism to Modernism, with emphasis on literary translation of voice, tone, and characterization.",
+    "syllabus": [
+      "عناصر داستان: پیرنگ، شخصیت‌پردازی، زاویه دید و فضاسازی",
+      "خوانش تحلیلی داستان‌های کوتاه جیمز جویس، ویرجینیا وولف و همینگوی",
+      "سیر تحول رمان انگلیسی (دیکنز، آستین، جورج اورول)",
+      "جریان سیال ذهن، کنایه (Irony) و ترجمه دیالوگ‌های گویشی"
+    ],
+    "lectures": [
+      {
+        "id": "c5-l1",
+        "title": "جلسه ۱: عناصر بنیادین روایت و زاویه دید",
+        "content": "\n              <p>شناخت دقیق <strong>زاویه دید (<span class=\"bidi-iso\" dir=\"ltr\">Point of View</span>)</strong> و <strong>گفتار غیرمستقیم آزاد (<span class=\"bidi-iso\" dir=\"ltr\">Free Indirect Discourse</span>)</strong> برای حفظ لحن نویسنده در ترجمه ادبی حیاتی است.</p>\n              <ul>\n                <li><strong>راوی اول‌شخص (<span class=\"bidi-iso\" dir=\"ltr\">First-person Narrator</span>):</strong> انتقال صمیمیت و محدودیت دیدگاه راوی.</li>\n                <li><strong>راوی دانای کل محدود (<span class=\"bidi-iso\" dir=\"ltr\">Third-person Limited</span>):</strong> تمرکز بر ذهنیت یک شخصیت مشخص.</li>\n              </ul>\n            "
+      },
+      {
+        "id": "c5-l2",
+        "title": "جلسه ۲: مطالعه موردی «دوبلینی‌ها» و مفهوم اپیفانی",
+        "content": "\n              <p>در داستان‌های کوتاه جیمز جویس، به‌ویژه <em>Araby</em>، کل ساختار داستان به سوی لحظه <strong>اپیفانی (<span class=\"bidi-iso\" dir=\"ltr\">Epiphany</span>)</strong> یا اشراق ناگهانی پیش می‌رود. در ترجمه، حفظ ایجاز، تصاویر حسی و تضاد نور و تاریکی ضروری است.</p>\n            "
+      }
+    ]
+  },
+  {
+    "id": "course-6",
+    "code": "TR-3046",
+    "titleFa": "بررسی آثار ترجمه‌شده اسلامی (۲)",
+    "titleEn": "The Study of Translated Islamic Texts (2)",
+    "category": "تخصصی",
+    "units": 2,
+    "prereqFa": "بررسی آثار ترجمه‌شده اسلامی (۱)",
+    "prereqEn": "The Study of Translated Islamic Texts (1)",
+    "objFa": "نقد و ارزیابی تطبیقی ترجمه‌های انگلیسی قرآن کریم، نهج‌البلاغه، صحیفه سجادیه و متون عرفانی و فلسفی اسلام بر پایه نظریه‌های نقد ترجمه.",
+    "objEn": "Comparative criticism and evaluation of English translations of the Holy Quran, Nahj al-Balagha, Sahifa Sajjadiyya, and classical Islamic philosophical/mystical texts.",
+    "syllabus": [
+      "معیارهای ارزیابی ترجمه‌های متون مقدس و دینی",
+      "مقایسه ترجمه‌های قرآن (آربری، پیکتال، یوسف علی، قرایی)",
+      "بررسی ترجمه‌های نهج‌البلاغه و چالش‌های بلاغت و ایجاز",
+      "رویکردهای بومی‌سازی و بیگانه‌سازی در ترجمه متون عرفانی"
+    ],
+    "lectures": [
+      {
+        "id": "c6-l1",
+        "title": "جلسه ۱: مقایسه سبک‌شناختی ترجمه‌های انگلیسی قرآن کریم",
+        "content": "\n              <p>مترجمان قرآن کریم در زبان انگلیسی میان دو قطب <strong>نثر کهن کتاب‌مقدسی (Biblical Archaic Style)</strong> و <strong>انگلیسی معاصر روان</strong> حرکت کرده‌اند.</p>\n              <table>\n                <thead><tr><th>مترجم</th><th>رویکرد غالب</th><th>ویژگی شاخص</th></tr></thead>\n                <tbody>\n                  <tr><td dir=\"ltr\">A. J. Arberry</td><td>ادبی و آهنگین</td><td>تلاش برای حفظ ریتم و زیبایی شعرگونه</td></tr>\n                  <tr><td dir=\"ltr\">A. Quli Qara'i</td><td>عبارت‌به‌عبارت (Phrase-by-phrase)</td><td>دقت معنایی بالا و وفاداری تفسیری</td></tr>\n                  <tr><td dir=\"ltr\">M. A. S. Abdel Haleem</td><td>انگلیسی معاصر روان</td><td>خوانایی بالا برای مخاطب امروز</td></tr>\n                </tbody>\n              </table>\n            "
+      },
+      {
+        "id": "c6-l2",
+        "title": "جلسه ۲: چالش‌های ترجمه اصطلاحات فقهی و عرفانی",
+        "content": "\n              <p>مفاهیمی مانند <em>تقوا، توکل، عصمت، اجتهاد</em> فاقد معادل یک‌به‌یک کامل در زبان انگلیسی هستند. استفاده از آوانگاری همراه با پانویس (<span class=\"bidi-iso\" dir=\"ltr\">Transliteration + Gloss</span>) یا معادل‌سازی توصیفی از راهکارهای اصلی است.</p>\n            "
+      }
+    ]
+  },
+  {
+    "id": "course-7",
+    "code": "TR-3047",
+    "titleFa": "ترجمه متون اسلامی از فارسی (۲)",
+    "titleEn": "Translating Persian Islamic Texts (2)",
+    "category": "تخصصی",
+    "units": 2,
+    "prereqFa": "ترجمه متون اسلامی از فارسی (۱)",
+    "prereqEn": "Translating Persian Islamic Texts (1)",
+    "objFa": "تمرین عملی ترجمه متون پیشرفته کلامی، تفسیری، اخلاقی و تاریخی از فارسی به انگلیسی با رعایت دقت اصطلاح‌شناختی و بلاغت زبان مقصد.",
+    "objEn": "Practical translation of advanced Persian theological, exegetical, ethical, and historical Islamic texts into idiomatic, terminologically accurate English.",
+    "syllabus": [
+      "تحلیل ساختار جملات متون کلاسیک و معاصر اسلامی فارسی",
+      "ترجمه گزیده‌هایی از متون اخلاقی و تفسیری معاصر",
+      "اصول استناد به آیات و روایات درون متن فارسی هنگام ترجمه به انگلیسی",
+      "ویرایش و بازنگری متون اسلامی ترجمه‌شده برای خواننده انگلیسی‌زبان"
+    ],
+    "lectures": [
+      {
+        "id": "c7-l1",
+        "title": "جلسه ۱: راهبردهای ترجمه متون کلامی و تفسیری فارسی به انگلیسی",
+        "content": "\n              <p>در ترجمه متون اسلامی از فارسی به انگلیسی، مترجم اغلب با جملات بلند حاوی عبارات دعایی (<span class=\"bidi-iso\" dir=\"ltr\">Eulogical Formulas</span>) و استشهادات قرآنی مواجه است.</p>\n              <ul>\n                <li>رعایت یکنواختی در ترجمه القاب معصومین (ع) مانند <span class=\"bidi-iso\" dir=\"ltr\">(PBUH)</span> یا <span class=\"bidi-iso\" dir=\"ltr\">(AS)</span>.</li>\n                <li>شکستن جملات بسیار بلند فارسی به جملات روشن و منسجم در انگلیسی بدون حذف پیوندهای منطقی.</li>\n              </ul>\n            "
+      },
+      {
+        "id": "c7-l2",
+        "title": "جلسه ۲: واژه‌گزینی دقیق در متون اخلاقی و فلسفی",
+        "content": "\n              <table>\n                <thead><tr><th>اصطلاح فارسی</th><th>معادل دقیق انگلیسی</th><th>معادل نادرست رایج</th></tr></thead>\n                <tbody>\n                  <tr><td>علم کلام</td><td dir=\"ltr\">Islamic Theology / Kalam</td><td dir=\"ltr\">Science of Speech</td></tr>\n                  <tr><td>حجت شرعی</td><td dir=\"ltr\">Canonical Proof / Religious Authority</td><td dir=\"ltr\">Legal Argument</td></tr>\n                  <tr><td>تزکیه نفس</td><td dir=\"ltr\">Purification of the Soul</td><td dir=\"ltr\">Self-cleaning</td></tr>\n                </tbody>\n              </table>\n            "
+      }
+    ]
+  },
+  {
+    "id": "course-8",
+    "code": "FL-2048",
+    "titleFa": "زبان دوم (3) — اسپانیایی",
+    "titleEn": "Foreign Language (3) — Spanish",
+    "category": "اختیاری",
+    "units": 2,
+    "prereqFa": "زبان دوم (2) — اسپانیایی",
+    "prereqEn": "Foreign Language (2) — Spanish",
+    "objFa": "گسترش مهارت‌های دستوری و واژگانی زبان اسپانیایی در سطح A2 شامل زمان‌های گذشته (Pretérito Indefinido و Imperfecto)، ضمایر مفعولی و مکالمات روزمره و دانشگاهی.",
+    "objEn": "Expanding Spanish grammar and vocabulary to CEFR A2 level, covering past tenses (Pretérito Indefinido & Imperfecto), object pronouns, and everyday academic communication.",
+    "syllabus": [
+      "مرور زمان حال اخباری و افعال بی‌قاعده پرکاربرد",
+      "زمان گذشته ساده (Pretérito Indefinido) و گذشته استمراری (Imperfecto)",
+      "ضمایر مفعول مستقیم و غیرمستقیم (lo, la, le, les)",
+      "درک مطلب متون کوتاه فرهنگی و ترجمه عبارات پایه"
+    ],
+    "lectures": [
+      {
+        "id": "c8-l1",
+        "title": "جلسه ۱: صرف افعال باقاعده در گذشته ساده (Pretérito Indefinido)",
+        "content": "\n              <p>زمان <span class=\"bidi-iso\" dir=\"ltr\">Pretérito Indefinido</span> برای بیان رویدادهای کامل‌شده در نقطه‌ای مشخص از گذشته به کار می‌رود.</p>\n              <table>\n                <thead><tr><th>ضمیر</th><th dir=\"ltr\">-AR (hablar)</th><th dir=\"ltr\">-ER / -IR (comer / vivir)</th></tr></thead>\n                <tbody>\n                  <tr><td dir=\"ltr\">yo</td><td dir=\"ltr\">hablé</td><td dir=\"ltr\">comí / viví</td></tr>\n                  <tr><td dir=\"ltr\">tú</td><td dir=\"ltr\">hablaste</td><td dir=\"ltr\">comiste / viviste</td></tr>\n                  <tr><td dir=\"ltr\">él / ella / usted</td><td dir=\"ltr\">habló</td><td dir=\"ltr\">comió / vivió</td></tr>\n                  <tr><td dir=\"ltr\">nosotros/as</td><td dir=\"ltr\">hablamos</td><td dir=\"ltr\">comimos / vivimos</td></tr>\n                </tbody>\n              </table>\n            "
+      },
+      {
+        "id": "c8-l2",
+        "title": "جلسه ۲: تفاوت Por و Para در جملات کاربردی",
+        "content": "\n              <ul>\n                <li><strong dir=\"ltr\" class=\"bidi-iso\">Para:</strong> بیان هدف، مقصد، گیرنده و مهلت زمانی (مثلاً: <span class=\"bidi-iso\" dir=\"ltr\">Este libro es para ti</span>).</li>\n                <li><strong dir=\"ltr\" class=\"bidi-iso\">Por:</strong> بیان علت، مدت زمان، معاوضه و مسیر عبور (مثلاً: <span class=\"bidi-iso\" dir=\"ltr\">Gracias por tu ayuda</span>).</li>\n              </ul>\n            "
+      }
+    ]
+  },
+  {
+    "id": "course-9",
+    "code": "GN-1049",
+    "titleFa": "تاریخ تحلیلی صدر اسلام",
+    "titleEn": "Analytical History of Early Islam",
+    "category": "عمومی",
+    "units": 2,
+    "prereqFa": "ندارد",
+    "prereqEn": "None",
+    "objFa": "بررسی تحلیلی بسترهای اجتماعی، سیاسی و فرهنگی شبه‌جزیره عربستان پیش از اسلام، سیره نبوی در مکه و مدینه، و تحولات سیاسی دوران خلفا و امامت امام علی (ع).",
+    "objEn": "Analytical examination of pre-Islamic Arabian society, the Prophetic era in Mecca and Medina, and early political developments in Islamic history.",
+    "syllabus": [
+      "روش‌شناسی تاریخ تحلیلی و منابع دست‌اول تاریخ اسلام",
+      "اوضاع اجتماعی و قبایلی حجاز پیش از بعثت",
+      "تشکیل حکومت اسلامی در مدینه و پیمان عمومی (صحیفه مدینه)",
+      "تحلیل رویدادهای پس از رحلت پیامبر (ص) و دوران خلافت امام علی (ع)"
+    ],
+    "lectures": [
+      {
+        "id": "c9-l1",
+        "title": "جلسه ۱: روش‌شناسی تاریخ تحلیلی و ویژگی‌های جامعه جاهلی",
+        "content": "\n              <p>تفاوت <strong>تاریخ نقلی</strong> با <strong>تاریخ تحلیلی</strong> در جستجوی علل، زمینه‌ها و پیامدهای رویدادها است. نظام اجتماعی حجاز بر پایه <em>عصبیت قبیله‌ای</em> و اقتصاد تجاری مکه استوار بود.</p>\n              <div class=\"lecture-callout\">\n                <strong>نکته کلیدی:</strong> اسلام با جایگزین کردن «امت» به جای «قبیله»، پیوندهای ایمانی و اخلاقی را محور همبستگی اجتماعی قرار داد.\n              </div>\n            "
+      },
+      {
+        "id": "c9-l2",
+        "title": "جلسه ۲: هجرت به مدینه و پیمان مدینه",
+        "content": "\n              <p>هجرت نقطه عطف تبدیل دعوت فردی و جمعی به یک جامعه سیاسی سازمان‌یافته بود. <strong>پیمان مدینه (صحیفه مدینه)</strong> نخستین منشور حقوقی-سیاسی برای همزیستی مسالمت‌آمیز و دفاع مشترک در تاریخ اسلام به شمار می‌رود.</p>\n            "
+      }
+    ]
+  },
+  {
+    "id": "course-10",
+    "code": "GN-1050",
+    "titleFa": "آشنایی با دفاع مقدس",
+    "titleEn": "Introduction to Sacred Defense",
+    "category": "عمومی",
+    "units": 2,
+    "prereqFa": "ندارد",
+    "prereqEn": "None",
+    "objFa": "شناخت ریشه‌های ژئوپلیتیکی و تاریخی جنگ تحمیلی هشت‌ساله، تحلیل عملیات‌های سرنوشت‌ساز، نقش دیپلماسی و قطعنامه ۵۹۸، و دستاوردهای فرهنگی و امنیتی دفاع مقدس.",
+    "objEn": "Studying the geopolitical and historical roots of the eight-year Sacred Defense, key operations, diplomatic milestones including UNSCR 598, and its socio-cultural legacy.",
+    "syllabus": [
+      "زمینه تاریخی اختلافات مرزی و قرارداد ۱۹۷۵ الجزایر",
+      "آغاز تهاجم و مراحل چهارگانه جنگ تحمیلی",
+      "آزادسازی خرمشهر (عملیات بیت‌المقدس) و موازنه راهبردی",
+      "بررسی حقوقی قطعنامه ۵۹۸ شورای امنیت سازمان ملل"
+    ],
+    "lectures": [
+      {
+        "id": "c10-l1",
+        "title": "جلسه ۱: ریشه‌های تاریخی و قرارداد ۱۹۷۵ الجزایر",
+        "content": "\n              <p>اختلافات مرزی بر سر خط تالوگ (<span class=\"bidi-iso\" dir=\"ltr\">Thalweg Line</span>) در اروندرود با امضای قرارداد ۱۹۷۵ الجزایر حل‌وفصل شد؛ اما رژیم بعث عراق در شهریور ۱۳۵۹ به‌صورت یک‌جانبه آن را لغو کرد.</p>\n            "
+      },
+      {
+        "id": "c10-l2",
+        "title": "جلسه ۲: قطعنامه ۵۹۸ و ابعاد حقوق بین‌الملل",
+        "content": "\n              <p><strong>قطعنامه ۵۹۸ شورای امنیت سازمان ملل</strong> (<span class=\"bidi-iso\" dir=\"ltr\">UN Security Council Resolution 598</span>) نخستین قطعنامه‌ای بود که بر اساس فصل هفتم منشور ملل متحد خواستار آتش‌بس، بازگشت به مرزهای بین‌المللی و تعیین متجاوز شد.</p>\n            "
+      }
+    ]
+  }
+];
     const DEFAULT_WORDLIST = [
-      // صوت جلسه ۱
-      { id: 1, fa: 'دفتر اسناد رسمی', en: 'Notary Public Office', notes: 'مرجع رسمی تنظیم و ثبت اسناد رسمی و گواهی امضا زیر نظر سازمان ثبت اسناد و املاک.', source: 'صوت جلسه ۱' },
-      { id: 2, fa: 'سردفتر اسناد رسمی', en: 'Notary Public', notes: 'شخص دارای ابلاغ رسمی برای تنظیم اسناد و تصدیق امضاها در دفترخانه.', source: 'صوت جلسه ۱' },
-      { id: 3, fa: 'برابر با اصل است', en: 'Certified True Copy', notes: 'عبارت استاندارد روی رونوشت اسناد پس از تطبیق با نسخه اصلی توسط دفترخانه یا دادگستری.', source: 'صوت جلسه ۱' },
-      { id: 4, fa: 'بدین‌وسیله گواهی می‌شود', en: 'It is hereby certified that', notes: 'فرمول آغازین رسمی در گواهی‌نامه‌ها و اسناد تأییدی؛ به جای ترجمه تحت‌اللفظی به کار می‌رود.', source: 'صوت جلسه ۱' },
-
-      // صوت جلسه ۲
-      { id: 5, fa: 'شناسنامه', en: 'Birth Certificate / National Identity Booklet', notes: 'در ترجمه رسمی ایران معمولاً Birth Certificate یا Identity Certificate (Shenasnameh) به کار می‌رود.', source: 'صوت جلسه ۲' },
-      { id: 6, fa: 'سازمان ثبت احوال کشور', en: 'National Organization for Civil Registration', notes: 'نهاد صادرکننده شناسنامه، کارت ملی و گواهی‌های ولادت، وفات و تجرد.', source: 'صوت جلسه ۲' },
-      { id: 7, fa: 'گواهی تجرد', en: 'Certificate of Single Status', notes: 'سندی که نشان می‌دهد فرد در حال حاضر فاقد همسر ثبت‌شده در شناسنامه است.', source: 'صوت جلسه ۲' },
-      { id: 8, fa: 'گواهی انحصار وراثت', en: 'Certificate of Heirship / Probate Certificate', notes: 'گواهی صادره از شورای حل اختلاف یا دادگاه برای تعیین وراث قانونی متوفی و سهم‌الارث آنان.', source: 'صوت جلسه ۲' },
-
-      // صوت جلسه ۳
-      { id: 9, fa: 'سند ازدواج (عقدنامه)', en: 'Marriage Certificate', notes: 'سند رسمی ثبت نکاح در دفتر رسمی ازدواج شامل شروط ضمن عقد و مشخصات مهریه.', source: 'صوت جلسه ۳' },
-      { id: 10, fa: 'مهریه عندالمطالبه', en: 'Marriage Portion Payable Upon Demand', notes: 'مهریه‌ای که زوجه هر زمان پس از عقد حق مطالبه آن را از زوج دارد.', source: 'صوت جلسه ۳' },
-      { id: 11, fa: 'طلاق توافقی', en: 'Divorce by Mutual Consent', notes: 'انحلال نکاح بر اساس توافق کامل زوجین درباره حقوق مالی و حضانت فرزندان.', source: 'صوت جلسه ۳' },
-      { id: 12, fa: 'شروط ضمن عقد', en: 'Stipulations of the Marriage Contract', notes: 'شروط مندرج در سند ازدواج از جمله حق طلاق، حق تحصیل، حق اشتغال و حق مسکن.', source: 'صوت جلسه ۳' },
-
-      // صوت جلسه ۴
-      { id: 13, fa: 'وکالت‌نامه بلاعزل', en: 'Irrevocable Power of Attorney', notes: 'وکالت‌نامه‌ای که موکل حق عزل وکیل را در ضمن عقد خارج لازم از خود سلب کرده است.', source: 'صوت جلسه ۴' },
-      { id: 14, fa: 'موکل و وکیل (در اسناد رسمی)', en: 'Principal and Attorney-in-Fact', notes: 'تفاوت مهم: برای وکیل دادگستری از Attorney-at-Law و برای وکیل مدنی دفترخانه‌ای از Attorney-in-Fact استفاده می‌شود.', source: 'صوت جلسه ۴' },
-      { id: 15, fa: 'حق توکیل به غیر', en: 'Right of Substitution / Power to Delegate', notes: 'اختیار وکیل برای واگذاری تمام یا بخشی از اختیارات وکالت به شخص ثالث.', source: 'صوت جلسه ۴' },
-      { id: 16, fa: 'اقرارنامه رسمی', en: 'Official Affidavit / Sworn Declaration', notes: 'سندی که فرد در دفتر اسناد رسمی به امری به زیان خود یا به نفع دیگری اقرار می‌نماید.', source: 'صوت جلسه ۴' },
-
-      // صوت جلسه ۵
-      { id: 17, fa: 'سند مالکیت تک‌برگ', en: 'Single-Page Title Deed', notes: 'سند رسمی جدید املاک با هولوگرام و شناسه یکتا صادره از اداره ثبت اسناد و املاک.', source: 'صوت جلسه ۵' },
-      { id: 18, fa: 'عرصه و اعیان', en: 'Land and Building / Plot and Superstructure', notes: 'عرصه به معنای زمین ملک و اعیان به معنای بنا و مستحدثات روی آن است.', source: 'صوت جلسه ۵' },
-      { id: 19, fa: 'مبایعه‌نامه', en: 'Deed of Sale / Purchase Agreement', notes: 'قرارداد رسمی یا عادی خریدوفروش ملک یا مال منقول میان بایع و مشتری.', source: 'صوت جلسه ۵' },
-      { id: 20, fa: 'در رهن بانک بودن', en: 'Mortgaged to the Bank / Encumbered with a Lien', notes: 'قیدی در ستون نقل‌وانتقالات سند مالکیت مبنی بر وثیقه بودن ملک در برابر تسهیلات بانکی.', source: 'صوت جلسه ۵' },
-
-      // صوت جلسه ۶
-      { id: 21, fa: 'دادنامه', en: 'Court Verdict / Written Judgment', notes: 'متن رسمی و مکتوب رأی صادره از دادگاه شامل شماره پرونده، طرفین، گردشکار و متن رأی.', source: 'صوت جلسه ۶' },
-      { id: 22, fa: 'رأی قطعی و لازم‌الاجرا', en: 'Final and Binding Judgment', notes: 'حکمی که مهلت تجدیدنظرخواهی آن گذشته یا در دادگاه تجدیدنظر تأیید شده و قابل اجراست.', source: 'صوت جلسه ۶' },
-      { id: 23, fa: 'تجدیدنظرخواهی', en: 'Filing an Appeal', notes: 'درخواست رسیدگی مجدد به رأی دادگاه بدوی در مرجع قضایی بالاتر (دادگاه تجدیدنظر).', source: 'صوت جلسه ۶' },
-      { id: 24, fa: 'قرار منع تعقیب', en: 'Order of Non-Prosecution / Dismissal of Charges', notes: 'قراری که بازپرس در صورت جرم نبودن عمل یا فقدان ادله کافی صادر می‌کند.', source: 'صوت جلسه ۶' },
-
-      // صوت جلسه ۷
-      { id: 25, fa: 'اساسنامه شرکت', en: 'Articles of Association', notes: 'سند بنیادین شرکت که موضوع فعالیت، سرمایه، ارکان و نحوه اداره شرکت را تعیین می‌کند.', source: 'صوت جلسه ۷' },
-      { id: 26, fa: 'آگهی تأسیس در روزنامه رسمی', en: 'Notice of Incorporation in the Official Gazette', notes: 'انتشار رسمی ثبت شرکت و مشخصات مدیران و دارندگان حق امضا در روزنامه رسمی کشور.', source: 'صوت جلسه ۷' },
-      { id: 27, fa: 'صورتجلسه مجمع عمومی عادی', en: 'Minutes of the Ordinary General Meeting', notes: 'گزارش رسمی تصمیمات سهامداران درباره تصویب ترازنامه، انتخاب هیئت‌مدیره و بازرسان.', source: 'صوت جلسه ۷' },
-      { id: 28, fa: 'شرکت سهامی خاص', en: 'Private Joint-Stock Company', notes: 'شرکتی که تمام سرمایه آن در موقع تأسیس منحصراً توسط مؤسسین تأمین می‌گردد.', source: 'صوت جلسه ۷' },
-
-      // صوت جلسه ۸
-      { id: 29, fa: 'دانشنامه کارشناسی', en: "Bachelor's Degree Certificate / Diploma", notes: 'مدرک رسمی فراغت از تحصیل پس از تسویه حساب آموزشی و مالی با دانشگاه.', source: 'صوت جلسه ۸' },
-      { id: 30, fa: 'ریز نمرات رسمی تحصیلی', en: 'Official Academic Transcript', notes: 'فهرست کامل دروس گذرانده‌شده، تعداد واحدها، نمرات و معدل کل (GPA).', source: 'صوت جلسه ۸' },
-      { id: 31, fa: 'گواهی اشتغال به تحصیل', en: 'Certificate of Enrollment', notes: 'نامه رسمی دانشگاه مبنی بر دانشجو بودن فرد در نیمسال جاری.', source: 'صوت جلسه ۸' },
-      { id: 32, fa: 'گواهی عدم سوءپیشینه کیفری', en: 'Police Clearance Certificate / Certificate of No Criminal Record', notes: 'سند صادره از پلیس آگاهی یا قوه قضائیه برای امور مهاجرتی، استخدامی و ویزا.', source: 'صوت جلسه ۸' },
-
-      // کتاب توانگر - درس ۱
-      { id: 33, fa: 'به موجب ماده ... قانون مدنی', en: 'Pursuant to Article ... of the Civil Code', notes: 'عبارت پرکاربرد استناد قانونی؛ از ترجمه تحت‌اللفظی According to در متون رسمی پرهیز شود.', source: 'کتاب توانگر - درس ۱' },
-      { id: 34, fa: 'باطل و بلااثر (کان‌لم‌یکن)', en: 'Null and Void', notes: 'زوج‌واژه کلاسیک حقوقی برای بیان بی‌اعتباری کامل یک قرارداد یا سند از ابتدا.', source: 'کتاب توانگر - درس ۱' },
-      { id: 35, fa: 'طرفین قرارداد (متعاقدین)', en: 'The Contracting Parties', notes: 'اشخاص حقیقی یا حقوقی امضاکننده یک توافق‌نامه یا قرارداد الزام‌آور.', source: 'کتاب توانگر - درس ۱' },
-
-      // کتاب توانگر - درس ۲
-      { id: 36, fa: 'قوه قاهره (فورس ماژور)', en: 'Force Majeure / Act of God', notes: 'حوادث غیرمترقبه و خارج از کنترل طرفین که اجرای تعهدات قراردادی را ناممکن می‌سازد.', source: 'کتاب توانگر - درس ۲' },
-      { id: 37, fa: 'فسخ یک‌جانبه قرارداد', en: 'Unilateral Termination of Contract', notes: 'اعمال حق فسخ توسط یکی از طرفین بر اساس خیارات قانونی یا شروط مندرج در قرارداد.', source: 'کتاب توانگر - درس ۲' },
-      { id: 38, fa: 'خسارت وجه التزام', en: 'Liquidated Damages', notes: 'مبلغ از پیش تعیین‌شده در قرارداد که متعهد در صورت نقض تعهد یا تأخیر ملزم به پرداخت آن است.', source: 'کتاب توانگر - درس ۲' },
-
-      // کتاب توانگر - درس ۳
-      { id: 39, fa: 'استشهادیه محلی', en: 'Local Affidavit / Witness Statement', notes: 'سندی که به امضای چند شاهد مطلع رسیده و در صورت لزوم توسط کلانتری یا دفترخانه تصدیق می‌شود.', source: 'کتاب توانگر - درس ۳' },
-      { id: 40, fa: 'تأییدیه دادگستری و وزارت امور خارجه', en: 'Legalization by the Judiciary and Ministry of Foreign Affairs', notes: 'مرحله نهایی اعتباربخشی به ترجمه رسمی برای ارائه به سفارتخانه‌ها و مراجع خارجی.', source: 'کتاب توانگر - درس ۳' }
-    ];
+  {
+    "id": 1,
+    "fa": "دفتر اسناد رسمی",
+    "en": "Notary Public Office",
+    "notes": "مرجع رسمی تنظیم و ثبت اسناد رسمی و گواهی امضا زیر نظر سازمان ثبت اسناد و املاک.",
+    "source": "صوت جلسه ۱"
+  },
+  {
+    "id": 2,
+    "fa": "سردفتر اسناد رسمی",
+    "en": "Notary Public",
+    "notes": "شخص دارای ابلاغ رسمی برای تنظیم اسناد و تصدیق امضاها در دفترخانه.",
+    "source": "صوت جلسه ۱"
+  },
+  {
+    "id": 3,
+    "fa": "برابر با اصل است",
+    "en": "Certified True Copy",
+    "notes": "عبارت استاندارد روی رونوشت اسناد پس از تطبیق با نسخه اصلی توسط دفترخانه یا دادگستری.",
+    "source": "صوت جلسه ۱"
+  },
+  {
+    "id": 4,
+    "fa": "بدین‌وسیله گواهی می‌شود",
+    "en": "It is hereby certified that",
+    "notes": "فرمول آغازین رسمی در گواهی‌نامه‌ها و اسناد تأییدی؛ به جای ترجمه تحت‌اللفظی به کار می‌رود.",
+    "source": "صوت جلسه ۱"
+  },
+  {
+    "id": 5,
+    "fa": "شناسنامه",
+    "en": "Birth Certificate / National Identity Booklet",
+    "notes": "در ترجمه رسمی ایران معمولاً Birth Certificate یا Identity Certificate (Shenasnameh) به کار می‌رود.",
+    "source": "صوت جلسه ۲"
+  },
+  {
+    "id": 6,
+    "fa": "سازمان ثبت احوال کشور",
+    "en": "National Organization for Civil Registration",
+    "notes": "نهاد صادرکننده شناسنامه، کارت ملی و گواهی‌های ولادت، وفات و تجرد.",
+    "source": "صوت جلسه ۲"
+  },
+  {
+    "id": 7,
+    "fa": "گواهی تجرد",
+    "en": "Certificate of Single Status",
+    "notes": "سندی که نشان می‌دهد فرد در حال حاضر فاقد همسر ثبت‌شده در شناسنامه است.",
+    "source": "صوت جلسه ۲"
+  },
+  {
+    "id": 8,
+    "fa": "گواهی انحصار وراثت",
+    "en": "Certificate of Heirship / Probate Certificate",
+    "notes": "گواهی صادره از شورای حل اختلاف یا دادگاه برای تعیین وراث قانونی متوفی و سهم‌الارث آنان.",
+    "source": "صوت جلسه ۲"
+  },
+  {
+    "id": 9,
+    "fa": "سند ازدواج (عقدنامه)",
+    "en": "Marriage Certificate",
+    "notes": "سند رسمی ثبت نکاح در دفتر رسمی ازدواج شامل شروط ضمن عقد و مشخصات مهریه.",
+    "source": "صوت جلسه ۳"
+  },
+  {
+    "id": 10,
+    "fa": "مهریه عندالمطالبه",
+    "en": "Marriage Portion Payable Upon Demand",
+    "notes": "مهریه‌ای که زوجه هر زمان پس از عقد حق مطالبه آن را از زوج دارد.",
+    "source": "صوت جلسه ۳"
+  },
+  {
+    "id": 11,
+    "fa": "طلاق توافقی",
+    "en": "Divorce by Mutual Consent",
+    "notes": "انحلال نکاح بر اساس توافق کامل زوجین درباره حقوق مالی و حضانت فرزندان.",
+    "source": "صوت جلسه ۳"
+  },
+  {
+    "id": 12,
+    "fa": "شروط ضمن عقد",
+    "en": "Stipulations of the Marriage Contract",
+    "notes": "شروط مندرج در سند ازدواج از جمله حق طلاق، حق تحصیل، حق اشتغال و حق مسکن.",
+    "source": "صوت جلسه ۳"
+  },
+  {
+    "id": 13,
+    "fa": "وکالت‌نامه بلاعزل",
+    "en": "Irrevocable Power of Attorney",
+    "notes": "وکالت‌نامه‌ای که موکل حق عزل وکیل را در ضمن عقد خارج لازم از خود سلب کرده است.",
+    "source": "صوت جلسه ۴"
+  },
+  {
+    "id": 14,
+    "fa": "موکل و وکیل (در اسناد رسمی)",
+    "en": "Principal and Attorney-in-Fact",
+    "notes": "تفاوت مهم: برای وکیل دادگستری از Attorney-at-Law و برای وکیل مدنی دفترخانه‌ای از Attorney-in-Fact استفاده می‌شود.",
+    "source": "صوت جلسه ۴"
+  },
+  {
+    "id": 15,
+    "fa": "حق توکیل به غیر",
+    "en": "Right of Substitution / Power to Delegate",
+    "notes": "اختیار وکیل برای واگذاری تمام یا بخشی از اختیارات وکالت به شخص ثالث.",
+    "source": "صوت جلسه ۴"
+  },
+  {
+    "id": 16,
+    "fa": "اقرارنامه رسمی",
+    "en": "Official Affidavit / Sworn Declaration",
+    "notes": "سندی که فرد در دفتر اسناد رسمی به امری به زیان خود یا به نفع دیگری اقرار می‌نماید.",
+    "source": "صوت جلسه ۴"
+  },
+  {
+    "id": 17,
+    "fa": "سند مالکیت تک‌برگ",
+    "en": "Single-Page Title Deed",
+    "notes": "سند رسمی جدید املاک با هولوگرام و شناسه یکتا صادره از اداره ثبت اسناد و املاک.",
+    "source": "صوت جلسه ۵"
+  },
+  {
+    "id": 18,
+    "fa": "عرصه و اعیان",
+    "en": "Land and Building / Plot and Superstructure",
+    "notes": "عرصه به معنای زمین ملک و اعیان به معنای بنا و مستحدثات روی آن است.",
+    "source": "صوت جلسه ۵"
+  },
+  {
+    "id": 19,
+    "fa": "مبایعه‌نامه",
+    "en": "Deed of Sale / Purchase Agreement",
+    "notes": "قرارداد رسمی یا عادی خریدوفروش ملک یا مال منقول میان بایع و مشتری.",
+    "source": "صوت جلسه ۵"
+  },
+  {
+    "id": 20,
+    "fa": "در رهن بانک بودن",
+    "en": "Mortgaged to the Bank / Encumbered with a Lien",
+    "notes": "قیدی در ستون نقل‌وانتقالات سند مالکیت مبنی بر وثیقه بودن ملک در برابر تسهیلات بانکی.",
+    "source": "صوت جلسه ۵"
+  },
+  {
+    "id": 21,
+    "fa": "دادنامه",
+    "en": "Court Verdict / Written Judgment",
+    "notes": "متن رسمی و مکتوب رأی صادره از دادگاه شامل شماره پرونده، طرفین، گردشکار و متن رأی.",
+    "source": "صوت جلسه ۶"
+  },
+  {
+    "id": 22,
+    "fa": "رأی قطعی و لازم‌الاجرا",
+    "en": "Final and Binding Judgment",
+    "notes": "حکمی که مهلت تجدیدنظرخواهی آن گذشته یا در دادگاه تجدیدنظر تأیید شده و قابل اجراست.",
+    "source": "صوت جلسه ۶"
+  },
+  {
+    "id": 23,
+    "fa": "تجدیدنظرخواهی",
+    "en": "Filing an Appeal",
+    "notes": "درخواست رسیدگی مجدد به رأی دادگاه بدوی در مرجع قضایی بالاتر (دادگاه تجدیدنظر).",
+    "source": "صوت جلسه ۶"
+  },
+  {
+    "id": 24,
+    "fa": "قرار منع تعقیب",
+    "en": "Order of Non-Prosecution / Dismissal of Charges",
+    "notes": "قراری که بازپرس در صورت جرم نبودن عمل یا فقدان ادله کافی صادر می‌کند.",
+    "source": "صوت جلسه ۶"
+  },
+  {
+    "id": 25,
+    "fa": "اساسنامه شرکت",
+    "en": "Articles of Association",
+    "notes": "سند بنیادین شرکت که موضوع فعالیت، سرمایه، ارکان و نحوه اداره شرکت را تعیین می‌کند.",
+    "source": "صوت جلسه ۷"
+  },
+  {
+    "id": 26,
+    "fa": "آگهی تأسیس در روزنامه رسمی",
+    "en": "Notice of Incorporation in the Official Gazette",
+    "notes": "انتشار رسمی ثبت شرکت و مشخصات مدیران و دارندگان حق امضا در روزنامه رسمی کشور.",
+    "source": "صوت جلسه ۷"
+  },
+  {
+    "id": 27,
+    "fa": "صورتجلسه مجمع عمومی عادی",
+    "en": "Minutes of the Ordinary General Meeting",
+    "notes": "گزارش رسمی تصمیمات سهامداران درباره تصویب ترازنامه، انتخاب هیئت‌مدیره و بازرسان.",
+    "source": "صوت جلسه ۷"
+  },
+  {
+    "id": 28,
+    "fa": "شرکت سهامی خاص",
+    "en": "Private Joint-Stock Company",
+    "notes": "شرکتی که تمام سرمایه آن در موقع تأسیس منحصراً توسط مؤسسین تأمین می‌گردد.",
+    "source": "صوت جلسه ۷"
+  },
+  {
+    "id": 29,
+    "fa": "دانشنامه کارشناسی",
+    "en": "Bachelor's Degree Certificate / Diploma",
+    "notes": "مدرک رسمی فراغت از تحصیل پس از تسویه حساب آموزشی و مالی با دانشگاه.",
+    "source": "صوت جلسه ۸"
+  },
+  {
+    "id": 30,
+    "fa": "ریز نمرات رسمی تحصیلی",
+    "en": "Official Academic Transcript",
+    "notes": "فهرست کامل دروس گذرانده‌شده، تعداد واحدها، نمرات و معدل کل (GPA).",
+    "source": "صوت جلسه ۸"
+  },
+  {
+    "id": 31,
+    "fa": "گواهی اشتغال به تحصیل",
+    "en": "Certificate of Enrollment",
+    "notes": "نامه رسمی دانشگاه مبنی بر دانشجو بودن فرد در نیمسال جاری.",
+    "source": "صوت جلسه ۸"
+  },
+  {
+    "id": 32,
+    "fa": "گواهی عدم سوءپیشینه کیفری",
+    "en": "Police Clearance Certificate / Certificate of No Criminal Record",
+    "notes": "سند صادره از پلیس آگاهی یا قوه قضائیه برای امور مهاجرتی، استخدامی و ویزا.",
+    "source": "صوت جلسه ۸"
+  },
+  {
+    "id": 33,
+    "fa": "به موجب ماده ... قانون مدنی",
+    "en": "Pursuant to Article ... of the Civil Code",
+    "notes": "عبارت پرکاربرد استناد قانونی؛ از ترجمه تحت‌اللفظی According to در متون رسمی پرهیز شود.",
+    "source": "کتاب توانگر - درس ۱"
+  },
+  {
+    "id": 34,
+    "fa": "باطل و بلااثر (کان‌لم‌یکن)",
+    "en": "Null and Void",
+    "notes": "زوج‌واژه کلاسیک حقوقی برای بیان بی‌اعتباری کامل یک قرارداد یا سند از ابتدا.",
+    "source": "کتاب توانگر - درس ۱"
+  },
+  {
+    "id": 35,
+    "fa": "طرفین قرارداد (متعاقدین)",
+    "en": "The Contracting Parties",
+    "notes": "اشخاص حقیقی یا حقوقی امضاکننده یک توافق‌نامه یا قرارداد الزام‌آور.",
+    "source": "کتاب توانگر - درس ۱"
+  },
+  {
+    "id": 36,
+    "fa": "قوه قاهره (فورس ماژور)",
+    "en": "Force Majeure / Act of God",
+    "notes": "حوادث غیرمترقبه و خارج از کنترل طرفین که اجرای تعهدات قراردادی را ناممکن می‌سازد.",
+    "source": "کتاب توانگر - درس ۲"
+  },
+  {
+    "id": 37,
+    "fa": "فسخ یک‌جانبه قرارداد",
+    "en": "Unilateral Termination of Contract",
+    "notes": "اعمال حق فسخ توسط یکی از طرفین بر اساس خیارات قانونی یا شروط مندرج در قرارداد.",
+    "source": "کتاب توانگر - درس ۲"
+  },
+  {
+    "id": 38,
+    "fa": "خسارت وجه التزام",
+    "en": "Liquidated Damages",
+    "notes": "مبلغ از پیش تعیین‌شده در قرارداد که متعهد در صورت نقض تعهد یا تأخیر ملزم به پرداخت آن است.",
+    "source": "کتاب توانگر - درس ۲"
+  },
+  {
+    "id": 39,
+    "fa": "استشهادیه محلی",
+    "en": "Local Affidavit / Witness Statement",
+    "notes": "سندی که به امضای چند شاهد مطلع رسیده و در صورت لزوم توسط کلانتری یا دفترخانه تصدیق می‌شود.",
+    "source": "کتاب توانگر - درس ۳"
+  },
+  {
+    "id": 40,
+    "fa": "تأییدیه دادگستری و وزارت امور خارجه",
+    "en": "Legalization by the Judiciary and Ministry of Foreign Affairs",
+    "notes": "مرحله نهایی اعتباربخشی به ترجمه رسمی برای ارائه به سفارتخانه‌ها و مراجع خارجی.",
+    "source": "کتاب توانگر - درس ۳"
+  }
+];
     // __PORTAL_DATA_END__
 
     /* =========================================================================
